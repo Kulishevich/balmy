@@ -1,0 +1,227 @@
+"use client";
+import Breadcrumbs from "@/components/breadcrumbs";
+import CallbackSectoin from "@/components/callback-section";
+import ProductSlider from "@/components/product/slider";
+import RecentlyViewedProductsSection from "@/components/recently-viewed-products-section";
+import EcoFriendlyImage from "@/public/images/eco-friendly.webp";
+import Title from "@/components/title";
+import Image from "next/image";
+import CountControl from "@/components/count-control";
+import Action from "@/components/action";
+import TabsSection from "@/components/product/tabs-section";
+import { CartProduct, Product } from "@/types/product";
+import { useViewedProductsStore } from "@/store/viewed-products";
+import { useEffect, useState } from "react";
+import { useCartStore } from "@/store/cart";
+import { getCartProductFromProduct } from "@/utils/helper";
+import { useRouter } from "next/navigation";
+import { useBuyOneClickStore } from "@/store/buy-one-click";
+import { usePopupStore } from "@/store/popup";
+import cn from "clsx";
+
+interface Props {
+  product: Product;
+  similarProducts: Product[];
+}
+
+function ProductLayout({ product, similarProducts }: Props) {
+  const [localCartProduct, setLocalCartProduct] = useState<CartProduct>(
+    getCartProductFromProduct(product)
+  );
+  const router = useRouter();
+  const { addToCart, getCartProduct } = useCartStore();
+  const { setProduct } = useBuyOneClickStore();
+  const { createPopup } = usePopupStore();
+  const { addProduct } = useViewedProductsStore();
+  const {
+    name,
+    images,
+    brand,
+    country,
+    article,
+    quantity,
+    salePrices,
+    discount,
+    discountPrices,
+    description,
+    categoryId,
+    categorySlug,
+    slug,
+  } = product;
+
+  const cartProduct = getCartProduct(slug!);
+
+  function handleClickOnAddToCartButton() {
+    if (cartProduct) {
+      router.push("/cart");
+      return;
+    }
+
+    addToCart(localCartProduct);
+  }
+
+  function handleClickOnBuyInOneClickButton() {
+    setProduct(product);
+    createPopup({ type: "buy-one-click" });
+  }
+
+  useEffect(() => {
+    addProduct({ image: images[0], slug: slug || "" });
+  }, [addProduct, images, slug]);
+
+  return (
+    <>
+      <Title type="h1" className="container mt-10 text-center">
+        {name}
+      </Title>
+      <Breadcrumbs
+        className="mt-4 mx-auto"
+        dynamicPath={[
+          { href: `/catalog/${categorySlug}`, name: categoryId },
+          {
+            href: `/product/${slug}`,
+            name,
+          },
+        ]}
+      />
+      <section
+        className="container flex flex-col"
+        itemScope
+        itemType="http://schema.org/Product"
+      >
+        <meta itemProp="name" content={name} />
+        <meta itemProp="description" content={description || "Товар"} />
+        <meta itemProp="sku" content={article} />
+        {images.map((img) => (
+          <link key={img} itemProp="image" href={img} />
+        ))}
+
+        <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
+          <link itemProp="url" href={`https://balmy.by/product/${slug}`} />
+          <meta
+            itemProp="availability"
+            content={
+              quantity
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock"
+            }
+          />
+          <meta itemProp="priceCurrency" content="BYN" />
+          <meta
+            itemProp="price"
+            content={(discount ? discountPrices : salePrices).toFixed(2)}
+          />
+          <meta
+            itemProp="itemCondition"
+            content="https://schema.org/NewCondition"
+          />
+          <meta itemProp="priceValidUntil" content="2030-12-31" />
+          <div
+            itemProp="seller"
+            itemScope
+            itemType="http://schema.org/Organization"
+          >
+            <meta itemProp="name" content="ООО 'Коммерс Коннект'" />
+          </div>
+        </div>
+
+        <div itemProp="brand" itemScope itemType="http://schema.org/Thing">
+          <meta itemProp="name" content={brand || "Без бренда"} />
+        </div>
+
+        <div className="mt-8 lg:mt-10 flex flex-col lg:flex-row">
+          <ProductSlider photos={images} />
+          <div className="mt-[30px] lg:mt-0 lg:ml-[140px] flex flex-col w-full">
+            <ul className="flex flex-col gap-y-[20px]">
+              <li className="text-[21px]">
+                Бренд: <span className="font-normal text-[17px]">{brand}</span>
+              </li>
+              <li className="text-[21px]">
+                Страна производитель:{" "}
+                <span className="font-normal text-[17px]">{country}</span>
+              </li>
+              <li className="text-[21px]">
+                Артикул:{" "}
+                <span className="font-normal text-[17px]">{article}</span>
+              </li>
+            </ul>
+            <Image
+              className="mt-[30px] object-contain max-w-[168px] lg:max-w-[266px]"
+              src={EcoFriendlyImage}
+              alt="эко"
+            />
+            {!discount && (
+              <span className="mt-[30px] sm:mt-[40px] text-[32px] font-quicksand sm:text-[40px] font-semibold text-center sm:text-left">
+                {salePrices.toFixed(2)} byn
+              </span>
+            )}
+            {!!discount && (
+              <>
+                <span className="mt-[30px] sm:mt-[40px] font-quicksand sm:text-[40px] text-[32px] font-semibold text-center sm:text-left inline-flex flex-col sm:flex-row gap-x-6">
+                  <span>{discountPrices.toFixed(2)} byn</span>
+                  <span className="opacity-50 line-through">
+                    {salePrices.toFixed(2)} byn
+                  </span>
+                </span>
+                <span className="mt-3 opacity-50">Cо скидкой {discount}%</span>
+              </>
+            )}
+            {!!quantity && (
+              <div className="max-w-[660px] mt-[30px] grid grid-cols-2 2xl:grid-cols-3 gap-3">
+                {!cartProduct && (
+                  <CountControl
+                    className="w-full col-span-1 2xl:col-span-1"
+                    size="big"
+                    localCartProduct={localCartProduct}
+                    setLocalCartProduct={setLocalCartProduct}
+                  />
+                )}
+                <Action
+                  type="button"
+                  className={cn("w-full col-span-1 2xl:col-span-1", {
+                    "col-span-2": cartProduct,
+                  })}
+                  size="big"
+                  color="light-green"
+                  onClick={handleClickOnAddToCartButton}
+                >
+                  {cartProduct ? "Уже в корзине" : "В корзину"}
+                </Action>
+                <Action
+                  className="2xl:max-w-[216px] w-full col-span-2 2xl:col-span-1"
+                  type="button"
+                  size="big"
+                  color="gray"
+                  onClick={handleClickOnBuyInOneClickButton}
+                >
+                  Купить в 1 клик
+                </Action>
+              </div>
+            )}
+            {!quantity && (
+              <span className="mt-4 text-[32px] text-center sm:text-left sm:text-[40px] font-semibold opacity-50">
+                Скоро в наличии
+              </span>
+            )}
+            {description && (
+              <>
+                <p className="mt-12 sm:mt-[40px] text-[20px] font-semibold sm:font-medium sm:text-[26px] text-center sm:text-left">
+                  Описание:
+                </p>
+                <div
+                  className="mt-5 max-w-[630px] text-center sm:text-left"
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+      <TabsSection similarProducts={similarProducts} />
+      <RecentlyViewedProductsSection currentProductSlug={slug} />
+      <CallbackSectoin />
+    </>
+  );
+}
+
+export default ProductLayout;

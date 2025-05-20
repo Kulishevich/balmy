@@ -1,0 +1,136 @@
+import "@/styles/globals.css";
+import type { Metadata } from "next";
+import { Nunito, Quicksand } from "next/font/google";
+import Navigation from "@/components/navigation";
+import Header from "@/components/header";
+import CategoryBar from "@/components/category-bar";
+import Footer from "@/components/footer";
+import InitialWrapper from "@/components/initial-wrapper";
+import Popups from "@/components/popups";
+import MobileMenu from "@/components/mobile-menu/menu";
+import { getCategories } from "@/api/category";
+import SearchMobile from "@/components/search/mobile";
+import { getSeoTags } from "@/api/seo";
+import { config } from "@/utils/config";
+import Script from "next/script";
+import AnimationThemeLayout from "@/components/animation-theme/animation-theme";
+import ScrollToTopButton from "@/components/scroll-to-top-button";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getSeoTags({ url: "home" });
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
+    alternates: {
+      canonical: config.homeUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle,
+      description: seo.ogDescription,
+      url: config?.homeUrl,
+    },
+    verification: {
+      yandex: "3144b55aa33ab7e1",
+      google: "D4fuQbmjBjy7Mr3MuI1g8YNSc0c9bit7DPrU40z0uPU",
+    },
+  };
+}
+
+const nunito = Nunito({
+  subsets: ["cyrillic"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-nunito",
+});
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-quicksand",
+});
+
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const { categories } = await getCategories();
+
+  return (
+    <html lang="ru">
+      <head>
+        {/* Yandex Metrika */}
+        <Script
+          id="yandex-metrika"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+              ym(96679665, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+              });
+            `,
+          }}
+        />
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/96679665"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RQCSZQF6LK"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-RQCSZQF6LK');
+            `,
+          }}
+        />
+        <meta
+          name="google-site-verification"
+          content="MYzskVibuO1uN0vli5GFxZ1XRWd2cbp0xA7U5MIrn_c"
+        />
+      </head>
+      <body
+        className={`${nunito.variable} ${quicksand.variable} flex flex-col h-full`}
+      >
+        <InitialWrapper>
+          <AnimationThemeLayout>
+            <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative">
+              <Navigation />
+              <SearchMobile />
+              <Header />
+              <CategoryBar categories={categories} />
+              {children}
+              <Footer categories={categories} />
+              <Popups />
+              <MobileMenu categories={categories} />
+            </div>
+            <ScrollToTopButton />
+          </AnimationThemeLayout>
+        </InitialWrapper>
+      </body>
+    </html>
+  );
+}

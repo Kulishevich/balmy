@@ -1,0 +1,51 @@
+.article p {
+  @apply text-base leading-relaxed; /* Стиль текста в параграфах */
+}
+
+.article ul {
+  @apply list-disc pl-5 space-y-2; /* Стили для ненумерованных списков */
+}
+
+.article ol {
+  @apply list-decimal pl-5 space-y-2; /* Стили для нумерованных списков */
+}
+
+.article li {
+  @apply text-base leading-relaxed; /* Общий стиль для элементов списка */
+}
+
+.article h1 {
+  @apply text-3xl font-bold leading-tight; /* Заголовок уровня 1 */
+}
+
+.article h2 {
+  @apply text-2xl font-bold leading-tight; /* Заголовок уровня 2 */
+}
+
+.article h3 {
+  @apply text-xl font-semibold leading-tight; /* Заголовок уровня 3 */
+}
+
+.article a {
+  @apply text-light-green hover:underline; /* Ссылки с цветом и эффектом наведения */
+}
+
+.article blockquote {
+  @apply italic border-l-4 pl-4 border-light-gray; /* Стили для цитат */
+}
+
+.article img {
+  @apply rounded-[5px]; /* Стили для изображений */
+}
+
+.article hr {
+  @apply border-t border-light-gray; /* Разделительная линия */
+}
+
+.article pre {
+  @apply bg-light-gray p-4 rounded-md text-sm overflow-x-auto; /* Кодовые блоки */
+}
+
+.article code {
+  @apply bg-light-gray px-1 py-0.5 rounded text-sm font-mono; /* Inline-код */
+}

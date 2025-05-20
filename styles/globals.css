@@ -1,0 +1,160 @@
+@import "swiper/css";
+@import 'yet-another-react-lightbox/styles.css';
+@import 'react-calendar/dist/Calendar.css';
+@import 'news.css';
+@import 'article.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply scroll-smooth;
+  height: 100%;
+}
+
+body {
+  @apply font-nunito font-medium text-dark-gray text-[17px];
+}
+
+/* Input, Textarea, Checkbox */
+.custom-input {
+  @apply py-[23px] px-[18px] font-normal placeholder:text-dark-gray/50 border border-dark-gray/30 rounded-[5px];
+}
+
+.custom-input--error {
+  @apply placeholder:text-[#EB001B] border-[#EB001B]/30;
+}
+
+.custom-input--dark {
+  @apply py-[18px] px-[16px] font-normal placeholder:text-dark-gray/50 bg-[#D9D9D9] rounded-[10px];
+}
+
+.custom-input--dark-error {
+  @apply placeholder:text-[#EB001B];
+}
+
+
+.price-custom-input {
+  @apply py-[12px] pr-[12px] pl-[37px] font-normal placeholder:text-dark-gray/50 border border-dark-gray/30 rounded-[5px];
+}
+
+.custom-textarea {
+  @apply py-[23px] px-[18px] font-normal placeholder:text-dark-gray/50 border border-dark-gray/30 rounded-[5px] h-[146px] resize-none;
+}
+
+.custom-textarea--error {
+  @apply placeholder:text-[#EB001B] border-[#EB001B]/30;
+}
+
+.custom-checkbox {
+  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden border border-dark-gray/30 appearance-none cursor-pointer grid place-items-center transition outline-none;
+}
+
+.custom-checkbox::before {
+  content: url("/icons/check.svg");
+  @apply transition opacity-0 scale-0 max-w-[24px] w-full h-[24px];
+}
+
+.custom-checkbox:checked {
+  @apply bg-green border-green;
+}
+
+.custom-checkbox:checked::before {
+  @apply opacity-100 scale-100;
+}
+
+.custom-checkbox--dark {
+  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden bg-[#D9D9D9] appearance-none cursor-pointer grid place-items-center transition outline-none;
+}
+
+.custom-checkbox--dark::before {
+  content: '';
+  @apply transition opacity-0 scale-0 max-w-5 w-full h-5 bg-dark-gray rounded-[5px];
+}
+
+.custom-checkbox--dark:checked::before {
+  @apply opacity-100 scale-100;
+}
+
+/* Price Filter Slider */
+.price-slider .rc-slider-rail {
+  @apply bg-light-gray;
+}
+
+.price-slider .rc-slider-track {
+  @apply bg-light-green;
+}
+
+.price-slider .rc-slider-handle {
+  @apply border-light-green opacity-100;
+}
+
+.price-slider .rc-slider-handle:focus-visible {
+  @apply shadow-none ;
+}
+
+.price-slider .rc-slider-handle-dragging {
+  @apply !border-light-green !shadow-none;
+}
+
+/* Swiper */
+.product-thumb-swiper .swiper-slide-thumb-active div {
+  @apply border border-green;
+}
+
+/* LightBox */
+.yarl__container {
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.yarl__slide_image {
+  border-radius: 12px;
+}
+
+.react-calendar__tile--now, .react-calendar__tile--now:enabled:hover, .react-calendar__tile--now:enabled:focus 
+{
+  @apply bg-dark-gray text-white;
+}
+
+.react-calendar__tile--active, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+  @apply bg-green;
+}
+
+/* Docs */
+.docs {
+  @apply px-6 mb-20 mt-8 sm:mt-10 sm:mb-7;
+}
+
+.docs h2 {
+  @apply mt-20 mb-20 sm:mt-8 sm:mb-8;
+}
+
+.docs > div {
+  @apply w-full max-w-screen-xl mx-auto overflow-hidden;
+}
+
+.docs p,
+.docs span,
+.docs font,
+.docs li {
+  @apply font-nunito text-[17px] font-normal leading-[24px] tracking-normal !important;
+}
+
+.docs ul {
+  @apply pl-8 list-disc;
+}
+
+.docs li {
+}
+
+/* Медиазапросы для экрана до 992px */
+@media (max-width: 992px) {
+  .docs {
+    @apply mb-8;
+  }
+  .docs h2 {
+    @apply mt-8 mb-8;
+  }
+}
