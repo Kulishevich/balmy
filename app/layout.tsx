@@ -117,7 +117,7 @@ export default async function RootLayout({
       >
         <InitialWrapper>
           <AnimationThemeLayout>
-            <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative">
+            <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative bg-dark-grey">
               <Navigation />
               <SearchMobile />
               <Header />

@@ -1,8 +1,8 @@
 @import "swiper/css";
-@import 'yet-another-react-lightbox/styles.css';
-@import 'react-calendar/dist/Calendar.css';
-@import 'news.css';
-@import 'article.css';
+@import "yet-another-react-lightbox/styles.css";
+@import "react-calendar/dist/Calendar.css";
+@import "news.css";
+@import "article.css";
 
 @tailwind base;
 @tailwind components;
@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  @apply font-nunito font-medium text-dark-gray text-[17px];
+  @apply font-nunito font-medium text-white text-[17px];
 }
 
 /* Input, Textarea, Checkbox */
@@ -33,7 +33,6 @@ body {
 .custom-input--dark-error {
   @apply placeholder:text-[#EB001B];
 }
-
 
 .price-custom-input {
   @apply py-[12px] pr-[12px] pl-[37px] font-normal placeholder:text-dark-gray/50 border border-dark-gray/30 rounded-[5px];
@@ -69,7 +68,7 @@ body {
 }
 
 .custom-checkbox--dark::before {
-  content: '';
+  content: "";
   @apply transition opacity-0 scale-0 max-w-5 w-full h-5 bg-dark-gray rounded-[5px];
 }
 
@@ -91,7 +90,7 @@ body {
 }
 
 .price-slider .rc-slider-handle:focus-visible {
-  @apply shadow-none ;
+  @apply shadow-none;
 }
 
 .price-slider .rc-slider-handle-dragging {
@@ -113,12 +112,15 @@ body {
   border-radius: 12px;
 }
 
-.react-calendar__tile--now, .react-calendar__tile--now:enabled:hover, .react-calendar__tile--now:enabled:focus 
-{
+.react-calendar__tile--now,
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
   @apply bg-dark-gray text-white;
 }
 
-.react-calendar__tile--active, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+.react-calendar__tile--active,
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
   @apply bg-green;
 }
 

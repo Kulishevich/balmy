@@ -80,7 +80,9 @@ function CartPage() {
                   {beforeFreeShipping <= 0 ? (
                     <span className="ml-auto">Бесплатно</span>
                   ) : (
-                    <span className="ml-auto">{SHIPPING_PRICE.toFixed(2)} byn</span>
+                    <span className="ml-auto">
+                      {SHIPPING_PRICE.toFixed(2)} byn
+                    </span>
                   )}
                 </m.span>
                 {beforeFreeShipping > 0 && (

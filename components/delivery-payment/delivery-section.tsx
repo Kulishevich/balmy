@@ -34,7 +34,7 @@ function DeliverySection() {
             {
               "opacity-100": deliveryType == "Courier",
               "opacity-25": deliveryType == "Post",
-            },
+            }
           )}
           onClick={handleClickOnCourierDelivery}
         >
@@ -49,7 +49,7 @@ function DeliverySection() {
             {
               "opacity-100": deliveryType == "Post",
               "opacity-25": deliveryType == "Courier",
-            },
+            }
           )}
           onClick={handleClickOnShippingDelivery}
         >

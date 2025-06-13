@@ -72,7 +72,7 @@ function Navigation() {
   }
 
   return (
-    <div className="sm:bg-light-gray lg:py-2 h-[70px] lg:h-auto opacity-0 lg:opacity-100">
+    <div className="sm:bg-dark-grey  lg:py-2 h-[70px] lg:h-auto opacity-0 lg:opacity-100 border-b border-gray">
       <div className="container flex items-center justify-between">
         <Link
           href={ADDRESS.href}
@@ -106,7 +106,9 @@ function Navigation() {
             </menu>
           </nav>
         )}
-        <Action onClick={handleClickOnCallbackButton}>Обратный звонок</Action>
+        <Action color="white" onClick={handleClickOnCallbackButton}>
+          Обратный звонок
+        </Action>
       </div>
     </div>
   );

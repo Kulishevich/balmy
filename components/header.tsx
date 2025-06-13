@@ -3,16 +3,23 @@ import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import CartInfo from "@/components/cart-info";
 import Link from "next/link";
 import Search from "./search/search";
-import LogoHeader from "./logo-header";
+import Image from "next/image";
 
 function Header() {
   return (
     <header
-      className="w-full bg-white sticky top-0 z-50
+      className="w-full bg-dark-grey sticky top-0 z-50
     "
     >
       <div className="container py-7 hidden lg:flex items-center">
-        <LogoHeader />
+        <div className="w-[116px] h-[98px] relative">
+          <Image
+            src={"/images/logo.png"}
+            fill
+            alt="logo"
+            className="object-cover"
+          />
+        </div>
         <Search className="ml-[37px]" />
         <CartInfo className="ml-4" />
         <div className="ml-auto pl-2 flex flex-col flex-shrink-0">
