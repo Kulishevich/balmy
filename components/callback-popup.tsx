@@ -53,10 +53,10 @@ function CallbackPopup() {
   return (
     <m.div
       {...popupAnimation}
-      className="fixed z-20 max-w-[640px] lg:max-w-[850px] w-full rounded-[5px] lg:overflow-hidden bg-white h-svh overflow-y-scroll sm:h-auto"
+      className="fixed z-20 max-w-[640px] lg:max-w-[850px] w-full rounded-[5px] lg:overflow-hidden bg-[#1C1C1C] h-svh overflow-y-scroll sm:h-auto"
     >
       <div className="h-[87px] lg:h-[194px] w-full bg-[url('/images/beard-cut.webp')] bg-cover bg-center bg-no-repeat"></div>
-      <div className="bg-white w-full flex flex-col items-center pt-4 lg:pt-6 pb-8 lg:pb-12 px-[18px] lg:px-0">
+      <div className="bg-[#1C1C1C] w-full flex flex-col items-center pt-4 lg:pt-6 pb-8 lg:pb-12 px-[18px] lg:px-0">
         <Title>Обратный звонок</Title>
         <form
           className="mt-4 lg:mt-6 w-full max-w-[632px] flex flex-col min-h-[calc(100svh-193px)] sm:min-h-0"
@@ -124,6 +124,7 @@ function CallbackPopup() {
             size="big"
             typeButton="submit"
             disabled={!personalInfo}
+            color="white"
           >
             Отправить
           </Action>

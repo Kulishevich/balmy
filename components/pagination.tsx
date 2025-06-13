@@ -63,7 +63,7 @@ function Pagination({ totalPages, currentPage = "1" }: Props) {
     <div className="mt-20 flex justify-center items-center gap-x-4">
       {currentPageNumber !== 1 && (
         <button
-          className="flex items-center gap-1 transition hover:text-green"
+          className="flex items-center gap-1 transition hover:text-gold"
           onClick={handlePageChange(currentPageNumber - 1)}
         >
           <LongArrowRightIcon className="rotate-180" /> Назад
@@ -82,7 +82,7 @@ function Pagination({ totalPages, currentPage = "1" }: Props) {
               {page}
               <span
                 className={cn(
-                  "absolute -bottom-0 left-1/2 -translate-x-1/2 w-5 h-[2px] rounded-t-[2px] bg-green opacity-0 transition",
+                  "absolute -bottom-0 left-1/2 -translate-x-1/2 w-5 h-[2px] rounded-t-[2px] bg-gold opacity-0 transition",
                   { "opacity-100": isActive }
                 )}
               ></span>
@@ -92,7 +92,7 @@ function Pagination({ totalPages, currentPage = "1" }: Props) {
       </div>
       {currentPageNumber !== totalPagesNumber && (
         <button
-          className="flex items-center gap-1 transition hover:text-green"
+          className="flex items-center gap-1 transition hover:text-gold"
           onClick={handlePageChange(currentPageNumber + 1)}
         >
           Дальше <LongArrowRightIcon />

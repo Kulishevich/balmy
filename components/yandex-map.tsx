@@ -20,7 +20,7 @@ function YandexMap({ className }: Props) {
           ymaps3;
 
         const { YMapDefaultMarker } = await ymaps3.import(
-          "@yandex/ymaps3-markers@0.0.1",
+          "@yandex/ymaps3-markers@0.0.1"
         );
 
         const map = new YMap(
@@ -35,14 +35,14 @@ function YandexMap({ className }: Props) {
               customization: mapStyles as VectorCustomization,
             }),
             new YMapDefaultFeaturesLayer({}),
-          ],
+          ]
         );
 
         map.addChild(
           new YMapDefaultMarker({
             coordinates: [27.52907, 53.907084],
             color: "#fff",
-          }),
+          })
         );
       }
     }
@@ -52,7 +52,10 @@ function YandexMap({ className }: Props) {
 
   return (
     <>
-      <div ref={mapRef} className={cn("w-full overflow-hidden cursor-move", className)} />
+      <div
+        ref={mapRef}
+        className={cn("w-full overflow-hidden cursor-move", className)}
+      />
     </>
   );
 }

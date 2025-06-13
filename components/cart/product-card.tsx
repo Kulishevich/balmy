@@ -23,7 +23,7 @@ function CartProductCard({ cartProduct }: Props) {
     <div className="flex justify-between flex-col 2xl:grid grid-cols-[705px,1fr,1fr,1fr] items-center py-[30px] border-b border-b-dark-gray/30">
       <div className="flex items-center w-full">
         <button
-          className="hidden bg-green w-[42px] h-[42px] sm:grid place-items-center rounded-full flex-shrink-0"
+          className="hidden bg-gold w-[42px] h-[42px] sm:grid place-items-center rounded-full flex-shrink-0"
           onClick={handleClickOnRemoveFromCartButton}
         >
           <CloseIcon className="fill-white" />
@@ -80,13 +80,13 @@ function CartProductCard({ cartProduct }: Props) {
         localCartProduct={cartProduct}
       />
       {!discount && (
-        <span className="text-[24px] text-dark-gray/60 hidden 2xl:inline">
+        <span className="text-[24px] text-white/60 hidden 2xl:inline">
           {basePrice.toFixed(2)} byn
         </span>
       )}
       {!!discount && (
         <span className="text-[24px] hidden 2xl:inline-flex flex-col">
-          <span className="opacity-50 line-through text-dark-gray/60">
+          <span className="opacity-50 line-through text-white/60">
             {basePrice.toFixed(2)} byn
           </span>
           <span className="text-red">{discountPrices.toFixed(2)} byn</span>

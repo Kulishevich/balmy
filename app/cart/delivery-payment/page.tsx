@@ -49,6 +49,7 @@ function DeliveryPayment() {
           type="button"
           className="mt-10 w-full"
           size="big"
+          color="white"
           typeButton="submit"
           form={form}
           disabled={!personalInfo}

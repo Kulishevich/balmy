@@ -26,8 +26,8 @@ function TabsSection({ similarProducts }: Props) {
             return (
               <button
                 className={cn("text-[26px]", {
-                  "text-dark-gray": isActive,
-                  "text-dark-gray/50": !isActive,
+                  "text-dark-white": isActive,
+                  "text-dark-white/50": !isActive,
                 })}
                 key={idx}
               >

@@ -14,7 +14,7 @@ import CardIcon from "@/public/icons/card.svg";
 import Link from "next/link";
 import CallbackSectoin from "@/components/callback-section";
 import YandexMap from "@/components/yandex-map";
-import CooperationSection from "./cooperation-section";
+// import CooperationSection from "./cooperation-section";
 import OrganizationSchema from "@/components/organization-schema";
 
 function ContactsPage() {
@@ -29,7 +29,7 @@ function ContactsPage() {
         <div className="flex container xl:mx-0 xl:px-0 flex-col gap-y-6 sm:gap-y-9 max-w-[392px] w-full">
           <div className="flex flex-col">
             <p className="font-semibold text-[24px] sm:text-[30px] inline-flex items-center gap-2">
-              <PhoneIcon className="flex-shrink-0 fill-green" />
+              <PhoneIcon className="flex-shrink-0 " />
               Номер телефона
             </p>
             <Link className="mt-3 font-normal" href={PHONE_NUMBER.href}>
@@ -38,7 +38,7 @@ function ContactsPage() {
           </div>
           <div className="flex flex-col">
             <p className="font-semibold text-[24px] sm:text-[30px] inline-flex items-center gap-2">
-              <PhoneIcon className="flex-shrink-0 fill-green" />
+              <PhoneIcon className="flex-shrink-0 " />
               Время работы:
             </p>
             <Link className="mt-3 font-normal" href={PHONE_NUMBER.href}>
@@ -47,7 +47,7 @@ function ContactsPage() {
           </div>
           <div className="flex flex-col">
             <p className="font-semibold text-[24px] sm:text-[30px] inline-flex items-center gap-2">
-              <MailIcon className="flex-shrink-0 fill-green" />
+              <MailIcon className="flex-shrink-0 " />
               Эл. почта
             </p>
             <Link className="mt-3 font-normal" href={MAIL.href}>
@@ -56,7 +56,7 @@ function ContactsPage() {
           </div>
           <div className="flex flex-col">
             <p className="font-semibold text-[24px] sm:text-[30px] inline-flex items-center gap-2">
-              <MapPinIcon className="flex-shrink-0 fill-green" />
+              <MapPinIcon className="flex-shrink-0 " />
               Адрес офиса
             </p>
             <Link
@@ -69,7 +69,7 @@ function ContactsPage() {
           </div>
           <div className="flex flex-col">
             <p className="font-semibold text-[24px] sm:text-[30px] inline-flex items-center gap-2">
-              <CardIcon className="flex-shrink-0 fill-green" />
+              <CardIcon className="flex-shrink-0" />
               Реквизиты
             </p>
             <p className="mt-3 font-normal">
@@ -81,7 +81,7 @@ function ContactsPage() {
         </div>
         <YandexMap className="mt-8 xl:mt-0 h-[327px] sm:h-[565.5px] rounded-[5px]" />
       </section>
-      <CooperationSection />
+      {/* <CooperationSection /> */}
       <CallbackSectoin />
     </>
   );

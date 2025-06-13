@@ -45,7 +45,7 @@ function CartPage() {
             className="container flex flex-col"
             {...appearanceAnimation}
           >
-            <div className="hidden mt-5 py-5 2xl:grid grid-cols-[705px,1fr,1fr,1fr] border-b border-b-dark-gray/30 text-[21px] text-dark-gray/60">
+            <div className="hidden mt-5 py-5 2xl:grid grid-cols-[705px,1fr,1fr,1fr] border-b border-b-white/30 text-[21px] text-white/60">
               <span className="pl-20">Наименование товара</span>
               <span>Количество</span>
               <span>Цена за шт.</span>
@@ -105,6 +105,7 @@ function CartPage() {
               href="/cart/delivery-payment"
               className="mt-10"
               size="big"
+              color="white"
             >
               Перейти к доставке и оплате
             </Action>

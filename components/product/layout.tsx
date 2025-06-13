@@ -182,7 +182,7 @@ function ProductLayout({ product, similarProducts }: Props) {
                     "col-span-2": cartProduct,
                   })}
                   size="big"
-                  color="light-green"
+                  color="gold"
                   onClick={handleClickOnAddToCartButton}
                 >
                   {cartProduct ? "Уже в корзине" : "В корзину"}
@@ -191,7 +191,7 @@ function ProductLayout({ product, similarProducts }: Props) {
                   className="2xl:max-w-[216px] w-full col-span-2 2xl:col-span-1"
                   type="button"
                   size="big"
-                  color="gray"
+                  color="white"
                   onClick={handleClickOnBuyInOneClickButton}
                 >
                   Купить в 1 клик

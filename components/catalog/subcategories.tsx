@@ -20,7 +20,7 @@ async function Subcategories({ categorySlug, subcategorySlug }: Props) {
             key={idx}
             type="link"
             href={`/catalog/${categorySlug}/${slug}`}
-            color={isActive ? "light-green" : "light-gray"}
+            color={isActive ? "gold" : "white"}
           >
             {subcategoryName}
           </Action>

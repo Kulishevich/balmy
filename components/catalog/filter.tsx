@@ -165,6 +165,7 @@ function CatalogFilter({ className, showBrands, page }: Props) {
         })}
       </div>
       <Action
+        color="black"
         type="button"
         className="mt-6 w-full"
         size="big"

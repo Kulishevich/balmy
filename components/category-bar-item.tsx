@@ -44,7 +44,7 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
                 className={cn(
                   "cursor-pointer py-2 px-4 hover transition hover:text-gold inline-block",
                   {
-                    "text-white/30": isActive,
+                    "text-gold": isActive,
                     "text-white": !isActive,
                   }
                 )}

@@ -67,7 +67,7 @@ function Breadcrumbs({ className, dynamicPath }: Props) {
                 <Link
                   href={path?.href || "/"}
                   className={cn({
-                    "transition hover:text-green": !isCurrentPage,
+                    "transition hover:text-gold": !isCurrentPage,
                   })}
                   itemProp="item"
                 >
@@ -97,7 +97,7 @@ function Breadcrumbs({ className, dynamicPath }: Props) {
                   ) : (
                     <Link
                       href={item.href}
-                      className="transition hover:text-green"
+                      className="transition hover:text-gold"
                       itemProp="item"
                     >
                       <span itemProp="name">{item.name}</span>
