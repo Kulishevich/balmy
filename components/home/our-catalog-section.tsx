@@ -24,7 +24,6 @@ async function OurCatalogSection() {
   const { categories } = await getCategories();
 
   return (
-    // <SectionAnimationWrapper>
     <section className="mt-[72px] lg:mt-[120px] container">
       <Title className="text-center">Наш каталог</Title>
       <div className="mt-6 lg:mt-[29px] grid grid-cols-1 lg:grid-cols-2 gap-x-[30px] gap-y-4 lg:gap-y-[40px]">
@@ -58,7 +57,6 @@ async function OurCatalogSection() {
         })}
       </div>
     </section>
-    // {/* </SectionAnimationWrapper> */}
   );
 }
 

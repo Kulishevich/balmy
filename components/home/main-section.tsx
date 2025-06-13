@@ -8,10 +8,10 @@ function MainSection() {
         <div className="absolute inset-0">
           <div className="mt-[64px] text-center lg:text-left max-w-[280px] mx-auto lg:max-w-full lg:mx-0 lg:ml-[96px] text-white">
             <Title type="main" className="max-w-[728px]">
-              Профессиональная косметика для мужчин
+              Профессиональная косметика оптом
             </Title>
             <p className="mt-4 text-[20px] lg:text-[30px] font-semibold">
-              Широкий спектр продукции по приятным ценам
+              Только оригинальная продукция
             </p>
           </div>
         </div>

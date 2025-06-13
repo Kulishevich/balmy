@@ -13,7 +13,7 @@ const SearchInput = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div className="relative" ref={ref}>
       <input
-        className="py-[14px] px-4 bg-[#FCFCFC] placeholder:text-[#B1B1B1] placeholder:font-normal border border-[#B1B1B1] rounded-[5px] w-full"
+        className="py-[14px] px-4 bg-gray placeholder:text-white/30 placeholder:font-normal rounded-[5px] w-full"
         placeholder="Введите текст для поиска"
         value={searchQuery}
         onChange={handleOnChangeSearchInput}

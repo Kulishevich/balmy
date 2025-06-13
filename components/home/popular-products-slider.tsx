@@ -46,8 +46,8 @@ function PopularProductsSlider({ popularProducts }: Props) {
           );
         })}
       </Swiper>
-      <ArrowLeft className="hidden xl:block popular-products-arrow-left absolute -left-24 top-[118px]" />
-      <ArrowRight className="hidden xl:block popular-products-arrow-right absolute -right-24 top-[118px]" />
+      <ArrowLeft className="hidden xl:block popular-products-arrow-left absolute -left-24 top-[118px] " />
+      <ArrowRight className="hidden xl:block popular-products-arrow-right absolute -right-24 top-[118px] " />
     </div>
   );
 }

@@ -10,6 +10,7 @@ interface Props {
     | "light-gray"
     | "gray"
     | "white"
+    | "gold"
     | "green";
   variant?: "outline";
   type?: "link" | "button";
@@ -37,28 +38,33 @@ function Action({
   const actionClassName = cn(
     "block p-1 border-2 rounded-[5px] text-center group transition",
     {
-      "border-dark-gray": color == "dark-gray",
-      "border-light-green": color == "light-green",
-      "border-gray": color == "gray",
-      "border-white": color == "white",
-      "border-green": color == "green",
-      "border-light-gray hover:border-light-green": color == "light-gray",
+      "border-gold hover:border-gold-gradient": color == "gold" && !disabled,
+      "border-dark-gray": color == "dark-gray" && !disabled,
+      "border-light-green": color == "light-green" && !disabled,
+      "border-gray": color == "gray" && !disabled,
+      "border-white hover:border-gold": color == "white" && !disabled,
+      "border-green": color == "green" && !disabled,
+      "border-light-gray hover:border-light-green":
+        color == "light-gray" && !disabled,
       "border-light-gray": disabled,
     },
     className
   );
 
   const wrapperClassName = cn("block rounded-[5px] transition", {
+    "bg-gold hover:bg-gold-gradient hover:text-black":
+      color == "gold" && !disabled,
     "py-4 text-[20px] px-6": size == "big",
     "py-3 px-6": size == "medium",
     "py-2 px-3": size == "small",
-    "bg-dark-gray text-white": color == "dark-gray",
-    "bg-light-green text-white": color == "light-green",
-    "bg-gray text-white": color == "gray",
-    "bg-white text-dark-gray": color == "white",
-    "bg-green text-white": color == "green",
+    "bg-dark-gray text-white": color == "dark-gray" && !disabled,
+    "bg-light-green text-white": color == "light-green" && !disabled,
+    "bg-gray text-white": color == "gray" && !disabled,
+    "bg-white text-dark-gray hover:bg-gold-gradient":
+      color == "white" && !disabled,
+    "bg-green text-white": color == "green" && !disabled,
     "bg-light-gray text-dark-gray group-hover:bg-light-green group-hover:text-white":
-      color == "light-gray",
+      color == "light-gray" && !disabled,
     "bg-white/0 text-white": variant == "outline",
     "bg-light-gray text-dark-gray": disabled,
   });

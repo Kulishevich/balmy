@@ -15,7 +15,7 @@ function SearchWrapper({ products, searchOptions }: Props) {
 
   return (
     <>
-      <SearchInput ref={searchInputRef}/>
+      <SearchInput ref={searchInputRef} />
       <SearchResult
         searchOptions={searchOptions}
         products={products}

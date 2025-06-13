@@ -27,7 +27,7 @@ function Header() {
             <span className="hidden 2xl:inline-flex">{PHONE_NUMBER.value}</span>
             <PhoneOutlineIcon className="2xl:hidden" />
           </Link>
-          <time className="text-[15px] font-normal text-dark-gray/50 hidden 2xl:inline-block">
+          <time className="text-[15px] font-normal text-white/50 hidden 2xl:inline-block">
             {WORK_DAYS} {WORK_TIME}
           </time>
         </div>

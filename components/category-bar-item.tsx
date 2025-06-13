@@ -17,7 +17,7 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
   return (
     <li
       className={cn("relative text-[21px] leading-[29px] transition group", {
-        "text-green": isActive,
+        "text-white": isActive,
       })}
     >
       {categorySlug == "sets" ? (
@@ -29,12 +29,12 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
         {isActive && (
           <m.span
             {...appearanceAnimation}
-            className="absolute h-[5px] w-full rounded-t-[5px] bg-green left-1/2 -translate-x-1/2 -bottom-2"
+            className="absolute h-[5px] w-full rounded-t-[5px] bg-gold left-1/2 -translate-x-1/2 -bottom-2"
           ></m.span>
         )}
       </AnimatePresence>
       <div className="pt-[3px] absolute top-full left-1/2 -translate-x-1/2 z-10 opacity-0 h-0 transition pointer-events-none group-hover:opacity-100 group-hover:h-auto group-hover:pointer-events-auto">
-        <ul className="bg-light-gray min-w-[180px] flex flex-col py-3 text-center rounded-[5px] border-t-[5px] border-green">
+        <ul className="bg-[#252525] min-w-[180px] flex flex-col py-3 text-center rounded-[5px] border-t-[5px] border-gold">
           {subcategories.map((subcategory) => {
             const { subcategoryName, slug, id } = subcategory;
             const isActive = subcategorySlug == slug;
@@ -42,10 +42,10 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
             return (
               <li
                 className={cn(
-                  "cursor-pointer py-2 px-4 hover transition hover:text-light-green inline-block",
+                  "cursor-pointer py-2 px-4 hover transition hover:text-gold inline-block",
                   {
-                    "text-light-green": isActive,
-                    "text-green": !isActive,
+                    "text-white/30": isActive,
+                    "text-white": !isActive,
                   }
                 )}
                 key={id}

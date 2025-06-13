@@ -1,7 +1,7 @@
 "use client";
 import Title from "../title";
 import HairoticBlackImage from "@/public/images/hairotic-black.webp";
-import ZewBlackImage from "@/public/images/zew-black.webp";
+import ZewBlackImage from "@/public/images/zew-white.webp";
 import HeyJoeBlackImage from "@/public/images/hey-joe-black.webp";
 import CaptainFawcettLimitedBlackImage from "@/public/images/captain-fawcett-limited-black.webp";
 import Image from "next/image";

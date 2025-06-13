@@ -54,13 +54,13 @@ function CartInfo({ className, mobileMenu }: Props) {
     <Link className={cn("flex items-center gap-2", className)} href="/cart">
       <div className="relative">
         <BagIcon />
-        <span className="text-xs font-semibold absolute top-0 right-0 font-quicksand bg-green text-white w-[18px] h-[18px] rounded-full flex text-center">
+        <span className="text-xs font-semibold absolute top-0 right-0 font-quicksand bg-gold text-white w-[18px] h-[18px] rounded-full flex text-center">
           <span className="block mx-auto my-auto">{cartItemCount}</span>
         </span>
       </div>
       <div className="hidden 2xl:flex flex-col">
         <span className="font-semibold">Корзина</span>
-        <span className="text-[15px] text-wrap font-normal text-dark-gray/50">
+        <span className="text-[15px] text-wrap font-normal text-white/50">
           {cartItemCount} {getDeclensionForGoods(cartItemCount)} (
           {cartTotal.toFixed(2)} BYN)
         </span>

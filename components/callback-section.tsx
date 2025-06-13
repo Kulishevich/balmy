@@ -38,8 +38,8 @@ function CallbackSectoin() {
 
   return (
     <section className="mt-[72px] lg:mt-[120px] container">
-      <div className="border border-dark-gray rounded-[5px] flex flex-col lg:flex-row">
-        <div className="w-full lg:max-w-[450px] xl:max-w-[550px] lg:min-h-[535px] bg-dark-gray p-6 lg:p-[54px] text-white flex flex-col text-center lg:text-left">
+      <div className="border border-white/30 rounded-[5px] flex flex-col lg:flex-row">
+        <div className="w-full lg:max-w-[450px] xl:max-w-[550px] lg:min-h-[535px] bg-white p-6 lg:p-[54px] text-black flex flex-col text-center lg:text-left rounded-s-md">
           <p
             className={
               "text-[28px] font-extrabold sm:text-[41px] sm:font-semibold"
@@ -121,6 +121,7 @@ function CallbackSectoin() {
             type="button"
             className="mt-6 sm:max-w-[300px] w-full"
             size="big"
+            color="white"
             typeButton="submit"
             disabled={!personalInfo}
           >

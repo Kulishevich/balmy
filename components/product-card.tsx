@@ -150,7 +150,7 @@ function ProductCard({ product }: Props) {
           </span>
         </span>
       )}
-      <div className="mt-4 flex justify-between w-full gap-[13px] transition opacity-100 lg:opacity-50 group-hover:opacity-100">
+      <div className="mt-4 flex justify-between w-full gap-[13px] transition">
         {!cartProduct && !isTablet && !!quantity && (
           <CountControl
             localCartProduct={localCartProduct}
@@ -162,7 +162,7 @@ function ProductCard({ product }: Props) {
             type="button"
             className="w-full transition-all"
             size="small"
-            color="light-green"
+            color="gold"
             onClick={handleClickOnAddToCartButton}
           >
             {addToCartButtonText}

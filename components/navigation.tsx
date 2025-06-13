@@ -17,9 +17,8 @@ import { useSearchStore } from "@/store/search";
 import cn from "clsx";
 
 const navigation = [
+  { name: "Главная", link: "/" },
   { name: "Скидки", link: "/catalog/discounts" },
-  { name: "Сотрудничество", link: "/contacts#cooperation" },
-  { name: "Блог", link: "/news" },
   { name: "Контакты", link: "/contacts" },
 ];
 

@@ -19,7 +19,7 @@ body {
 
 /* Input, Textarea, Checkbox */
 .custom-input {
-  @apply py-[23px] px-[18px] font-normal placeholder:text-dark-gray/50 border border-dark-gray/30 rounded-[5px];
+  @apply py-[23px] px-[18px] font-normal placeholder:text-white/50 border border-white/30 bg-transparent rounded-[5px];
 }
 
 .custom-input--error {
@@ -39,7 +39,7 @@ body {
 }
 
 .custom-textarea {
-  @apply py-[23px] px-[18px] font-normal placeholder:text-dark-gray/50 border border-dark-gray/30 rounded-[5px] h-[146px] resize-none;
+  @apply py-[23px] px-[18px] font-normal placeholder:text-white/50 border border-white/30 bg-transparent rounded-[5px] h-[146px] resize-none;
 }
 
 .custom-textarea--error {
@@ -47,7 +47,7 @@ body {
 }
 
 .custom-checkbox {
-  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden border border-dark-gray/30 appearance-none cursor-pointer grid place-items-center transition outline-none;
+  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden border border-white/30 appearance-none cursor-pointer grid place-items-center transition outline-none;
 }
 
 .custom-checkbox::before {
@@ -56,7 +56,7 @@ body {
 }
 
 .custom-checkbox:checked {
-  @apply bg-green border-green;
+  @apply bg-gold-gradient border-gold;
 }
 
 .custom-checkbox:checked::before {

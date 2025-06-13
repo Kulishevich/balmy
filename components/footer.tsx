@@ -1,5 +1,4 @@
 "use client";
-import Logo from "@/public/icons/logo-light.svg";
 import Link from "next/link";
 import PhoneIcon from "@/public/icons/phone.svg";
 import MapPinIcon from "@/public/icons/map-pin.svg";
@@ -12,12 +11,12 @@ import {
   WORK_TIME,
 } from "@/utils/constants";
 import Action from "./action";
-import SocialNetwokrs from "./social-networks";
 import { useScreenSize } from "@/hooks/use-screen-size";
 import { Category } from "@/types/category";
 import { usePopupStore } from "@/store/popup";
 import Payments from "./payments";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface Props {
   categories: Category[];
@@ -48,16 +47,28 @@ function Footer({ categories }: Props) {
         <div className="container py-12 flex flex-col lg:flex-row sm:bg-[url('/images/footer-bg.webp')] bg-no-repeat bg-center">
           <div className="w-max mx-auto flex flex-col lg:mx-0">
             {pathname === "/" ? (
-              <div className="mx-auto lg:mx-0">
-                <Logo />
+              <div className="w-[145px] h-[122px] relative">
+                <Image
+                  src={"/images/logo.png"}
+                  fill
+                  alt="logo"
+                  className="object-cover"
+                />
               </div>
             ) : (
-              <Link className="mx-auto lg:mx-0" href="/">
-                <Logo />
+              <Link
+                className="mx-auto lg:mx-0 w-[145px] h-[122px] relative"
+                href="/"
+              >
+                <Image
+                  src={"/images/logo.png"}
+                  fill
+                  alt="logo"
+                  className="object-cover"
+                />
               </Link>
             )}
-            <div className="mt-8 lg:mt-6 flex items-center lg:items-start lg:flex-col">
-              <SocialNetwokrs className="scale-75 lg:scale-100" />
+            <div className="mt-8 lg:mt-3 flex items-center lg:items-start lg:flex-col">
               {!isTablet && (
                 <p className="hidden lg:block mt-4 max-w-[280px] 2xl:max-w-[310px] text-base opacity-70">
                   OOO &quot; Коммерс Коннект &quot; <br /> УНП 193716324 <br />{" "}
