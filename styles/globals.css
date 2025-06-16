@@ -19,7 +19,7 @@ body {
 
 /* Input, Textarea, Checkbox */
 .custom-input {
-  @apply py-[23px] px-[18px] font-normal placeholder:text-white/50 border border-white/30 bg-transparent rounded-[5px];
+  @apply py-[23px] px-[18px] font-normal text-[#171717] placeholder:text-[#171717]/50 border border-[#171717]/50 bg-transparent rounded-[5px];
 }
 
 .custom-input--error {
@@ -47,7 +47,7 @@ body {
 }
 
 .custom-checkbox {
-  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden border border-white/30 appearance-none cursor-pointer grid place-items-center transition outline-none;
+  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden border border-[#171717]/20 appearance-none cursor-pointer grid place-items-center transition outline-none;
 }
 
 .custom-checkbox::before {

@@ -7,10 +7,10 @@ export const AuthorizationWindow = () => {
   const [state, setState] = useState<"sign_up" | "log_in">("sign_up");
 
   return (
-    <div className="relative z-10 bg-white rounded-md px-[76px] py-[52px] flex flex-col gap-6 w-[776px]">
+    <div className="relative z-10 bg-white text-black rounded-md px-[76px] py-[52px] flex flex-col gap-6 w-[776px]">
       <div className="flex gap-5 justify-center">
         <button
-          className={clsx("text-[42px]", {
+          className={clsx("text-[42px] ", {
             "opacity-100": state == "sign_up",
             "opacity-20": state == "log_in",
           })}
@@ -19,7 +19,7 @@ export const AuthorizationWindow = () => {
           Регистрация
         </button>
         <button
-          className={clsx("text-[42px]", {
+          className={clsx("text-[42px] ", {
             "opacity-100": state == "log_in",
             "opacity-20": state == "sign_up",
           })}
@@ -35,7 +35,7 @@ export const AuthorizationWindow = () => {
               ФИО
             </label>
             <input
-              className={"custom-input mt-[6px]"}
+              className={"custom-input mt-[6px] "}
               id="name"
               placeholder="Введите ваше имя"
             />
@@ -61,13 +61,7 @@ export const AuthorizationWindow = () => {
             />
           </div>
           <div className="flex items-center gap-2">
-            <input
-              className="custom-checkbox--dark"
-              id="date"
-              type="checkbox"
-              // checked={"specific-date" == whenToDeliver}
-              // onChange={handleChangeWhenToDeliver("specific-date")}
-            />
+            <input className="custom-checkbox" id="date" type="checkbox" />
             <label className="font-normal cursor-pointer" htmlFor="date">
               Согласие на обработку данных
             </label>

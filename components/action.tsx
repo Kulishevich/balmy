@@ -54,7 +54,7 @@ function Action({
     className
   );
 
-  const wrapperClassName = cn("block rounded-[5px] transition", {
+  const wrapperClassName = cn("block rounded-[5px] transition ", {
     "bg-gold hover:bg-gold-gradient hover:text-black":
       color == "gold" && !disabled,
     "py-4 text-[20px] px-6": size == "big",

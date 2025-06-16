@@ -24,16 +24,12 @@ function Breadcrumbs({ className, dynamicPath }: Props) {
         return { href: "/", name: "Главная" };
       case "cart":
         return { href: "/cart", name: "Корзина" };
-      case "delivery-payment":
-        return { href: "/delivery-payment", name: "Доставка и оплата" };
       case "offer-contract":
         return { href: "/offer-contract", name: "Договор оферты" };
       case "privacy-policy":
         return { href: "/privacy-policy", name: "Политика конфиденциальности" };
       case "contacts":
         return { href: "/contacts", name: "Контакты" };
-      case "news":
-        return { href: "/news", name: "Новости" };
       default:
         break;
     }

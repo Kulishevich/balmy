@@ -24,8 +24,6 @@ interface Props {
 
 const information = [
   { name: "Скидки", link: "/catalog/discounts" },
-  { name: "Блог", link: "/news" },
-  { name: "Доставка и оплата", link: "/delivery-payment" },
   { name: "Контакты", link: "/contacts" },
   { name: "Договор оферты", link: "/offer-contract" },
   { name: "Политика конфиденциальности", link: "/privacy-policy" },

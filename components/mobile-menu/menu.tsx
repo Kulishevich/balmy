@@ -26,9 +26,7 @@ interface Props {
 
 const links = [
   { name: "Скидки", href: "/catalog/discounts" },
-  { name: "Доставка и оплата", href: "/delivery-payment" },
   { name: "Контакты", href: "/contacts" },
-  { name: "Блог", href: "/news" },
 ];
 
 function MobileMenu({ categories }: Props) {
