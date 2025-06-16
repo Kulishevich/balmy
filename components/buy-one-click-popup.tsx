@@ -64,20 +64,20 @@ function BuyOneClickPopup() {
 
   return (
     <m.div
-      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-scroll sm:overflow-hidden bg-white py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
+      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-scroll sm:overflow-hidden border-l border-[#9E9E9E] bg-dark-grey py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
       {...leftAppearanceAnimation}
       {...swipeHandlers}
     >
       <div className="flex gap-6 sm:mx-auto">
         <button className="sm:hidden" onClick={removePopup}>
-          <CloseIcon className="fill-black" />
+          <CloseIcon />
         </button>
         <h3 className="text-center font-bold text-[28px] sm:text-[30px]">
           Купить в 1 клик
         </h3>
       </div>
       <div className="mt-5 sm:mt-[30px] flex items-start gap-3">
-        <div className="relative max-w-20 w-full h-20 border border-dark-gray rounded-[5px] overflow-hidden">
+        <div className="relative max-w-20 w-full h-20 rounded-[5px] overflow-hidden">
           <Image
             className="object-contain"
             src={product?.images[0] || "/icons/logo-gray.svg"}
@@ -172,7 +172,7 @@ function BuyOneClickPopup() {
           type="button"
           className="mt-6 w-full"
           size="big"
-          color="dark-gray"
+          color="white"
           typeButton="submit"
           disabled={!personalInfo}
         >

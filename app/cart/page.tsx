@@ -63,7 +63,7 @@ function CartPage() {
             </div>
             <div className="mt-5 sm:mt-10 flex flex-col sm:flex-row justify-between items-start">
               <button
-                className="sm:text-[21px] text-dark-gray/50 border-b border-b-dark-gray/50"
+                className="sm:text-[21px] text-white/50 underline border-b border-b-dark-gray/50"
                 onClick={clearCart}
               >
                 Очистить корзину

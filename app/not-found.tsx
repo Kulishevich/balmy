@@ -18,6 +18,7 @@ async function NotFoundPage() {
           href="/"
           className="max-w-[300px] w-full"
           size="big"
+          color="white"
         >
           Перейти на главную
         </Action>

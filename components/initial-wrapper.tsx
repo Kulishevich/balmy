@@ -26,7 +26,7 @@ function InitialWrapper({ children }: Props) {
         src="https://api-maps.yandex.ru/v3/?apikey=fe67c55a-458f-4bfc-805b-a1a37e125d50&lang=ru_RU"
         strategy="beforeInteractive"
       />
-      <NextTopLoader color="#659654" showSpinner={false} />
+      <NextTopLoader color="#C49B48" showSpinner={false} />
       <Toaster
         position="top-center"
         duration={1260}

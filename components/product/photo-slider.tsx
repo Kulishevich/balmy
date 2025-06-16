@@ -38,7 +38,7 @@ function PhotoSlider({ thumbsSwiper, photos }: Props) {
   }
 
   return (
-    <div className="relative w-full border border-dark-gray rounded-[5px] overflow-hidden">
+    <div className="relative w-full border border-gold rounded-[5px] overflow-hidden">
       <Swiper
         onInit={setSwiperClass}
         slidesPerView={1}

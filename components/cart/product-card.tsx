@@ -20,7 +20,7 @@ function CartProductCard({ cartProduct }: Props) {
   }
 
   return (
-    <div className="flex justify-between flex-col 2xl:grid grid-cols-[705px,1fr,1fr,1fr] items-center py-[30px] border-b border-b-dark-gray/30">
+    <div className="flex justify-between flex-col 2xl:grid grid-cols-[705px,1fr,1fr,1fr] items-center py-[30px] border-b border-b-white/30">
       <div className="flex items-center w-full">
         <button
           className="hidden bg-gold w-[42px] h-[42px] sm:grid place-items-center rounded-full flex-shrink-0"
@@ -44,7 +44,7 @@ function CartProductCard({ cartProduct }: Props) {
             )}
           </div>
           <button
-            className="sm:hidden mt-[20px] text-dark-gray/50 border-b border-b-dark-gray/50"
+            className="sm:hidden mt-[20px] text-white/60 underline border-b border-b-dark-gray/50"
             onClick={handleClickOnRemoveFromCartButton}
           >
             Удалить
@@ -59,7 +59,7 @@ function CartProductCard({ cartProduct }: Props) {
             />
             <div className="ml-4 flex flex-col">
               <span
-                className={cn("sm:text-[24px] text-dark-gray/60 line-through", {
+                className={cn("sm:text-[24px] text-white/60 line-through", {
                   hidden: !discount,
                 })}
               >

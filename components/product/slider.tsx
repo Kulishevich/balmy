@@ -4,11 +4,11 @@ import PhotoSlider from "./photo-slider";
 import ThumbSlider from "./thumb-slider";
 import { SwiperClass } from "swiper/react";
 
-interface Props  {
+interface Props {
   photos: string[];
 }
 
-function ProductSlider({photos}: Props) {
+function ProductSlider({ photos }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
   return (

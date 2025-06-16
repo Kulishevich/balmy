@@ -8,7 +8,7 @@ import Image from "next/image";
 function Header() {
   return (
     <header
-      className="w-full bg-dark-grey sticky top-0 z-50
+      className="w-full bg-dark-grey sticky top-0 z-20
     "
     >
       <div className="container py-7 hidden lg:flex items-center">

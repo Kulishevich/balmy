@@ -38,7 +38,7 @@ function DeliverySection() {
           )}
           onClick={handleClickOnCourierDelivery}
         >
-          <FastCarSmallIcon />
+          <FastCarSmallIcon className="fill-white" />
           <h3 className="mt-3 text-[20px] max-w-[122px] sm:max-w-full sm:text-[26px]">
             Курьером по Минску
           </h3>

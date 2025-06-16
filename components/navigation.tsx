@@ -1,7 +1,6 @@
 "use client";
 import LocationIcon from "@/public/icons/location.svg";
 import BurgerIcon from "@/public/icons/burger.svg";
-import LogoDarkMobileIcon from "@/public/icons/logo-dark-mobile.svg";
 import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import SearchMobileIcon from "@/public/icons/search-mobile.svg";
 import Link from "next/link";
@@ -15,6 +14,7 @@ import { appearanceAnimation } from "@/utils/animations";
 import { useMobileMenuStore } from "@/store/mobile-menu";
 import { useSearchStore } from "@/store/search";
 import cn from "clsx";
+import Image from "next/image";
 
 const navigation = [
   { name: "Главная", link: "/" },
@@ -47,8 +47,13 @@ function Navigation() {
             <BurgerIcon />
             <span className="sr-only">Открыть меню</span>
           </button>
-          <Link className="ml-9" href="/">
-            <LogoDarkMobileIcon />
+          <Link className="ml-9 w-[67px] h-[57px] relative" href="/">
+            <Image
+              src={"/images/logo.png"}
+              fill
+              alt="logo"
+              className="object-cover"
+            />
           </Link>
           <div className="ml-auto flex gap-6">
             <Link href={PHONE_NUMBER.href}>
@@ -57,8 +62,8 @@ function Navigation() {
             <button onClick={toggleSearch}>
               <SearchMobileIcon
                 className={cn("stroke-2 transition", {
-                  "stroke-green": show,
-                  "stroke-black": !show,
+                  "stroke-gold": show,
+                  "stroke-white": !show,
                 })}
               />
               <span className="sr-only">Открыть поиск</span>

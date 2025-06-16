@@ -25,7 +25,7 @@ function CartIsEmpty({ firstCategorySlug }: Props) {
           href={`/catalog/${firstCategorySlug}`}
           className="mt-8 max-w-[300px] w-full"
           size="big"
-          color="green"
+          color="gold"
         >
           Перейти в каталог
         </Action>

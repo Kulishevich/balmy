@@ -97,7 +97,7 @@ function FilterPopup() {
 
   return (
     <m.div
-      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-scroll sm:overflow-hidden bg-white py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
+      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-scroll sm:overflow-hidden bg-dark-grey py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
       {...leftAppearanceAnimation}
       {...swipeHandlers}
     >
@@ -181,6 +181,7 @@ function FilterPopup() {
           type="button"
           className="mt-6 w-full"
           size="big"
+          color="white"
           onClick={handleClickOnCleanFilterButton}
         >
           Очистить фильтр

@@ -27,7 +27,7 @@ function SearchResult({ products, searchOptions, searchInputRef }: Props) {
   const searchResultRef = useRef<HTMLDivElement | null>(null);
   const fuse = useMemo(
     () => new Fuse(products, searchOptions),
-    [products, searchOptions],
+    [products, searchOptions]
   );
 
   function handleClickOnResultSearch() {
@@ -77,7 +77,7 @@ function SearchResult({ products, searchOptions, searchInputRef }: Props) {
       {searchResult.length && (
         <m.div
           ref={searchResultRef}
-          className="absolute bg-light-gray top-full inset-x-4 sm:inset-x-8 md:inset-x-12 lg:inset-x-0 flex flex-col z-10 rounded-[5px] py-3 max-h-[420px] lg:max-h-[440px] overflow-y-auto"
+          className="absolute bg-dark-gray border border-white/10 top-full inset-x-4 sm:inset-x-8 md:inset-x-12 lg:inset-x-0 flex flex-col z-50 rounded-[5px] py-3 max-h-[420px] lg:max-h-[440px] overflow-y-auto"
           {...appearanceAnimation}
         >
           {searchResult.map((result) => {

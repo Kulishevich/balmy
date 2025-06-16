@@ -40,7 +40,7 @@ function ThumbSlider({ setThumbsSwiper, photos }: Props) {
         {photos.map((photo, idx) => {
           return (
             <SwiperSlide className="transition cursor-pointer" key={idx}>
-              <div className="relative max-w-[100px] w-full aspect-square border border-light-gray rounded-[5px] overflow-hidden">
+              <div className="relative max-w-[100px] w-full aspect-square border border-gold rounded-[5px] overflow-hidden">
                 <Image
                   className="object-contain"
                   src={photo}

@@ -178,7 +178,7 @@ function ProductCard({ product }: Props) {
         <Action
           type="button"
           className="mt-[6px] transition w-full"
-          color="gray"
+          color="white"
           size="small"
           onClick={handleClickOnBuyInOneClickButton}
         >

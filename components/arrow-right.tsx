@@ -28,7 +28,7 @@ function ArrowRight({
       <ArrowRightIcon
         className={cn({
           "fill-white": variant == "fill",
-          "fill-green": variant == "transparent",
+          "fill-gold": variant == "transparent",
         })}
       />
     </button>

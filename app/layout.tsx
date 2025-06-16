@@ -113,11 +113,11 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${nunito.variable} ${quicksand.variable} flex flex-col h-full`}
+        className={`${nunito.variable} ${quicksand.variable} flex flex-col h-full bg-dark-grey`}
       >
         <InitialWrapper>
           <AnimationThemeLayout>
-            <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative bg-dark-grey">
+            <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relativ z-1">
               <Navigation />
               <SearchMobile />
               <Header />

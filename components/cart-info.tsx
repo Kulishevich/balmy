@@ -30,7 +30,7 @@ function CartInfo({ className, mobileMenu }: Props) {
       >
         <div className="relative">
           <BagMobileLightIcon />
-          <span className="text-xs font-semibold absolute top-0 right-0 font-quicksand bg-green text-white w-[16px] h-[16px] rounded-full flex text-center">
+          <span className="text-xs font-semibold absolute top-0 right-0 font-quicksand bg-gold text-white w-[16px] h-[16px] rounded-full flex text-center">
             <span className="block mx-auto my-auto">{cartItemCount}</span>
           </span>
         </div>
@@ -43,7 +43,7 @@ function CartInfo({ className, mobileMenu }: Props) {
     return (
       <Link className="relative" href="/cart">
         <BagMobileIcon />
-        <span className="text-xs font-semibold absolute top-0 right-0 font-quicksand bg-green text-white w-[16px] h-[16px] rounded-full flex text-center">
+        <span className="text-xs font-semibold absolute top-0 right-0 font-quicksand bg-gold text-white w-[16px] h-[16px] rounded-full flex text-center">
           <span className="block mx-auto my-auto">{cartItemCount}</span>
         </span>
       </Link>

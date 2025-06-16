@@ -43,7 +43,7 @@ function CategoryBarList({ categories }: Props) {
   return (
     <div
       className={clsx(
-        "w-full bg-dark-grey sticky top-[133px] z-50 transition-shadow pb-2",
+        "hidden lg:block w-full bg-dark-grey sticky top-[153px] z-10 transition-shadow pb-2",
         hasShadow && "shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]"
       )}
     >

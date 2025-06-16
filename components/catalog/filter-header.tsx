@@ -17,11 +17,11 @@ function FilterHeader({ totalPages, countProducts }: Props) {
 
   return (
     <div className="2xl:hidden mt-6 container flex justify-between items-center">
-      <p className="font-normal text-[15px]">
+      <p className="font-normal text-[15px] text-gold">
         Найдено по фильтрам: <span className="font-bold">{foundByFilter}</span>
       </p>
       <button
-        className="w-[42px] h-[42px] rounded-full border border-dark-gray grid place-items-center"
+        className="w-[42px] h-[42px] rounded-full border border-white grid place-items-center"
         onClick={handleClickOnFilterButton}
       >
         <FilterIcon />
