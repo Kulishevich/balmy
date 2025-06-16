@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  @apply font-nunito font-medium text-white text-[17px];
+  @apply font-golos font-medium text-white text-[17px];
 }
 
 /* Input, Textarea, Checkbox */
@@ -47,7 +47,7 @@ body {
 }
 
 .custom-checkbox {
-  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden border border-[#171717]/20 appearance-none cursor-pointer grid place-items-center transition outline-none;
+  @apply m-0 max-w-[30px] w-full h-[30px] rounded-[5px] overflow-hidden appearance-none cursor-pointer grid place-items-center transition outline-none;
 }
 
 .custom-checkbox::before {
@@ -141,7 +141,7 @@ body {
 .docs span,
 .docs font,
 .docs li {
-  @apply font-nunito text-[17px] font-normal leading-[24px] tracking-normal !important;
+  @apply font-golos text-[17px] font-normal leading-[24px] tracking-normal !important;
 }
 
 .docs ul {

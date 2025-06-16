@@ -7,10 +7,10 @@ export const AuthorizationWindow = () => {
   const [state, setState] = useState<"sign_up" | "log_in">("sign_up");
 
   return (
-    <div className="relative z-10 bg-white text-black rounded-md px-[76px] py-[52px] flex flex-col gap-6 w-[776px]">
-      <div className="flex gap-5 justify-center">
+    <div className="relative z-10 bg-white text-black rounded-md p-8 lg:px-[76px] lg:py-[52px] flex flex-col gap-6 w-[336px] lg:w-[766px]">
+      <div className="flex lg:gap-5 gap-3 justify-center">
         <button
-          className={clsx("text-[42px] ", {
+          className={clsx("lg:text-[42px] text-[24px] ", {
             "opacity-100": state == "sign_up",
             "opacity-20": state == "log_in",
           })}
@@ -19,7 +19,7 @@ export const AuthorizationWindow = () => {
           Регистрация
         </button>
         <button
-          className={clsx("text-[42px] ", {
+          className={clsx("lg:text-[42px] text-[24px] ", {
             "opacity-100": state == "log_in",
             "opacity-20": state == "sign_up",
           })}
@@ -61,9 +61,16 @@ export const AuthorizationWindow = () => {
             />
           </div>
           <div className="flex items-center gap-2">
-            <input className="custom-checkbox" id="date" type="checkbox" />
-            <label className="font-normal cursor-pointer" htmlFor="date">
-              Согласие на обработку данных
+            <input
+              className="custom-checkbox border border-[#1717174D]/20"
+              id="date"
+              type="checkbox"
+            />
+            <label
+              className="font-normal lg:text-[17px] text-[14px]  cursor-pointer"
+              htmlFor="date"
+            >
+              Согласие на обработку персональных данных
             </label>
           </div>
           <Action

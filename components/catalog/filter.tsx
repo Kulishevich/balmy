@@ -117,7 +117,7 @@ function CatalogFilter({ className, showBrands, page }: Props) {
               return (
                 <div className="flex items-center gap-[10px]" key={id}>
                   <input
-                    className="custom-checkbox"
+                    className="custom-checkbox border-white/30"
                     id={id}
                     type="radio"
                     checked={currentBrand == id}
@@ -150,7 +150,7 @@ function CatalogFilter({ className, showBrands, page }: Props) {
           return (
             <div className="flex items-center gap-[10px]" key={sortDirection}>
               <input
-                className="custom-checkbox"
+                className="custom-checkbox border-white/30"
                 id={sortDirection}
                 type="radio"
                 name="sort"

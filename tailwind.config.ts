@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        nunito: "var(--font-nunito)",
         quicksand: "var(--font-quicksand)",
+        golos: "var(--font-golos)",
       },
       colors: {
         "light-green": "#659654",

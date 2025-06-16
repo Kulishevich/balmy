@@ -100,7 +100,7 @@ function CallbackPopup() {
           </div>
           <div className="pt-4 mt-auto flex items-center gap-2">
             <input
-              className="custom-checkbox"
+              className="custom-checkbox border-white/30"
               id="personal-data-2"
               type="checkbox"
               {...register("personal-info")}

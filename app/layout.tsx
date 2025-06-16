@@ -1,15 +1,7 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Nunito, Quicksand } from "next/font/google";
-import Navigation from "@/components/navigation";
-import Header from "@/components/header";
-import CategoryBar from "@/components/category-bar";
-import Footer from "@/components/footer";
+import { Quicksand, Golos_Text } from "next/font/google";
 import InitialWrapper from "@/components/initial-wrapper";
-import Popups from "@/components/popups";
-import MobileMenu from "@/components/mobile-menu/menu";
-import { getCategories } from "@/api/category";
-import SearchMobile from "@/components/search/mobile";
 import { getSeoTags } from "@/api/seo";
 import { config } from "@/utils/config";
 import Script from "next/script";
@@ -38,10 +30,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const nunito = Nunito({
+const golosText = Golos_Text({
   subsets: ["cyrillic"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-nunito",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-golos",
 });
 
 const quicksand = Quicksand({
@@ -55,8 +47,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { categories } = await getCategories();
-
   return (
     <html lang="ru">
       <head>
@@ -113,20 +103,11 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${nunito.variable} ${quicksand.variable} flex flex-col h-full bg-dark-grey`}
+        className={`${quicksand.variable} ${golosText.variable} flex flex-col h-full bg-dark-grey`}
       >
         <InitialWrapper>
           <AnimationThemeLayout>
-            <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relativ z-1">
-              <Navigation />
-              <SearchMobile />
-              <Header />
-              <CategoryBar categories={categories} />
-              {children}
-              <Footer categories={categories} />
-              <Popups />
-              <MobileMenu categories={categories} />
-            </div>
+            {children}
             <ScrollToTopButton />
           </AnimationThemeLayout>
         </InitialWrapper>

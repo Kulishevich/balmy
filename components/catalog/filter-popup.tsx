@@ -126,7 +126,7 @@ function FilterPopup() {
                   onClick={handleBrandClick(id)}
                 >
                   <input
-                    className="custom-checkbox"
+                    className="custom-checkbox border-white/30"
                     id={id}
                     type="radio"
                     checked={currentBrand == id}
@@ -162,7 +162,7 @@ function FilterPopup() {
               onClick={handleSortClick}
             >
               <input
-                className="custom-checkbox"
+                className="custom-checkbox border-white/30"
                 id={sortDirection}
                 type="radio"
                 name="sort"

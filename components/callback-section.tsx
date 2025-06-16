@@ -99,7 +99,7 @@ function CallbackSectoin() {
           </div>
           <div className="mt-4 flex items-center gap-2">
             <input
-              className="custom-checkbox"
+              className="custom-checkbox border border-white/30"
               id="personal-data"
               type="checkbox"
               {...register("personal-info")}
