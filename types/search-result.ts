@@ -1,7 +1,7 @@
-import { Product } from "./product";
+import { ProductItem } from "./product";
 
 export interface SearchResult {
-  item: Product;
+  item: ProductItem;
   refIndex: number;
   score?: number;
 }

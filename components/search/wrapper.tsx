@@ -1,13 +1,13 @@
 "use client";
-import { Product } from "@/types/product";
 import { IFuseOptions } from "fuse.js";
 import { useRef } from "react";
 import SearchInput from "./input";
 import SearchResult from "./result";
+import { ProductItem } from "@/types/product";
 
 interface Props {
-  products: Product[];
-  searchOptions: IFuseOptions<Product>;
+  products: ProductItem[];
+  searchOptions: IFuseOptions<ProductItem>;
 }
 
 function SearchWrapper({ products, searchOptions }: Props) {

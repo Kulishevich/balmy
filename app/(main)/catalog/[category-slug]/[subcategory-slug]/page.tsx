@@ -1,8 +1,7 @@
-import { getProductsBySubcategoryId } from "@/api/products";
-import { notFound, redirect } from "next/navigation";
+import { getProductsByCategoryId } from "@/api/products";
+import { notFound } from "next/navigation";
 import CategoryLayout from "@/components/catalog/category-layout";
 import React from "react";
-import { getSubcategory } from "@/api/subcategory";
 import { Direction } from "@/store/filter";
 import { getCategory } from "@/api/category";
 
@@ -27,39 +26,32 @@ async function Page({ params, searchParams }: Props) {
     page,
   } = await params;
   const responseSearchParams = await searchParams;
-  const { category } = await getCategory(categorySlug);
-  const { subcategory } = await getSubcategory(subcategorySlug);
 
-  if (!subcategory) {
-    const newSubcategorySlug = category?.subcategories.find(
-      (elem) => elem.id.toLocaleLowerCase() === subcategorySlug
-    )?.slug;
+  const categoryId = categorySlug.split("_").findLast((elem) => elem) || "";
+  const subcategoryId =
+    subcategorySlug.split("_").findLast((elem) => elem) || "";
 
-    if (newSubcategorySlug) {
-      redirect(`/catalog/${categorySlug}/${newSubcategorySlug}`);
-    } else {
-      redirect("/404");
-    }
-  }
+  const category = await getCategory(categoryId);
+  const subcategory = await getCategory(subcategoryId);
+  console.log(subcategory);
 
-  const { products, totalPages } = await getProductsBySubcategoryId({
-    category: categorySlug,
-    subcategoryId: subcategory?.id,
+  const { last_page, data: products } = await getProductsByCategoryId({
+    category_id: subcategoryId,
     page: page,
-    sort: responseSearchParams.sort,
-    direction: responseSearchParams.direction,
+    sort_by: responseSearchParams.sort,
+    sort_direction: responseSearchParams.direction,
     brand: responseSearchParams.brand,
   });
+
   if (!subcategory || !category) notFound();
 
   return (
     <CategoryLayout
       page={page}
-      categorySlug={categorySlug}
-      subcategorySlug={subcategorySlug}
-      subcategoryName={subcategory.subcategoryName}
+      category={category}
+      subcategory={subcategory}
       products={products}
-      totalPages={totalPages}
+      totalPages={last_page}
     />
   );
 }

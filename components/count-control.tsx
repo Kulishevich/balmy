@@ -48,7 +48,7 @@ function CountControl({
   return (
     <div
       className={cn(
-        "font-quicksand flex justify-between items-center gap-2 border border-gold rounded-[5px] hover:border-gold-gradient",
+        "font-quicksand flex justify-between items-center gap-2 border border-gold rounded-[5px] hover:border-light-gold",
         { "text-[21px]": size == "small", "text-[30px]": size == "big" },
         className
       )}

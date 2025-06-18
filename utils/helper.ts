@@ -67,9 +67,9 @@ export async function handleCategoryChangePath({
 }) {
   if (pathname.includes("/product")) {
     const productSlug = pathname.split("/")[2];
-    const { product } = await getProductBySlug(productSlug);
+    const product = await getProductBySlug(productSlug);
 
-    setActiveCategorySlug(product?.categorySlug || "");
+    setActiveCategorySlug(product?.slug || "");
   }
 
   if (pathname.includes("/catalog")) {
@@ -83,18 +83,17 @@ export async function handleCategoryChangePath({
 }
 
 export function getCartProductFromProduct(product: Product) {
-  const { id, slug, images, name, salePrices, discount, discountPrices } =
-    product;
+  const { id, slug, photo_path, name, discount, price } = product;
 
   return {
     id,
     slug: slug!,
-    image: images[0],
+    image: photo_path,
     name,
-    price: salePrices,
-    basePrice: salePrices,
+    price: price,
+    basePrice: price,
     discount,
-    discountPrices,
+    discountPrices: price,
     quantity: 1,
   };
 }

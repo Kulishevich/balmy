@@ -7,7 +7,7 @@ import LongArrowRightIcon from "@/public/icons/long-arrow-right.svg";
 import cn from "clsx";
 
 interface Props {
-  totalPages: string;
+  totalPages: number;
   currentPage?: string;
 }
 

@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/types/product";
+import { ProductItem } from "@/types/product";
 import { IFuseOptions } from "fuse.js";
 import { useRef } from "react";
 import SearchInput from "./input";
@@ -9,8 +9,8 @@ import { AnimatePresence, m } from "motion/react";
 import { topAppearanceAnimation } from "@/utils/animations";
 
 interface Props {
-  products: Product[];
-  searchOptions: IFuseOptions<Product>;
+  products: ProductItem[];
+  searchOptions: IFuseOptions<ProductItem>;
 }
 
 function SearchWrapperMobile({ products, searchOptions }: Props) {

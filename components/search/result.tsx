@@ -1,7 +1,7 @@
 "use client";
 import { useSearchStore } from "@/store/search";
 import { useEffect, useMemo, useRef } from "react";
-import { Product } from "@/types/product";
+import { ProductItem } from "@/types/product";
 import { AnimatePresence, m } from "motion/react";
 import { appearanceAnimation } from "@/utils/animations";
 import { MAX_SEARCH_RESULT } from "@/utils/constants";
@@ -11,8 +11,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  products: Product[];
-  searchOptions: IFuseOptions<Product>;
+  products: ProductItem[];
+  searchOptions: IFuseOptions<ProductItem>;
   searchInputRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -82,25 +82,31 @@ function SearchResult({ products, searchOptions, searchInputRef }: Props) {
         >
           {searchResult.map((result) => {
             const { item: product, refIndex } = result;
-            const { name, images, discount, slug, salePrices, discountPrices } =
-              product;
+            const { name, discount, slug, price, id, photo_path } = product;
             const alt = name.toLowerCase();
+
+            const isDiscount = !!Number(discount);
+            const discountPrices = Number(price) * (100 - Number(discount));
 
             return (
               <Link
                 key={refIndex}
-                href={`/product/${slug}`}
+                href={`/product/${slug}_${id}`}
                 className="inline-flex py-[10px] lg:py-3 px-[18px] lg:px-6 gap-4 transition hover:bg-gray/20"
                 onClick={handleClickOnResultSearch}
               >
                 <div className="relative max-w-[80px] w-full h-[80px] bg-white rounded-[5px] overflow-hidden border border-dark-gray">
                   <Image
                     className="object-contain"
-                    src={images[0] || "/icons/logo-gray.svg"}
+                    src={
+                      photo_path
+                        ? `https://balmy.webspaceteam.site/storage/${photo_path}`
+                        : "/icons/logo-gray.svg"
+                    }
                     alt={alt}
                     fill
                   />
-                  {!!discount && (
+                  {isDiscount && (
                     <span className="absolute right-0 text-white py-[3px] px-[6px] bg-red font-semibold text-[14px] rounded-[5px]">
                       -{discount}%
                     </span>
@@ -112,12 +118,12 @@ function SearchResult({ products, searchOptions, searchInputRef }: Props) {
                   <span className="text-[15px] font-bold inline-flex gap-[6px]">
                     <span
                       className={cn({
-                        "opacity-50 line-through": !!discount,
+                        "opacity-50 line-through": isDiscount,
                       })}
                     >
-                      {salePrices.toFixed(2)} byn
+                      {price} byn
                     </span>
-                    {!!discount && discountPrices.toFixed(2) + " byn"}
+                    {isDiscount && discountPrices.toFixed(2) + " byn"}
                   </span>
                 </div>
               </Link>

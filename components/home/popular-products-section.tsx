@@ -3,7 +3,7 @@ import PopularProductsSlider from "./popular-products-slider";
 import { getPopularProducts } from "@/api/products";
 
 async function PopularProductsSection() {
-  const { popularProducts } = await getPopularProducts();
+  const popularProducts = await getPopularProducts();
 
   return (
     <section className="mt-[796px] lg:mt-[194px] container">

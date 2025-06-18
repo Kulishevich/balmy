@@ -14,7 +14,7 @@ export async function generateMetadata({
   const { seo } = await getSeoTags({
     url: `product/${productSlug}`,
   });
-  const { product } = await getProductBySlug(productSlug);
+  const product = await getProductBySlug("4");
   const { title, description } = generateSeoProduct(
     product?.name,
     product?.discountPrices

@@ -25,18 +25,13 @@ function ProductCard({ product }: Props) {
   const [localCartProduct, setLocalCartProduct] = useState<CartProduct>(
     getCartProductFromProduct(product)
   );
-  const {
-    images,
-    quantity,
-    name,
-    slug,
-    salePrices,
-    discount,
-    discountPrices,
-    description,
-    brand,
-  } = product;
+  const { photo_path, name, slug, discount, price, id, description, brand } =
+    product;
   const cartProduct = getCartProduct(slug || "");
+
+  const isDiscount = !!Number(discount);
+  const discountPrices = Number(price) * (100 - Number(discount));
+  const quantity = 10;
 
   const addToCartButtonText = cartProduct
     ? isTablet
@@ -75,14 +70,18 @@ function ProductCard({ product }: Props) {
       <meta itemProp="name" content={name} />
       <meta itemProp="description" content={description || ""} />
       <div itemProp="brand" itemScope itemType="http://schema.org/Brand">
-        <meta itemProp="name" content={brand} />
+        <meta itemProp="name" content={brand?.name || ""} />
       </div>
 
       <div className="relative max-w-[300px] w-full aspect-square border border-dark-gray rounded-[5px] overflow-hidden bg-white">
-        <Link href={`/product/${slug}`} itemProp="url">
+        <Link href={`/product/${slug}_${id}`} itemProp="url">
           <Image
             className="object-contain"
-            src={images[0] || "/icons/logo-gray.svg"}
+            src={
+              !!photo_path
+                ? `https://balmy.webspaceteam.site/storage/${photo_path}`
+                : "/icons/logo-gray.svg"
+            }
             alt={name}
             fill
             itemProp="image"
@@ -94,7 +93,7 @@ function ProductCard({ product }: Props) {
             </span>
           </div>
         </Link>
-        {!!discount && (
+        {isDiscount && (
           <span className="absolute right-0 text-white py-[6px] px-3 bg-red font-semibold sm:text-[21px] rounded-[5px]">
             -{discount}%
           </span>
@@ -131,19 +130,19 @@ function ProductCard({ product }: Props) {
         />
         <meta
           itemProp="price"
-          content={(discount ? discountPrices : salePrices).toFixed(2)}
+          content={(isDiscount ? discountPrices : +price).toFixed(2)}
         />
       </div>
 
-      {!discount && (
+      {!isDiscount && (
         <span className="mt-auto pt-3 lg:pt-[20px] text-[20px] lg:text-[24px] font-quicksand font-semibold">
-          {(salePrices * localCartProduct.quantity).toFixed(2)} byn
+          {(+price * localCartProduct.quantity).toFixed(2)} byn
         </span>
       )}
-      {!!discount && (
+      {isDiscount && (
         <span className="mt-auto pt-3 lg:pt-[20px] font-quicksand font-semibold flex flex-col items-center">
           <span className="opacity-50 line-through">
-            {(salePrices * localCartProduct.quantity).toFixed(2)} byn
+            {(+price * localCartProduct.quantity).toFixed(2)} byn
           </span>
           <span className="text-[20px] lg:text-[24px]">
             {(discountPrices * localCartProduct.quantity).toFixed(2)} byn

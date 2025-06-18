@@ -33,21 +33,13 @@ function ProductLayout({ product, similarProducts }: Props) {
   const { setProduct } = useBuyOneClickStore();
   const { createPopup } = usePopupStore();
   const { addProduct } = useViewedProductsStore();
-  const {
-    name,
-    images,
-    brand,
-    country,
-    article,
-    quantity,
-    salePrices,
-    discount,
-    discountPrices,
-    description,
-    categoryId,
-    categorySlug,
-    slug,
-  } = product;
+  const { name, images, brand, discount, price, description, sku, slug } =
+    product;
+
+  const isDiscount = !!Number(discount);
+  const discountPrices = Number(price) * (100 - Number(discount));
+  const quantity = 10;
+  const country = "Country";
 
   const cartProduct = getCartProduct(slug!);
 
@@ -66,7 +58,12 @@ function ProductLayout({ product, similarProducts }: Props) {
   }
 
   useEffect(() => {
-    addProduct({ image: images[0], slug: slug || "" });
+    addProduct({
+      image: !!images?.[0]?.image_path
+        ? `https://balmy.webspaceteam.site/storage/${images?.[0]?.image_path}`
+        : "/icons/logo-gray.svg",
+      slug: slug || "",
+    });
   }, [addProduct, images, slug]);
 
   return (
@@ -77,7 +74,10 @@ function ProductLayout({ product, similarProducts }: Props) {
       <Breadcrumbs
         className="mt-4 mx-auto"
         dynamicPath={[
-          { href: `/catalog/${categorySlug}`, name: categoryId },
+          {
+            href: `/catalog/${product.category.slug}`,
+            name: product.category.name,
+          },
           {
             href: `/product/${slug}`,
             name,
@@ -91,9 +91,9 @@ function ProductLayout({ product, similarProducts }: Props) {
       >
         <meta itemProp="name" content={name} />
         <meta itemProp="description" content={description || "Товар"} />
-        <meta itemProp="sku" content={article} />
-        {images.map((img) => (
-          <link key={img} itemProp="image" href={img} />
+        <meta itemProp="sku" content={sku} />
+        {images?.map((img) => (
+          <link key={img.id} itemProp="image" href={img.image_path} />
         ))}
 
         <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
@@ -109,7 +109,7 @@ function ProductLayout({ product, similarProducts }: Props) {
           <meta itemProp="priceCurrency" content="BYN" />
           <meta
             itemProp="price"
-            content={(discount ? discountPrices : salePrices).toFixed(2)}
+            content={(isDiscount ? discountPrices : +price).toFixed(2)}
           />
           <meta
             itemProp="itemCondition"
@@ -126,7 +126,7 @@ function ProductLayout({ product, similarProducts }: Props) {
         </div>
 
         <div itemProp="brand" itemScope itemType="http://schema.org/Thing">
-          <meta itemProp="name" content={brand || "Без бренда"} />
+          <meta itemProp="name" content={brand?.name || "Без бренда"} />
         </div>
 
         <div className="mt-8 lg:mt-10 flex flex-col lg:flex-row">
@@ -134,15 +134,15 @@ function ProductLayout({ product, similarProducts }: Props) {
           <div className="mt-[30px] lg:mt-0 lg:ml-[140px] flex flex-col w-full">
             <ul className="flex flex-col gap-y-[20px]">
               <li className="text-[21px]">
-                Бренд: <span className="font-normal text-[17px]">{brand}</span>
+                Бренд:{" "}
+                <span className="font-normal text-[17px]">{brand?.name}</span>
               </li>
               <li className="text-[21px]">
                 Страна производитель:{" "}
                 <span className="font-normal text-[17px]">{country}</span>
               </li>
               <li className="text-[21px]">
-                Артикул:{" "}
-                <span className="font-normal text-[17px]">{article}</span>
+                Артикул: <span className="font-normal text-[17px]">{sku}</span>
               </li>
             </ul>
             <Image
@@ -150,20 +150,20 @@ function ProductLayout({ product, similarProducts }: Props) {
               src={EcoFriendlyImage}
               alt="эко"
             />
-            {!discount && (
+            {!isDiscount && (
               <span className="mt-[30px] sm:mt-[40px] text-[32px] font-quicksand sm:text-[40px] font-semibold text-center sm:text-left">
-                {salePrices.toFixed(2)} byn
+                {price} byn
               </span>
             )}
-            {!!discount && (
+            {!!isDiscount && (
               <>
                 <span className="mt-[30px] sm:mt-[40px] font-quicksand sm:text-[40px] text-[32px] font-semibold text-center sm:text-left inline-flex flex-col sm:flex-row gap-x-6">
                   <span>{discountPrices.toFixed(2)} byn</span>
-                  <span className="opacity-50 line-through">
-                    {salePrices.toFixed(2)} byn
-                  </span>
+                  <span className="opacity-50 line-through">{price} byn</span>
                 </span>
-                <span className="mt-3 opacity-50">Cо скидкой {discount}%</span>
+                <span className="mt-3 opacity-50">
+                  Cо скидкой {Number(discount)}%
+                </span>
               </>
             )}
             {!!quantity && (
@@ -218,7 +218,7 @@ function ProductLayout({ product, similarProducts }: Props) {
         </div>
       </section>
       <TabsSection similarProducts={similarProducts} />
-      <RecentlyViewedProductsSection currentProductSlug={slug} />
+      {/* <RecentlyViewedProductsSection currentProductSlug={slug} /> */}
       <CallbackSectoin />
     </>
   );

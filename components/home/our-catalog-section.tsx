@@ -21,14 +21,14 @@ const catalog = [
 ];
 
 async function OurCatalogSection() {
-  const { categories } = await getCategories();
+  const categories = await getCategories();
 
   return (
     <section className="mt-[72px] lg:mt-[120px] container">
       <Title className="text-center">Наш каталог</Title>
       <div className="mt-6 lg:mt-[29px] grid grid-cols-1 lg:grid-cols-2 gap-x-[30px] gap-y-4 lg:gap-y-[40px]">
         {categories.map((category) => {
-          const { id: name, slug } = category;
+          const { name, slug } = category;
           const alt = name.toLowerCase();
           const categorySlug = slug == "sets" ? "sets/hey-joe" : slug;
           const foundCatalog = catalog.find((catalog) => catalog.name == name);

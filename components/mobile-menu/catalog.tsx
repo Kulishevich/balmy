@@ -52,7 +52,7 @@ function MobileMenuCatalog({ categories }: Props) {
             {...collapseAnimation}
           >
             {categories.map((category) => {
-              const { id: name, slug } = category;
+              const { name, slug } = category;
 
               return (
                 <li className="inline-flex flex-col py-[6px]" key={slug}>
@@ -74,10 +74,7 @@ function MobileMenuCatalog({ categories }: Props) {
                         {...collapseAnimation}
                       >
                         {category.subcategories.map((subcategory) => {
-                          const {
-                            subcategoryName: name,
-                            slug: subcategorySlug,
-                          } = subcategory;
+                          const { name, slug: subcategorySlug } = subcategory;
                           return (
                             <li
                               key={subcategorySlug}

@@ -56,7 +56,7 @@ body {
 }
 
 .custom-checkbox:checked {
-  @apply bg-gold-gradient border-gold;
+  @apply bg-light-gold border-gold;
 }
 
 .custom-checkbox:checked::before {
@@ -99,7 +99,7 @@ body {
 
 /* Swiper */
 .product-thumb-swiper .swiper-slide-thumb-active div {
-  @apply border border-green;
+  @apply border border-white/20;
 }
 
 /* LightBox */

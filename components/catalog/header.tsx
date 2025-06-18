@@ -1,44 +1,33 @@
-import { getCategory } from "@/api/category";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
+import { Category } from "@/types/category";
 
 interface Props {
-  categorySlug: string;
-  subcategorySlug?: string;
-  subcategoryName?: string;
+  category: Category;
+  subcategory?: Category;
 }
 
-async function CatalogHeader({
-  categorySlug,
-  subcategoryName,
-  subcategorySlug,
-}: Props) {
-  const { category } = await getCategory(categorySlug);
-  const isDiscounts = categorySlug === "discounts";
-  const dynamicPath = subcategoryName
+async function CatalogHeader({ category, subcategory }: Props) {
+  const dynamicPath = subcategory
     ? [
         {
-          href: `/catalog/${category?.slug}`,
-          name: category?.id || "",
+          href: `/catalog/${category?.slug}_${category.id}`,
+          name: category?.name || "",
         },
         {
-          href: `/catalog/${category?.slug}/${subcategorySlug}`,
-          name: subcategoryName || "",
+          href: `/catalog/${category?.slug}_${category.id}/${subcategory.slug}_${subcategory.id}`,
+          name: subcategory.name || "",
         },
       ]
     : {
-        href: `/catalog/${category?.slug}`,
-        name: isDiscounts ? "Скидки" : category?.id || "",
+        href: `/catalog/${category?.slug}_${category.id}`,
+        name: category?.name || "",
       };
 
   return (
     <>
       <Title type="h1" className="mt-10 text-center">
-        {isDiscounts
-          ? "Скидки"
-          : subcategoryName
-          ? subcategoryName
-          : category?.id}
+        {subcategory ? subcategory.name : category?.name}
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" dynamicPath={dynamicPath} />
     </>

@@ -20,7 +20,7 @@ function ArrowLeft({
       className={cn(
         "rounded-full h-16 w-16 grid place-items-center",
         {
-          "bg-dark-gold hover:bg-gold-gradient ": variant === "fill",
+          "bg-dark-gold hover:bg-light-gold ": variant === "fill",
           "bg-transparent": variant == "transparent",
           "h-16 w-16": size == "big",
           "h-[42px] w-[42px]": size == "small",

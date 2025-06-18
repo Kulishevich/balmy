@@ -3,13 +3,7 @@ import Link from "next/link";
 import PhoneIcon from "@/public/icons/phone.svg";
 import MapPinIcon from "@/public/icons/map-pin.svg";
 import MailIcon from "@/public/icons/mail.svg";
-import {
-  ADDRESS,
-  MAIL,
-  PHONE_NUMBER,
-  WORK_DAYS,
-  WORK_TIME,
-} from "@/utils/constants";
+import { ADDRESS, MAIL } from "@/utils/constants";
 import Action from "./action";
 import { useScreenSize } from "@/hooks/use-screen-size";
 import { Category } from "@/types/category";
@@ -17,9 +11,11 @@ import { usePopupStore } from "@/store/popup";
 import Payments from "./payments";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { Contacts } from "@/types/contacts";
 
 interface Props {
   categories: Category[];
+  contacts: Contacts;
 }
 
 const information = [
@@ -29,7 +25,7 @@ const information = [
   { name: "Политика конфиденциальности", link: "/privacy-policy" },
 ];
 
-function Footer({ categories }: Props) {
+function Footer({ categories, contacts }: Props) {
   const pathname = usePathname();
   const { isTablet } = useScreenSize();
   const { createPopup } = usePopupStore();
@@ -68,10 +64,8 @@ function Footer({ categories }: Props) {
             )}
             <div className="mt-8 lg:mt-3 flex items-center lg:items-start lg:flex-col">
               {!isTablet && (
-                <p className="hidden lg:block mt-4 max-w-[280px] 2xl:max-w-[310px] text-base opacity-70">
-                  OOO &quot; Коммерс Коннект &quot; <br /> УНП 193716324 <br />{" "}
-                  220004, РБ, г. Минск, переулок Тучинский 4, пом.13 <br /> В
-                  торговом реестре с 04 Января 2024 г., № регистрации 570934
+                <p className="hidden lg:block mt-4 max-w-[280px] 2xl:max-w-[310px] text-base opacity-70 whitespace-pre-line">
+                  {contacts.company_info}
                 </p>
               )}
               {isTablet && (
@@ -93,9 +87,9 @@ function Footer({ categories }: Props) {
               <p className="text-[21px] font-semibold">Каталог</p>
               <ul className="mt-4 flex flex-col gap-y-[14px]">
                 {categories
-                  .filter((category) => category.id !== "Бренды")
+                  .filter((category) => category.name !== "Бренды")
                   .map((category) => {
-                    const { id: name, slug } = category;
+                    const { name, slug } = category;
 
                     return (
                       <li key={slug}>
@@ -130,29 +124,32 @@ function Footer({ categories }: Props) {
                 Контакты
               </p>
               <p className="mt-4 text-[20px] inline-flex gap-3 items-center">
-                {WORK_DAYS} {WORK_TIME}
+                {contacts.working_hours}
               </p>
+              {contacts.phones.map((phone, index) => (
+                <Link
+                  className="mt-4 text-[20px] inline-flex gap-3 items-center"
+                  href={`tel:${phone}`}
+                  key={index}
+                >
+                  <PhoneIcon className="flex-shrink-0 fill-white" />
+                  {phone}
+                </Link>
+              ))}
               <Link
                 className="mt-4 text-[20px] inline-flex gap-3 items-center"
-                href={PHONE_NUMBER.href}
-              >
-                <PhoneIcon className="flex-shrink-0 fill-white" />
-                {PHONE_NUMBER.value}
-              </Link>
-              <Link
-                className="mt-4 text-[20px] inline-flex gap-3 items-center"
-                href={ADDRESS.href}
+                href={contacts.address || ADDRESS}
                 target="_blank"
               >
                 <MapPinIcon className="flex-shrink-0 fill-white" />
-                {ADDRESS.value}
+                {contacts.address}
               </Link>
               <Link
                 className="mt-4 text-[20px] inline-flex gap-3 items-center"
-                href={MAIL.href}
+                href={contacts.email || MAIL.href}
               >
                 <MailIcon className="flex-shrink-0 fill-white" />
-                {MAIL.value}
+                {contacts.email || MAIL.value}
               </Link>
               {!isTablet && (
                 <Action
@@ -168,10 +165,8 @@ function Footer({ categories }: Props) {
             </div>
           </div>
           {isTablet && (
-            <p className="mt-9 max-w-[310px] text-base opacity-70 text-center mx-auto">
-              OOO &quot; Коммерс Коннект &quot; <br /> УНП 193716324 <br />{" "}
-              220004, РБ, г. Минск, переулок Тучинский 4, пом.13 <br /> В
-              торговом реестре с 04 Января 2024 г., № регистрации 570934
+            <p className="mt-9 max-w-[310px] text-base opacity-70 text-center mx-auto whitespace-pre-line">
+              {contacts.company_info}
             </p>
           )}
         </div>

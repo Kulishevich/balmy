@@ -1,46 +1,27 @@
 import { Category } from "@/types/category";
-import { config } from "@/utils/config";
-import { slugifyWithOpts } from "@/utils/helper";
-import { getBrands } from "./brands";
+// import { config } from "@/utils/config";
+// import { slugifyWithOpts } from "@/utils/helper";
+// import { getBrands } from "./brands";
 
 export async function getCategories() {
-  const res = await fetch(`${config.apiUrl}/categories`, { cache: "no-store" });
+  const res = await fetch(`https://balmy.webspaceteam.site/api/v1/categories`, {
+    cache: "no-store",
+  });
   const clonedResponse = res.clone();
-  const data: Category[] = await clonedResponse.json();
+  const { data } = (await clonedResponse.json()) as { data: Category[] };
 
-  const categories = data.map((category) => ({
-    ...category,
-    slug: slugifyWithOpts(category.id),
-    subcategories: category.subcategories.map((subcategory) => ({
-      ...subcategory,
-      slug: slugifyWithOpts(subcategory.subcategoryName),
-    })),
-  }));
-
-  const { brands } = await getBrands();
-
-  const categoriesWithSets = [
-    {
-      id: "Бренды",
-      slug: "sets",
-      subcategories: brands,
-    },
-    ...categories,
-  ];
-
-  return {
-    categories: categoriesWithSets,
-  };
+  return data;
 }
 
 export async function getCategory(categorySlug: string) {
-  const { categories } = await getCategories();
-
-  const category = categories?.find(
-    (category) => category.slug == categorySlug
+  const res = await fetch(
+    `https://balmy.webspaceteam.site/api/v1/categories/${categorySlug}`,
+    {
+      cache: "no-store",
+    }
   );
+  const clonedResponse = res.clone();
+  const { data } = (await clonedResponse.json()) as { data: Category };
 
-  return {
-    category,
-  };
+  return data;
 }

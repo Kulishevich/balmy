@@ -1,5 +1,5 @@
 import { getProducts } from "@/api/products";
-import { Product } from "@/types/product";
+import { ProductItem } from "@/types/product";
 import { IFuseOptions } from "fuse.js";
 import cn from "clsx";
 import SearchWrapperMobile from "./wrapper-mobile";
@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-const searchOptions: IFuseOptions<Product> = {
+const searchOptions: IFuseOptions<ProductItem> = {
   keys: [
     { name: "name", weight: 0.1 },
     { name: "brand", weight: 0.2 },
@@ -18,11 +18,14 @@ const searchOptions: IFuseOptions<Product> = {
 };
 
 async function SearchMobile({ className }: Props) {
-  const { products } = await getProducts();
+  const products = await getProducts();
 
   return (
     <div className={cn("container relative lg:hidden", className)}>
-      <SearchWrapperMobile searchOptions={searchOptions} products={products} />
+      <SearchWrapperMobile
+        searchOptions={searchOptions}
+        products={products.data}
+      />
     </div>
   );
 }

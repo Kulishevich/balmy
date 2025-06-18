@@ -11,7 +11,7 @@ interface Props {
 }
 function CategoryBarItem({ category, activeCategorySlug }: Props) {
   const { "subcategory-slug": subcategorySlug } = useParams();
-  const { id: name, slug: categorySlug, subcategories } = category;
+  const { name, slug: categorySlug, subcategories, id: categoryId } = category;
   const isActive = categorySlug == activeCategorySlug;
 
   return (
@@ -23,7 +23,7 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
       {categorySlug == "sets" ? (
         <span className="cursor-default">{name}</span>
       ) : (
-        <Link href={`/catalog/${categorySlug}`}>{name}</Link>
+        <Link href={`/catalog/${categorySlug}_${categoryId}`}>{name}</Link>
       )}
       <AnimatePresence>
         {isActive && (
@@ -36,7 +36,7 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
       <div className="pt-[3px] absolute top-full left-1/2 -translate-x-1/2 z-10 opacity-0 h-0 transition pointer-events-none group-hover:opacity-100 group-hover:h-auto group-hover:pointer-events-auto">
         <ul className="bg-[#252525] min-w-[180px] flex flex-col py-3 text-center rounded-[5px] border-t-[5px] border-gold">
           {subcategories.map((subcategory) => {
-            const { subcategoryName, slug, id } = subcategory;
+            const { name, slug, id } = subcategory;
             const isActive = subcategorySlug == slug;
 
             return (
@@ -50,8 +50,10 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
                 )}
                 key={id}
               >
-                <Link href={`/catalog/${categorySlug}/${slug}`}>
-                  {subcategoryName}
+                <Link
+                  href={`/catalog/${categorySlug}_${categoryId}/${slug}_${id}`}
+                >
+                  {name}
                 </Link>
               </li>
             );

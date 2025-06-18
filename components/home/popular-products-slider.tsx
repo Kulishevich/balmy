@@ -14,6 +14,7 @@ function PopularProductsSlider({ popularProducts }: Props) {
   return (
     <div className="mt-6 lg:mt-[40px] relative flex">
       <Swiper
+        className="w-full"
         slidesPerView={4}
         spaceBetween={30}
         breakpoints={{

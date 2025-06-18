@@ -8,7 +8,6 @@ import { useEffect } from "react";
 
 interface Props {
   className?: string;
-  showBrands?: boolean;
   page: string;
 }
 
@@ -25,7 +24,7 @@ export const sorts = [
   { id: "salePrices", direction: "desc", name: "По убыванию цены" },
 ];
 
-function CatalogFilter({ className, showBrands, page }: Props) {
+function CatalogFilter({ className, page }: Props) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
@@ -104,39 +103,36 @@ function CatalogFilter({ className, showBrands, page }: Props) {
 
   return (
     <div className={cn("max-w-[276px] w-full flex flex-col", className)}>
-      {showBrands && (
-        <>
-          <p className="text-[21px] font-semibold inline-flex justify-between items-center w-full">
-            Бренды
-            <LongArrowDownIcon />
-          </p>
-          <div className="mt-4 flex flex-col gap-y-3">
-            {brands.map((brand) => {
-              const { id, name } = brand;
+      <>
+        <p className="text-[21px] font-semibold inline-flex justify-between items-center w-full">
+          Бренды
+          <LongArrowDownIcon />
+        </p>
+        <div className="mt-4 flex flex-col gap-y-3">
+          {brands.map((brand) => {
+            const { id, name } = brand;
 
-              return (
-                <div className="flex items-center gap-[10px]" key={id}>
-                  <input
-                    className="custom-checkbox border-white/30"
-                    id={id}
-                    type="radio"
-                    checked={currentBrand == id}
-                    onChange={handleBrandChange(id)}
-                    onClick={handleBrandChange(id)}
-                  />
-                  <label className="cursor-pointer" htmlFor={id}>
-                    {name}
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
+            return (
+              <div className="flex items-center gap-[10px]" key={id}>
+                <input
+                  className="custom-checkbox border border-white/30"
+                  id={id}
+                  type="radio"
+                  checked={currentBrand == id}
+                  onChange={handleBrandChange(id)}
+                  onClick={handleBrandChange(id)}
+                />
+                <label className="cursor-pointer" htmlFor={id}>
+                  {name}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </>
       <p
         className={cn(
-          "text-[21px] font-semibold inline-flex justify-between items-center w-full",
-          { "mt-6": showBrands }
+          "text-[21px] font-semibold inline-flex justify-between items-center w-full mt-6"
         )}
       >
         Сортировка
@@ -150,7 +146,7 @@ function CatalogFilter({ className, showBrands, page }: Props) {
           return (
             <div className="flex items-center gap-[10px]" key={sortDirection}>
               <input
-                className="custom-checkbox border-white/30"
+                className="custom-checkbox border border-white/30"
                 id={sortDirection}
                 type="radio"
                 name="sort"

@@ -18,25 +18,27 @@ interface Props {
 async function CatalogPage({ params, searchParams }: Props) {
   const { "category-slug": categorySlug, page } = await params;
   const responseSearchParams = await searchParams;
-  const { category } = await getCategory(categorySlug);
-  const isDiscounts = categorySlug == "discounts";
-  const { products, totalPages } = await getProductsByCategoryId({
-    categoryId: category?.id,
+
+  const categoryId = categorySlug.split("_").findLast((elem) => elem) || "";
+
+  const category = await getCategory(categoryId);
+
+  const { last_page, data: products } = await getProductsByCategoryId({
+    category_id: categoryId,
     page: page,
-    sort: responseSearchParams.sort,
-    direction: responseSearchParams.direction,
+    sort_by: responseSearchParams.sort,
+    sort_direction: responseSearchParams.direction,
     brand: responseSearchParams.brand,
-    discounts: isDiscounts,
   });
 
-  if ((!isDiscounts && !category) || categorySlug == "sets") notFound();
+  if (!category) notFound();
 
   return (
     <CategoryLayout
       page={page}
-      categorySlug={categorySlug}
+      category={category}
       products={products}
-      totalPages={totalPages}
+      totalPages={last_page}
     />
   );
 }

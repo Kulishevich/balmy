@@ -27,7 +27,7 @@ async function Page({ params, searchParams }: Props) {
     page,
   } = await params;
   const responseSearchParams = await searchParams;
-  const { category } = await getCategory(categorySlug);
+  const category = await getCategory("1");
   const { subcategory } = await getSubcategory(subcategorySlug);
   const { products, totalPages } = await getProductsBySubcategoryId({
     category: categorySlug,

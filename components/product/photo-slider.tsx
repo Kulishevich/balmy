@@ -8,18 +8,18 @@ import ArrowLeft from "@/components/arrow-left";
 import ArrowRight from "@/components/arrow-right";
 import ArrowRightIcon from "@/public/icons/arrow-right.svg";
 import ArrowLeftIcon from "@/public/icons/arrow-left.svg";
+import { ProductImage } from "@/types/product";
 
 interface Props {
   thumbsSwiper: SwiperClass | null;
-  photos: string[];
+  photos: ProductImage[] | null;
 }
 
 function PhotoSlider({ thumbsSwiper, photos }: Props) {
   const [swiperClass, setSwiperClass] = useState<SwiperClass | null>(null);
   const [realIdx, setRealIdx] = useState<number>(0);
   const [isOpen, setIsOpen] = useState(false);
-  const photosMoreThanOne = photos.length > 1;
-  photos = photos.length ? photos : ["/icons/logo-gray.svg"];
+  const photosMoreThanOne = photos && photos?.length > 1;
 
   function handleOnRealIndexChange(swiperClass: SwiperClass) {
     setRealIdx(swiperClass.realIndex);
@@ -54,7 +54,9 @@ function PhotoSlider({ thumbsSwiper, photos }: Props) {
           index={realIdx}
           close={handleCloseLightBox}
           open={isOpen}
-          slides={photos.map((photo) => ({ src: photo }))}
+          slides={photos?.map((photo) => ({
+            src: `https://balmy.webspaceteam.site/storage/${photo.image_path}`,
+          }))}
           plugins={[Zoom]}
           zoom={{
             maxZoomPixelRatio: 3,
@@ -78,22 +80,36 @@ function PhotoSlider({ thumbsSwiper, photos }: Props) {
               photosMoreThanOne && <ArrowLeftIcon className="fill-white" />,
           }}
         />
-        {photos.map((photo, idx) => {
-          return (
-            <SwiperSlide
-              className="relative aspect-square w-full cursor-zoom-in"
-              key={idx}
-              onClick={handleClickOnSlide}
-            >
-              <Image
-                className="object-contain"
-                src={photo}
-                alt="фото продукта"
-                fill
-              />
-            </SwiperSlide>
-          );
-        })}
+        {!!photos?.length ? (
+          photos.map((photo, idx) => {
+            return (
+              <SwiperSlide
+                className="relative aspect-square w-full cursor-zoom-in"
+                key={idx}
+                onClick={handleClickOnSlide}
+              >
+                <Image
+                  className="object-contain"
+                  src={`https://balmy.webspaceteam.site/storage/${photo.image_path}`}
+                  alt="фото продукта"
+                  fill
+                />
+              </SwiperSlide>
+            );
+          })
+        ) : (
+          <SwiperSlide
+            className="relative aspect-square w-full cursor-zoom-in"
+            onClick={handleClickOnSlide}
+          >
+            <Image
+              className="object-contain"
+              src={"/icons/logo-gray.svg"}
+              alt="фото продукта"
+              fill
+            />
+          </SwiperSlide>
+        )}
       </Swiper>
       {photosMoreThanOne && (
         <>

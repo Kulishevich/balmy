@@ -21,11 +21,8 @@ export default {
         green: "#223F18",
         red: "#8B1919",
         gold: "#C49B48",
+        "light-gold": "#E3BE60",
         "dark-gold": "#49402E",
-      },
-      backgroundImage: {
-        "gold-gradient":
-          "linear-gradient(180deg, #A97F36 0%, #F2CB66 54.81%, #CFA045 100%)",
       },
     },
     screens: {

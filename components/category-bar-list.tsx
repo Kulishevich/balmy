@@ -5,12 +5,14 @@ import { usePathname } from "next/navigation";
 import { handleCategoryChangePath } from "@/utils/helper";
 import CategoryBarItem from "./category-bar-item";
 import clsx from "clsx";
+import { Brand } from "@/types/brand";
 
 type Props = {
   categories: Category[];
+  brands: Brand[];
 };
 
-function CategoryBarList({ categories }: Props) {
+function CategoryBarList({ categories, brands }: Props) {
   const [hasShadow, setHasShadow] = useState(false);
   const pathname = usePathname();
   const [activeCategorySlug, setActiveCategorySlug] = useState("");
@@ -18,7 +20,6 @@ function CategoryBarList({ categories }: Props) {
     categories,
     pathname,
   ]);
-
   useEffect(() => {
     if (!pathname.includes("/catalog") && !pathname.includes("/product")) {
       setActiveCategorySlug("");

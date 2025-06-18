@@ -12,7 +12,7 @@ interface Props {
     | "white"
     | "gold"
     | "black"
-    | "gold-gradient"
+    | "light-gold"
     | "green";
   variant?: "outline";
   type?: "link" | "button";
@@ -40,7 +40,7 @@ function Action({
   const actionClassName = cn(
     "block p-1 border-2 rounded-[5px] text-center group transition",
     {
-      "border-gold hover:border-gold-gradient": color == "gold" && !disabled,
+      "border-gold hover:border-gold": color == "gold" && !disabled,
       "border-dark-gray": color == "dark-gray" && !disabled,
       "border-white px-1 py-1": color == "black" && !disabled,
       "border-light-green": color == "light-green" && !disabled,
@@ -55,8 +55,7 @@ function Action({
   );
 
   const wrapperClassName = cn("block rounded-[5px] transition ", {
-    "bg-gold hover:bg-gold-gradient hover:text-black":
-      color == "gold" && !disabled,
+    "bg-gold hover:bg-gold hover:text-black": color == "gold" && !disabled,
     "py-4 text-[20px] px-6": size == "big",
     "py-3 px-6": size == "medium",
     "py-2 px-3": size == "small",
@@ -64,8 +63,7 @@ function Action({
     "bg-black text-white border border-white": color == "black" && !disabled,
     "bg-light-green text-white": color == "light-green" && !disabled,
     "bg-gray text-white": color == "gray" && !disabled,
-    "bg-white text-dark-gray hover:bg-gold-gradient":
-      color == "white" && !disabled,
+    "bg-white text-dark-gray hover:bg-gold": color == "white" && !disabled,
     "bg-green text-white": color == "green" && !disabled,
     "bg-light-gray text-dark-gray group-hover:bg-light-green group-hover:text-white":
       color == "light-gray" && !disabled,
