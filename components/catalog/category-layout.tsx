@@ -57,6 +57,8 @@ function CategoryLayout({
   page,
   brands,
 }: Props) {
+  console.log(category);
+
   return (
     <>
       <CatalogHeader category={category} subcategory={subcategory} />
@@ -68,7 +70,7 @@ function CategoryLayout({
             className="hidden 2xl:block min-[1921px]:absolute min-[1921px]:left-0 min-[1921px]:-translate-x-[calc(100%+40px)] min-[1921px]:top-0"
             page={page}
             brands={brands}
-            showBrands={category.slug !== "brands"}
+            showBrands={category.slug === "brands"}
           />
           {!!products.length && (
             <div className="mx-auto 2xl:ml-auto relative grid grid-cols-2 sm:grid-cols-3 min-[1921px]:grid-cols-4 gap-x-4 sm:gap-x-[30px] gap-y-9 sm:gap-y-[40px]">

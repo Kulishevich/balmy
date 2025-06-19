@@ -12,7 +12,7 @@ interface Props {
     page?: string;
     sort?: string;
     direction?: Direction;
-    brand?: string;
+    brand_id?: string;
   }>;
 }
 
@@ -22,16 +22,17 @@ async function CatalogPage({ params, searchParams }: Props) {
 
   const categoryId = categorySlug.split("_").findLast((elem) => elem) || "";
   const isBrands = categoryId === "brands";
-
+  const isDiscounts = categorySlug === "discounts";
   const category = await getCategory(categoryId);
   const brands = await getBrands();
 
   const { last_page, data: products } = await getProductsByCategoryId({
-    category_id: categoryId,
+    category_id: !isDiscounts ? categoryId : "",
     page: page,
     sort_by: responseSearchParams.sort,
     sort_direction: responseSearchParams.direction,
-    brand: responseSearchParams.brand,
+    brand_id: responseSearchParams.brand_id,
+    on_sale: isDiscounts && true,
   });
 
   const brandsCategory = {
@@ -41,12 +42,21 @@ async function CatalogPage({ params, searchParams }: Props) {
     subcategories: brands,
   };
 
-  if (!category && !isBrands) notFound();
+  const discountsCategory = {
+    id: "Скидки",
+    slug: "discounts",
+    name: "Скидки",
+    subcategories: brands,
+  };
+
+  if (!category && !isBrands && !isDiscounts) notFound();
 
   return (
     <CategoryLayout
       page={page}
-      category={!isBrands ? category : brandsCategory}
+      category={
+        isBrands ? brandsCategory : isDiscounts ? discountsCategory : category
+      }
       products={products}
       totalPages={last_page}
       brands={brands}

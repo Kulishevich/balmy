@@ -53,6 +53,7 @@ export async function getProductsByCategoryId({
   sort_by = "name",
   sort_direction = "asc",
   brand_id = "",
+  on_sale = false,
 }: {
   category_id?: string;
   brand?: string;
@@ -61,6 +62,7 @@ export async function getProductsByCategoryId({
   per_page?: string;
   sort_by?: string;
   sort_direction?: Direction;
+  on_sale?: boolean;
 }) {
   const params = new URLSearchParams();
 
@@ -84,6 +86,10 @@ export async function getProductsByCategoryId({
   }
   if (sort_direction) {
     params.append("sort_direction", sort_direction);
+  }
+
+  if (on_sale) {
+    params.append("on_sale", String(on_sale));
   }
 
   const url = `https://balmy.webspaceteam.site/api/v1/products?${params.toString()}`;

@@ -55,7 +55,10 @@ async function Page({ params, searchParams }: Props) {
     subcategories: brands,
   };
 
-  const activeBrand = brands.find((elem) => String(elem.id) === subcategoryId);
+  const activeBrand = brands.find(
+    (elem) =>
+      String(elem.slug) === subcategorySlug.split("_").find((elem) => elem)
+  );
 
   return (
     <CategoryLayout

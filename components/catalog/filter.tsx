@@ -99,7 +99,7 @@ function CatalogFilter({ className, page, brands, showBrands }: Props) {
 
   return (
     <div className={cn("max-w-[276px] w-full flex flex-col", className)}>
-      {showBrands && (
+      {!showBrands && (
         <>
           <p className="text-[21px] font-semibold inline-flex justify-between items-center w-full">
             Бренды
