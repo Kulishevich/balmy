@@ -5,18 +5,14 @@ import cn from "clsx";
 import { Sort, Direction, useFilterStore } from "@/store/filter";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { Brand } from "@/types/brand";
 
 interface Props {
   className?: string;
   page: string;
+  brands: Brand[];
+  showBrands: boolean;
 }
-
-export const brands = [
-  { id: "Hey Joe!", name: "Hey Joe" },
-  { id: "Hairoticmen", name: "Hairoticmen" },
-  { id: "ZEW", name: "ZEW" },
-  { id: "Captain Fawcett", name: "Captain Fawcett" },
-];
 
 export const sorts = [
   { id: "name", direction: "asc", name: "По имени" },
@@ -24,7 +20,7 @@ export const sorts = [
   { id: "salePrices", direction: "desc", name: "По убыванию цены" },
 ];
 
-function CatalogFilter({ className, page }: Props) {
+function CatalogFilter({ className, page, brands, showBrands }: Props) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
@@ -63,10 +59,10 @@ function CatalogFilter({ className, page }: Props) {
     return () => {
       if (brand == currentBrand) {
         setBrand("");
-        params.delete("brand");
+        params.delete("brand_id");
       } else {
         setBrand(brand);
-        params.set("brand", brand);
+        params.set("brand_id", brand);
       }
 
       params.delete("page");
@@ -103,33 +99,35 @@ function CatalogFilter({ className, page }: Props) {
 
   return (
     <div className={cn("max-w-[276px] w-full flex flex-col", className)}>
-      <>
-        <p className="text-[21px] font-semibold inline-flex justify-between items-center w-full">
-          Бренды
-          <LongArrowDownIcon />
-        </p>
-        <div className="mt-4 flex flex-col gap-y-3">
-          {brands.map((brand) => {
-            const { id, name } = brand;
+      {showBrands && (
+        <>
+          <p className="text-[21px] font-semibold inline-flex justify-between items-center w-full">
+            Бренды
+            <LongArrowDownIcon />
+          </p>
+          <div className="mt-4 flex flex-col gap-y-3">
+            {brands.map((brand) => {
+              const { id, name } = brand;
 
-            return (
-              <div className="flex items-center gap-[10px]" key={id}>
-                <input
-                  className="custom-checkbox border border-white/30"
-                  id={id}
-                  type="radio"
-                  checked={currentBrand == id}
-                  onChange={handleBrandChange(id)}
-                  onClick={handleBrandChange(id)}
-                />
-                <label className="cursor-pointer" htmlFor={id}>
-                  {name}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-      </>
+              return (
+                <div className="flex items-center gap-[10px]" key={id}>
+                  <input
+                    className="custom-checkbox border border-white/30"
+                    id={String(id)}
+                    type="radio"
+                    checked={currentBrand == String(id)}
+                    onChange={handleBrandChange(String(id))}
+                    onClick={handleBrandChange(String(id))}
+                  />
+                  <label className="cursor-pointer" htmlFor={String(id)}>
+                    {name}
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
       <p
         className={cn(
           "text-[21px] font-semibold inline-flex justify-between items-center w-full mt-6"

@@ -1,10 +1,10 @@
-import { getProductsBySubcategoryId } from "@/api/products";
+import { getProductsByCategoryId } from "@/api/products";
 import { notFound } from "next/navigation";
 import CategoryLayout from "@/components/catalog/category-layout";
 import React from "react";
-import { getSubcategory } from "@/api/subcategory";
 import { Direction } from "@/store/filter";
 import { getCategory } from "@/api/category";
+import { getBrands } from "@/api/brands";
 
 interface Props {
   params: Promise<{
@@ -16,7 +16,7 @@ interface Props {
     page?: string;
     sort?: string;
     direction?: Direction;
-    brand?: string;
+    brand_id?: string;
   }>;
 }
 
@@ -27,27 +27,44 @@ async function Page({ params, searchParams }: Props) {
     page,
   } = await params;
   const responseSearchParams = await searchParams;
-  const category = await getCategory("1");
-  const { subcategory } = await getSubcategory(subcategorySlug);
-  const { products, totalPages } = await getProductsBySubcategoryId({
-    category: categorySlug,
-    subcategoryId: subcategory?.id,
+
+  const categoryId = categorySlug.split("_").findLast((elem) => elem) || "";
+  const subcategoryId =
+    subcategorySlug.split("_").findLast((elem) => elem) || "";
+
+  const isBrands = categoryId === "brands";
+
+  const category = await getCategory(categoryId);
+  const subcategory = await getCategory(subcategoryId);
+  const brands = await getBrands();
+
+  const { last_page, data: products } = await getProductsByCategoryId({
+    category_id: !isBrands ? subcategoryId : "",
     page: page,
-    sort: responseSearchParams.sort,
-    direction: responseSearchParams.direction,
-    brand: responseSearchParams.brand,
+    sort_by: responseSearchParams.sort,
+    sort_direction: responseSearchParams.direction,
+    brand_id: isBrands ? subcategoryId : responseSearchParams.brand_id,
   });
 
-  if (!subcategory || !category) notFound();
+  if ((!subcategory && !isBrands) || (!category && !isBrands)) notFound();
+
+  const brandsCategory = {
+    id: "Бренды",
+    slug: "brands",
+    name: "Бренды",
+    subcategories: brands,
+  };
+
+  const activeBrand = brands.find((elem) => String(elem.id) === subcategoryId);
 
   return (
     <CategoryLayout
       page={page}
-      categorySlug={categorySlug}
-      subcategorySlug={subcategorySlug}
-      subcategoryName={subcategory.subcategoryName}
+      category={!isBrands ? category : brandsCategory}
+      subcategory={!isBrands ? subcategory : activeBrand}
       products={products}
-      totalPages={totalPages}
+      totalPages={last_page}
+      brands={brands}
     />
   );
 }

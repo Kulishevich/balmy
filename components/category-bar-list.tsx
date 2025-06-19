@@ -20,6 +20,17 @@ function CategoryBarList({ categories, brands }: Props) {
     categories,
     pathname,
   ]);
+
+  const menuItems = [
+    {
+      id: "Бренды",
+      slug: "brands",
+      name: "Бренды",
+      subcategories: brands,
+    },
+    ...categories,
+  ];
+
   useEffect(() => {
     if (!pathname.includes("/catalog") && !pathname.includes("/product")) {
       setActiveCategorySlug("");
@@ -49,7 +60,7 @@ function CategoryBarList({ categories, brands }: Props) {
       )}
     >
       <ul className="container w-full  hidden lg:flex justify-between">
-        {categories?.map((category) => {
+        {menuItems?.map((category) => {
           return (
             <CategoryBarItem
               key={category.id}

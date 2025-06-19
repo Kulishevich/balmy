@@ -20,7 +20,7 @@ export default async function MainLayout({
   // const settings = await getSettings();
   const contacts = await getContacts();
   const brands = await getBrands();
-  console.log(brands);
+
   return (
     <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative">
       <Navigation />

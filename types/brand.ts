@@ -1,9 +1,10 @@
 export interface Brand {
-  created_at: string | null;
   id: number;
-  image_path: string | null;
+  name: string;
+  slug: string;
   link: string | null;
-  name: string | null;
+  image_path: string | null;
   order: number;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
 }

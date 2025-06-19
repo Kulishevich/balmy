@@ -4,9 +4,12 @@ import { appearanceAnimation } from "@/utils/animations";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import cn from "clsx";
+import { Brand } from "@/types/brand";
 
 interface Props {
-  category: Category;
+  category:
+    | Category
+    | { id: string; slug: string; name: string; subcategories: Brand[] };
   activeCategorySlug: string;
 }
 function CategoryBarItem({ category, activeCategorySlug }: Props) {
@@ -20,8 +23,8 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
         "text-white": isActive,
       })}
     >
-      {categorySlug == "sets" ? (
-        <span className="cursor-default">{name}</span>
+      {categorySlug == "brands" ? (
+        <Link href={`/catalog/brands`}>{name}</Link>
       ) : (
         <Link href={`/catalog/${categorySlug}_${categoryId}`}>{name}</Link>
       )}
@@ -50,11 +53,15 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
                 )}
                 key={id}
               >
-                <Link
-                  href={`/catalog/${categorySlug}_${categoryId}/${slug}_${id}`}
-                >
-                  {name}
-                </Link>
+                {categorySlug == "brands" ? (
+                  <Link href={`/catalog/brands/${slug}_${id}`}>{name}</Link>
+                ) : (
+                  <Link
+                    href={`/catalog/${categorySlug}_${categoryId}/${slug}_${id}`}
+                  >
+                    {name}
+                  </Link>
+                )}
               </li>
             );
           })}

@@ -11,6 +11,8 @@ interface Props {
 }
 
 function PopularProductsSlider({ popularProducts }: Props) {
+  console.log(popularProducts);
+
   return (
     <div className="mt-6 lg:mt-[40px] relative flex">
       <Swiper

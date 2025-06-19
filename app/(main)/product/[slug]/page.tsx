@@ -14,7 +14,7 @@ async function ProductPage({ params }: Props) {
   const { slug: productSlug } = await params;
   const id = productSlug.split("_").findLast((elem) => elem) || "";
   const product = await getProductBySlug(id);
-
+  console.log(product);
   // if (!product) {
   //   const { products } = await getProducts();
   //   const foundProduct = products.find((elem) => elem.id === productSlug);

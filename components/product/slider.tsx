@@ -11,7 +11,7 @@ interface Props {
 
 function ProductSlider({ photos }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-  console.log(photos);
+
   return (
     <div className="flex flex-col mx-auto lg:mx-0 items-center max-w-[412px] w-full">
       <PhotoSlider thumbsSwiper={thumbsSwiper} photos={photos} />

@@ -1,9 +1,12 @@
 import Action from "@/components/action";
+import { Brand } from "@/types/brand";
 import { Category } from "@/types/category";
 
 interface Props {
-  category: Category;
-  subcategory?: Category;
+  category:
+    | Category
+    | { id: string; slug: string; name: string; subcategories: Brand[] };
+  subcategory?: Category | Brand;
 }
 
 async function Subcategories({ category, subcategory }: Props) {
@@ -12,12 +15,16 @@ async function Subcategories({ category, subcategory }: Props) {
       {category?.subcategories.map((subcategoryItem, idx) => {
         const { name, slug, id } = subcategoryItem;
         const isActive = slug == subcategory?.slug;
-
+        console.log(slug, subcategory?.slug);
         return (
           <Action
             key={idx}
             type="link"
-            href={`/catalog/${category.slug}_${category.id}/${slug}_${id}`}
+            href={`/catalog/${
+              category?.slug !== "brands"
+                ? `${category?.slug}_${category.id}`
+                : `${category.slug}`
+            }/${slug}_${id}`}
             color={isActive ? "gold" : "white"}
           >
             {name}

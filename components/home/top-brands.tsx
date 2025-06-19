@@ -22,25 +22,25 @@ const brands = [
     name: "Hey Joe",
     image: HeyJoeImage,
     logo: HeyJoeLogoImage,
-    href: "/catalog/sets/hey-joe",
+    href: "/catalog/brands/hey-joe",
   },
   {
     name: "Zew",
     image: ZewImage,
     logo: ZewLogoImage,
-    href: "/catalog/sets/zew",
+    href: "/catalog/brands/zew",
   },
   {
     name: "Hairotic",
     image: HairoticImage,
     logo: HairoticLogoImage,
-    href: "/catalog/sets/hairoticmen",
+    href: "/catalog/brands/hairoticmen",
   },
   {
     name: "Captain fawcett limited",
     image: CaptainFawcettLimitedImage,
     logo: CaptainFawcettLimitedLogoImage,
-    href: "/catalog/sets/captain-fawcett",
+    href: "/catalog/brands/captain-fawcett",
   },
 ];
 
@@ -49,7 +49,7 @@ function TopBrands({ className }: Props) {
     <div
       className={cn(
         "flex flex-col lg:flex-row justify-center gap-y-3 gap-x-[20px]",
-        className,
+        className
       )}
     >
       {brands.map((brand, idx) => {

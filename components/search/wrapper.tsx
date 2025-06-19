@@ -3,11 +3,11 @@ import { IFuseOptions } from "fuse.js";
 import { useRef } from "react";
 import SearchInput from "./input";
 import SearchResult from "./result";
-import { ProductItem } from "@/types/product";
+import { Product } from "@/types/product";
 
 interface Props {
-  products: ProductItem[];
-  searchOptions: IFuseOptions<ProductItem>;
+  products: Product[];
+  searchOptions: IFuseOptions<Product>;
 }
 
 function SearchWrapper({ products, searchOptions }: Props) {

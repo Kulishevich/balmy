@@ -1,7 +1,7 @@
 "use client";
 import { useSearchStore } from "@/store/search";
 import { useEffect, useMemo, useRef } from "react";
-import { ProductItem } from "@/types/product";
+import { Product } from "@/types/product";
 import { AnimatePresence, m } from "motion/react";
 import { appearanceAnimation } from "@/utils/animations";
 import { MAX_SEARCH_RESULT } from "@/utils/constants";
@@ -11,8 +11,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  products: ProductItem[];
-  searchOptions: IFuseOptions<ProductItem>;
+  products: Product[];
+  searchOptions: IFuseOptions<Product>;
   searchInputRef: React.RefObject<HTMLDivElement>;
 }
 

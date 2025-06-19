@@ -16,7 +16,6 @@ export async function getProducts() {
 }
 
 export async function getProductBySlug(productSlug: string) {
-  console.log(`https://balmy.webspaceteam.site/api/v1/products/${productSlug}`);
   const res = await fetch(
     `https://balmy.webspaceteam.site/api/v1/products/${productSlug}`,
     {
@@ -53,26 +52,42 @@ export async function getProductsByCategoryId({
   per_page = "16",
   sort_by = "name",
   sort_direction = "asc",
+  brand_id = "",
 }: {
   category_id?: string;
   brand?: string;
+  brand_id?: string;
   page?: string;
   per_page?: string;
   sort_by?: string;
   sort_direction?: Direction;
 }) {
-  let url = ``;
+  const params = new URLSearchParams();
 
+  if (category_id && category_id !== "brands") {
+    params.append("category_id", category_id);
+  }
+  if (brand_id) {
+    params.append("brand_id", brand_id);
+  }
   if (brand) {
-    url = `https://balmy.webspaceteam.site/api/v1/products?category_id=${category_id}&brand=${brand}&page=${
-      +page - 1
-    }&per_page=${per_page}&sort_by=${sort_by}&sort_direction=${sort_direction}`;
-  } else {
-    url = `https://balmy.webspaceteam.site/api/v1/products?category_id=${category_id}&page=${
-      +page - 1
-    }&per_page=${per_page}&sort_by=${sort_by}&sort_direction=${sort_direction}`;
+    params.append("brand", brand);
+  }
+  if (page) {
+    params.append("page", page);
+  }
+  if (per_page) {
+    params.append("per_page", per_page);
+  }
+  if (sort_by) {
+    params.append("sort_by", sort_by);
+  }
+  if (sort_direction) {
+    params.append("sort_direction", sort_direction);
   }
 
+  const url = `https://balmy.webspaceteam.site/api/v1/products?${params.toString()}`;
+  console.log(url);
   const res = await fetch(url, { cache: "no-store" });
   const clonedResponse = res.clone();
   const { data } = (await clonedResponse.json()) as {

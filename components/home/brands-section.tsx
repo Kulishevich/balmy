@@ -14,18 +14,18 @@ const brands = [
   {
     image: HairoticBlackImage,
     alt: "hairotc brand",
-    href: "/catalog/sets/hairoticmen",
+    href: "/catalog/brands/hairoticmen",
   },
-  { image: ZewBlackImage, alt: "zew brand", href: "/catalog/sets/zew" },
+  { image: ZewBlackImage, alt: "zew brand", href: "/catalog/brands/zew" },
   {
     image: HeyJoeBlackImage,
     alt: "hey joe brand",
-    href: "/catalog/sets/hey-joe",
+    href: "/catalog/brands/hey-joe",
   },
   {
     image: CaptainFawcettLimitedBlackImage,
     alt: "captain fawcett limited brand",
-    href: "/catalog/sets/captain-fawcett",
+    href: "/catalog/brands/captain-fawcett",
   },
 ];
 

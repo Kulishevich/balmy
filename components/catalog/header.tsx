@@ -1,26 +1,41 @@
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
+import { Brand } from "@/types/brand";
 import { Category } from "@/types/category";
 
 interface Props {
-  category: Category;
-  subcategory?: Category;
+  category:
+    | Category
+    | { id: string; slug: string; name: string; subcategories: Brand[] };
+  subcategory?: Category | Brand;
 }
 
 async function CatalogHeader({ category, subcategory }: Props) {
   const dynamicPath = subcategory
     ? [
         {
-          href: `/catalog/${category?.slug}_${category.id}`,
+          href: `/catalog/${
+            category?.slug !== "brands"
+              ? `${category?.slug}_${category.id}`
+              : `${category?.slug}`
+          }`,
           name: category?.name || "",
         },
         {
-          href: `/catalog/${category?.slug}_${category.id}/${subcategory.slug}_${subcategory.id}`,
+          href: `/catalog/${
+            category?.slug !== "brands"
+              ? `${category?.slug}_${category.id}`
+              : `${category.slug}`
+          }/${subcategory.slug}_${subcategory.id}`,
           name: subcategory.name || "",
         },
       ]
     : {
-        href: `/catalog/${category?.slug}_${category.id}`,
+        href: `/catalog/${
+          category?.slug !== "brands"
+            ? `${category?.slug}_${category.id}`
+            : `${category?.slug}`
+        }`,
         name: category?.name || "",
       };
 

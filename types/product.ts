@@ -1,8 +1,9 @@
+import { Brand } from "./brand";
 import { Category } from "./category";
 
 export interface ProductResponse {
   current_page: number;
-  data: ProductItem[];
+  data: Product[];
   first_page_url: string | null;
   from: number;
   last_page: number;
@@ -15,56 +16,34 @@ export interface ProductResponse {
   total: number;
 }
 
-export interface ProductItem {
-  id: number;
-  moysklad_id: number | null;
-  name: string;
-  slug: string;
+export interface Product {
+  brand: Brand;
+  brand_id: number;
+  category: Category;
+  category_id: number;
+  country: string;
+  created_at: string;
   description: string;
+  discount: string;
+  id: number;
+  images?: ProductImage[];
+  is_active: boolean;
+  is_available: boolean;
+  is_novelty: boolean;
+  is_popular: boolean;
+  main_image: ProductImage;
+  manufacturer_id: string | null;
+  moysklad_id: string | null;
+  name: string;
+  order: number;
   photo_path: string;
   price: string;
-  stock: number;
-  discount: string;
-  is_popular: boolean;
-  is_novelty: boolean;
+  quantity: number;
   sku: string;
-  specifications: null;
-  is_active: boolean;
-  category_id: number;
-  manufacturer_id: null;
-  created_at: string;
-  updated_at: string;
-  order: number;
-  brand_id: number | null;
-  is_available: boolean;
-  category: Category;
-  main_image: ProductImage;
-  brand: BrandProduct | null;
-}
-
-export interface Product {
-  id: number;
-  name: string;
   slug: string;
-  description: string;
-  photo_path: string | null;
-  price: string;
-  discount: string;
-  is_popular: boolean;
-  is_novelty: boolean;
-  sku: string;
   specifications: [];
-  is_active: boolean;
-  category_id: number;
-  manufacturer_id: string | null;
-  created_at: string;
+  stock: number;
   updated_at: string;
-  order: number;
-  brand_id: number | null;
-  category: Category;
-  images: ProductImage[] | null;
-  brand: BrandProduct | null;
-  main_image: ProductImage;
 }
 
 export interface ProductImage {

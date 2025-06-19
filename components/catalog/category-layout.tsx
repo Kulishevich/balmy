@@ -9,6 +9,7 @@ import { Product } from "@/types/product";
 import React from "react";
 import FilterHeader from "./filter-header";
 import { Category } from "@/types/category";
+import { Brand } from "@/types/brand";
 // import DeodorantDescription from "../descriptions/deodorant-description";
 // import VoskDlyaUsovDescription from "../descriptions/vosk-dlya-usov-description";
 // import RascheskiDlyaVolosDescription from "../descriptions/rascheski-dlya-volos-description";
@@ -38,11 +39,14 @@ import { Category } from "@/types/category";
 // };
 
 interface Props {
-  category: Category;
-  subcategory?: Category;
+  category:
+    | Category
+    | { id: string; slug: string; name: string; subcategories: Brand[] };
+  subcategory?: Category | Brand;
   products: Product[];
   totalPages: number;
   page: string;
+  brands: Brand[];
 }
 
 function CategoryLayout({
@@ -51,6 +55,7 @@ function CategoryLayout({
   products,
   totalPages,
   page,
+  brands,
 }: Props) {
   return (
     <>
@@ -62,6 +67,8 @@ function CategoryLayout({
           <CatalogFilter
             className="hidden 2xl:block min-[1921px]:absolute min-[1921px]:left-0 min-[1921px]:-translate-x-[calc(100%+40px)] min-[1921px]:top-0"
             page={page}
+            brands={brands}
+            showBrands={category.slug !== "brands"}
           />
           {!!products.length && (
             <div className="mx-auto 2xl:ml-auto relative grid grid-cols-2 sm:grid-cols-3 min-[1921px]:grid-cols-4 gap-x-4 sm:gap-x-[30px] gap-y-9 sm:gap-y-[40px]">
