@@ -46,7 +46,6 @@ async function CatalogPage({ params, searchParams }: Props) {
     id: "Скидки",
     slug: "discounts",
     name: "Скидки",
-    subcategories: brands,
   };
 
   if (!category && !isBrands && !isDiscounts) notFound();

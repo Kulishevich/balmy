@@ -6,7 +6,7 @@ import { Category } from "@/types/category";
 interface Props {
   category:
     | Category
-    | { id: string; slug: string; name: string; subcategories: Brand[] };
+    | { id: string; slug: string; name: string; subcategories?: Brand[] };
   subcategory?: Category | Brand;
 }
 
