@@ -90,10 +90,10 @@ export function getCartProductFromProduct(product: Product) {
     slug: slug!,
     image: photo_path,
     name,
-    price: price,
-    basePrice: price,
-    discount,
-    discountPrices: price,
+    price: +price,
+    basePrice: +price,
+    discount: +discount,
+    discountPrices: (Number(price) * (100 - Number(discount))) / 100,
     quantity: 1,
   };
 }

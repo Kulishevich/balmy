@@ -37,7 +37,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   addToCart: (product) =>
     set((state) => {
       const isProductInCart = state.cart.some(
-        (cartProduct) => cartProduct.slug === product.slug,
+        (cartProduct) => cartProduct.slug === product.slug
       );
 
       if (isProductInCart) {
@@ -57,7 +57,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
     set((state) => {
       toast.success("Товар удален из корзины");
       const updatedCart = state.cart.filter(
-        (cartProduct) => cartProduct.slug !== slug,
+        (cartProduct) => cartProduct.slug !== slug
       );
 
       saveCartToStorage(updatedCart);
@@ -71,7 +71,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
               ...cartProduct,
               quantity: cartProduct.quantity + 1,
             }
-          : cartProduct,
+          : cartProduct
       );
 
       const updatedCartWithPrice = updatedCart.map((cartProduct) => ({
@@ -90,7 +90,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
               ...cartProduct,
               quantity: cartProduct.quantity - 1,
             }
-          : cartProduct,
+          : cartProduct
       );
 
       const updatedCartWithPrice = updatedCart.map((cartProduct) => ({
@@ -129,7 +129,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       (totalDiscount, product) =>
         totalDiscount +
         (product.basePrice - product.discountPrices) * product.quantity,
-      0,
+      0
     );
   },
   getCartProduct: (slug) => {

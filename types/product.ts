@@ -68,7 +68,7 @@ export interface BrandProduct {
 }
 
 export interface CartProduct {
-  id: string;
+  id: number;
   slug: string;
   name: string;
   price: number;

@@ -28,13 +28,13 @@ function CartPage() {
 
   useEffect(() => {
     async function handleFetchCategories() {
-      const { categories } = await getCategories();
+      const categories = await getCategories();
       setCategories(categories);
     }
 
     handleFetchCategories();
   }, []);
-
+  console.log(cart);
   return (
     <>
       <Title className="mt-10 text-center">Корзина</Title>

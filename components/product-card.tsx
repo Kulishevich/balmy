@@ -25,13 +25,21 @@ function ProductCard({ product }: Props) {
   const [localCartProduct, setLocalCartProduct] = useState<CartProduct>(
     getCartProductFromProduct(product)
   );
-  const { photo_path, name, slug, discount, price, id, description, brand } =
-    product;
+  const {
+    photo_path,
+    name,
+    slug,
+    discount,
+    price,
+    id,
+    description,
+    brand,
+    quantity,
+  } = product;
   const cartProduct = getCartProduct(slug || "");
 
   const isDiscount = !!Number(discount);
-  const discountPrices = Number(price) * (100 - Number(discount));
-  const quantity = 10;
+  const discountPrices = (Number(price) * (100 - Number(discount))) / 100;
 
   const addToCartButtonText = cartProduct
     ? isTablet

@@ -33,13 +33,21 @@ function ProductLayout({ product, similarProducts }: Props) {
   const { setProduct } = useBuyOneClickStore();
   const { createPopup } = usePopupStore();
   const { addProduct } = useViewedProductsStore();
-  const { name, images, brand, discount, price, description, sku, slug } =
-    product;
+  const {
+    name,
+    images,
+    brand,
+    discount,
+    price,
+    description,
+    sku,
+    slug,
+    quantity,
+    country,
+  } = product;
 
   const isDiscount = !!Number(discount);
-  const discountPrices = Number(price) * (100 - Number(discount));
-  const quantity = 10;
-  const country = "Country";
+  const discountPrices = (Number(price) * (100 - Number(discount))) / 100;
 
   const cartProduct = getCartProduct(slug!);
 
@@ -130,7 +138,7 @@ function ProductLayout({ product, similarProducts }: Props) {
         </div>
 
         <div className="mt-8 lg:mt-10 flex flex-col lg:flex-row">
-          <ProductSlider photos={images} />
+          <ProductSlider photos={images || []} />
           <div className="mt-[30px] lg:mt-0 lg:ml-[140px] flex flex-col w-full">
             <ul className="flex flex-col gap-y-[20px]">
               <li className="text-[21px]">
@@ -218,7 +226,7 @@ function ProductLayout({ product, similarProducts }: Props) {
         </div>
       </section>
       <TabsSection similarProducts={similarProducts} />
-      {/* <RecentlyViewedProductsSection currentProductSlug={slug} /> */}
+      <RecentlyViewedProductsSection currentProductSlug={slug} />
       <CallbackSectoin />
     </>
   );

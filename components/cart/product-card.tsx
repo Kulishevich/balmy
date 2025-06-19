@@ -19,6 +19,8 @@ function CartProductCard({ cartProduct }: Props) {
     removeFromCart(slug);
   }
 
+  console.log(cartProduct);
+
   return (
     <div className="flex justify-between flex-col 2xl:grid grid-cols-[705px,1fr,1fr,1fr] items-center py-[30px] border-b border-b-white/30">
       <div className="flex items-center w-full">
@@ -33,7 +35,11 @@ function CartProductCard({ cartProduct }: Props) {
           <div className="relative w-full aspect-square border border-green rounded-[5px] overflow-hidden">
             <Image
               className="object-contain"
-              src={image || "/icons/logo-gray.svg"}
+              src={
+                image
+                  ? `https://balmy.webspaceteam.site/storage/${image}`
+                  : "/icons/logo-gray.svg"
+              }
               alt={alt}
               fill
             />
