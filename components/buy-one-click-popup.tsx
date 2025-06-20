@@ -36,11 +36,16 @@ function BuyOneClickPopup() {
   } = useForm<BuyOneClickInputs>({
     resolver: yupResolver(buyOneClickSchema),
   });
+
   const swipeHandlers = useSwipeable({
     onSwipedRight: removePopup,
     trackTouch: true,
   });
   const personalInfo = watch("personal-info");
+
+  const isDiscount = !!Number(product?.discount);
+  const discountPrices =
+    (Number(product?.price) * (100 - Number(product?.discount))) / 100;
 
   function resetFormFields() {
     setValue("name", "");
@@ -64,7 +69,7 @@ function BuyOneClickPopup() {
 
   return (
     <m.div
-      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-scroll sm:overflow-hidden border-l border-[#9E9E9E] bg-dark-grey py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
+      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full max-h-[100vh] overflow-y-auto border-l border-[#9E9E9E] bg-dark-grey py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
       {...leftAppearanceAnimation}
       {...swipeHandlers}
     >
@@ -80,7 +85,10 @@ function BuyOneClickPopup() {
         <div className="relative max-w-20 w-full h-20 rounded-[5px] overflow-hidden">
           <Image
             className="object-contain"
-            src={product?.images?.[0]?.image_path || "/icons/logo-gray.svg"}
+            src={
+              `https://balmy.webspaceteam.site/storage/${product?.photo_path}` ||
+              "/icons/logo-gray.svg"
+            }
             alt={product?.name.toLowerCase() || "продукт"}
             fill
           />
@@ -91,9 +99,9 @@ function BuyOneClickPopup() {
             <span
               className={cn({ "opacity-50 line-through": !!product?.discount })}
             >
-              {product?.salePrices.toFixed(2)} byn
+              {product?.price} byn
             </span>
-            {!!product?.discount && product.discountPrices.toFixed(2) + " byn"}
+            {isDiscount && discountPrices.toFixed(2) + " byn"}
           </span>
         </div>
       </div>
@@ -150,7 +158,7 @@ function BuyOneClickPopup() {
         </div>
         <div className="pt-4 mt-auto flex items-center gap-2">
           <input
-            className="custom-checkbox border-white/30"
+            className="custom-checkbox border border-white/30"
             id="personal-data-3"
             type="checkbox"
             {...register("personal-info")}

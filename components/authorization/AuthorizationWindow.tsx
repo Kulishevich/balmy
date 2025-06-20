@@ -35,7 +35,7 @@ export const AuthorizationWindow = () => {
               ФИО
             </label>
             <input
-              className={"custom-input mt-[6px] "}
+              className={"custom-input--dark mt-[6px] "}
               id="name"
               placeholder="Введите ваше имя"
             />
@@ -45,7 +45,7 @@ export const AuthorizationWindow = () => {
               Email*
             </label>
             <input
-              className={"custom-input mt-[6px]"}
+              className={"custom-input--dark mt-[6px]"}
               id="name"
               placeholder="Введите ваше имя"
             />
@@ -55,7 +55,7 @@ export const AuthorizationWindow = () => {
               Пароль*
             </label>
             <input
-              className={"custom-input mt-[6px]"}
+              className={"custom-input--dark mt-[6px]"}
               id="name"
               placeholder="Введите ваше имя"
             />
@@ -89,7 +89,7 @@ export const AuthorizationWindow = () => {
               Email*
             </label>
             <input
-              className={"custom-input mt-[6px]"}
+              className={"custom-input--dark mt-[6px]"}
               id="email"
               placeholder="Email"
             />
@@ -99,7 +99,7 @@ export const AuthorizationWindow = () => {
               Пароль*
             </label>
             <input
-              className={"custom-input mt-[6px]"}
+              className={"custom-input--dark mt-[6px]"}
               id="password"
               placeholder="Пароль"
             />

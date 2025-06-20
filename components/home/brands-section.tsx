@@ -1,35 +1,13 @@
 "use client";
 import Title from "../title";
-import HairoticBlackImage from "@/public/images/hairotic-black.webp";
-import ZewBlackImage from "@/public/images/zew-white.webp";
-import HeyJoeBlackImage from "@/public/images/hey-joe-black.webp";
-import CaptainFawcettLimitedBlackImage from "@/public/images/captain-fawcett-limited-black.webp";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import SectionAnimationWrapper from "../section-animation-wrapper";
 import Link from "next/link";
+import { Brand } from "@/types/brand";
 
-const brands = [
-  {
-    image: HairoticBlackImage,
-    alt: "hairotc brand",
-    href: "/catalog/brands/hairoticmen",
-  },
-  { image: ZewBlackImage, alt: "zew brand", href: "/catalog/brands/zew" },
-  {
-    image: HeyJoeBlackImage,
-    alt: "hey joe brand",
-    href: "/catalog/brands/hey-joe",
-  },
-  {
-    image: CaptainFawcettLimitedBlackImage,
-    alt: "captain fawcett limited brand",
-    href: "/catalog/brands/captain-fawcett",
-  },
-];
-
-function BrandsSection() {
+function BrandsSection({ brands }: { brands: Brand[] }) {
   return (
     <SectionAnimationWrapper>
       <section className="mt-[72px] lg:mt-[120px] container">
@@ -56,16 +34,17 @@ function BrandsSection() {
           modules={[Navigation, Autoplay]}
         >
           {brands.map((brand, idx) => {
-            const { image, alt, href } = brand;
+            const { image_path, slug } = brand;
 
             return (
               <SwiperSlide className="max-w-[200px]" key={idx}>
-                <Link href={href}>
+                <Link href={`/catalog/brands/${slug}`}>
                   <Image
                     className="mx-auto object-contain h-[120px] sm:h-[200px]"
-                    src={image}
-                    alt={alt}
-                    placeholder="blur"
+                    src={`https://balmy.webspaceteam.site/storage/${image_path}`}
+                    alt={slug}
+                    width={200}
+                    height={200}
                   />
                 </Link>
               </SwiperSlide>
