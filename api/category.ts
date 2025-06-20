@@ -15,7 +15,7 @@ export async function getCategories() {
 
 export async function getCategory(categorySlug: string) {
   const res = await fetch(
-    `https://balmy.webspaceteam.site/api/v1/categories/${categorySlug}`,
+    `https://balmy.webspaceteam.site/api/v1/categories/slug/${categorySlug}`,
     {
       cache: "no-store",
     }

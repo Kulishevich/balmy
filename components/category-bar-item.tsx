@@ -14,7 +14,7 @@ interface Props {
 }
 function CategoryBarItem({ category, activeCategorySlug }: Props) {
   const { "subcategory-slug": subcategorySlug } = useParams();
-  const { name, slug: categorySlug, subcategories, id: categoryId } = category;
+  const { name, slug: categorySlug, subcategories } = category;
   const isActive = categorySlug == activeCategorySlug;
 
   return (
@@ -26,7 +26,7 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
       {categorySlug == "brands" ? (
         <Link href={`/catalog/brands`}>{name}</Link>
       ) : (
-        <Link href={`/catalog/${categorySlug}_${categoryId}`}>{name}</Link>
+        <Link href={`/catalog/${categorySlug}`}>{name}</Link>
       )}
       <AnimatePresence>
         {isActive && (
@@ -54,13 +54,9 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
                 key={id}
               >
                 {categorySlug == "brands" ? (
-                  <Link href={`/catalog/brands/${slug}_${id}`}>{name}</Link>
+                  <Link href={`/catalog/brands/${slug}`}>{name}</Link>
                 ) : (
-                  <Link
-                    href={`/catalog/${categorySlug}_${categoryId}/${slug}_${id}`}
-                  >
-                    {name}
-                  </Link>
+                  <Link href={`/catalog/${categorySlug}/${slug}`}>{name}</Link>
                 )}
               </li>
             );

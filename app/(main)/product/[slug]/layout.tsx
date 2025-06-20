@@ -17,7 +17,7 @@ export async function generateMetadata({
   const product = await getProductBySlug("4");
   const { title, description } = generateSeoProduct(
     product?.name,
-    product?.discountPrices
+    +product?.price
   );
 
   return {

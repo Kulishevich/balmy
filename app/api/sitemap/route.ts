@@ -1,5 +1,4 @@
 import { getCategories } from "@/api/category";
-import { getNews } from "@/api/news";
 import { getProducts } from "@/api/products";
 import { NextResponse } from "next/server";
 
@@ -46,9 +45,8 @@ export async function GET() {
     { loc: `${HOST}/privacy-policy`, changefreq: "monthly", priority: 0.5 },
   ];
 
-  const { categories } = await getCategories();
-  const { products } = await getProducts();
-  const { news } = await getNews({ page: "0", size: "0" });
+  const categories = await getCategories();
+  const products = await getProducts();
 
   const categoryPages = categories.map((cat) => ({
     loc: `${HOST}/catalog/${cat.slug}`,
@@ -64,16 +62,10 @@ export async function GET() {
     }))
   );
 
-  const productPages = products.map((p) => ({
+  const productPages = products.data.map((p) => ({
     loc: `${HOST}/product/${p.slug}`,
     changefreq: "daily",
     priority: 0.8,
-  }));
-
-  const newsPages = news.map((n) => ({
-    loc: `${HOST}/news/${n.slug}`,
-    changefreq: "weekly",
-    priority: 0.7,
   }));
 
   const allPages = [
@@ -81,7 +73,6 @@ export async function GET() {
     ...categoryPages,
     ...subcategoryPages,
     ...productPages,
-    ...newsPages,
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

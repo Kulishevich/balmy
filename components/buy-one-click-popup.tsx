@@ -80,7 +80,7 @@ function BuyOneClickPopup() {
         <div className="relative max-w-20 w-full h-20 rounded-[5px] overflow-hidden">
           <Image
             className="object-contain"
-            src={product?.images[0] || "/icons/logo-gray.svg"}
+            src={product?.images?.[0]?.image_path || "/icons/logo-gray.svg"}
             alt={product?.name.toLowerCase() || "продукт"}
             fill
           />

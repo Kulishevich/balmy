@@ -24,12 +24,12 @@ export function createBuyOneClickMessage({
   product: Product;
 }) {
   const { name, phone, comment } = buyOneClickData;
-  const { name: productName, article } = product;
+  const { name: productName, sku } = product;
 
   return `<b>Поступила заявка на покупку в один клик</b>\n\nИмя: ${name}\nТелефон: ${phone}${
     comment ? `\nКомментарий: ${comment}` : ""
   }
-  \nНазвание продукта: ${productName}\nАртикул: ${article}`;
+  \nНазвание продукта: ${productName}\nАртикул: ${sku}`;
 }
 
 export function createNewOrderMessage({

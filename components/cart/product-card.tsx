@@ -32,7 +32,7 @@ function CartProductCard({ cartProduct }: Props) {
           <span className="sr-only">Удалить тоавр из корзины</span>
         </button>
         <div className="max-w-[100px] lg:max-w-[200px] w-full sm:ml-[38px]">
-          <div className="relative w-full aspect-square border border-green rounded-[5px] overflow-hidden">
+          <div className="relative w-full aspect-square border border-gold rounded-[5px] overflow-hidden">
             <Image
               className="object-contain"
               src={

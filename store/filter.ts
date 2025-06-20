@@ -6,7 +6,7 @@ export type Direction = "desc" | "asc";
 type FilterState = {
   sort: Sort;
   direction: Direction;
-  brand: string;
+  brand_slug: string;
   setSort: (sort: Sort) => void;
   setDirection: (direction: Direction) => void;
   setBrand: (brand: string) => void;
@@ -16,7 +16,7 @@ type FilterState = {
 export const useFilterStore = create<FilterState>((set) => ({
   sort: "name",
   direction: "asc",
-  brand: "",
+  brand_slug: "",
   setSort: (sort: Sort) => {
     return set((state) => {
       return {
@@ -33,11 +33,11 @@ export const useFilterStore = create<FilterState>((set) => ({
       };
     });
   },
-  setBrand: (brand) => {
+  setBrand: (brand_slug) => {
     return set((state) => {
       return {
         ...state,
-        brand,
+        brand_slug,
       };
     });
   },
@@ -45,7 +45,7 @@ export const useFilterStore = create<FilterState>((set) => ({
     return set((state) => {
       return {
         ...state,
-        brand: "",
+        brand_slug: "",
         direction: "asc",
         sort: "name",
       };

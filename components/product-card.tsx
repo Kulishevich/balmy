@@ -31,7 +31,6 @@ function ProductCard({ product }: Props) {
     slug,
     discount,
     price,
-    id,
     description,
     brand,
     quantity,
@@ -82,7 +81,7 @@ function ProductCard({ product }: Props) {
       </div>
 
       <div className="relative max-w-[300px] w-full aspect-square border border-dark-gray rounded-[5px] overflow-hidden bg-white">
-        <Link href={`/product/${slug}_${id}`} itemProp="url">
+        <Link href={`/product/${slug}`} itemProp="url">
           <Image
             className="object-contain"
             src={

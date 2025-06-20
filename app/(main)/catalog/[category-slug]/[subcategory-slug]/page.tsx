@@ -16,7 +16,7 @@ interface Props {
     page?: string;
     sort?: string;
     direction?: Direction;
-    brand_id?: string;
+    brand_slug?: string;
   }>;
 }
 
@@ -28,22 +28,18 @@ async function Page({ params, searchParams }: Props) {
   } = await params;
   const responseSearchParams = await searchParams;
 
-  const categoryId = categorySlug.split("_").findLast((elem) => elem) || "";
-  const subcategoryId =
-    subcategorySlug.split("_").findLast((elem) => elem) || "";
+  const isBrands = categorySlug === "brands";
 
-  const isBrands = categoryId === "brands";
-
-  const category = await getCategory(categoryId);
-  const subcategory = await getCategory(subcategoryId);
+  const category = await getCategory(categorySlug);
+  const subcategory = await getCategory(subcategorySlug);
   const brands = await getBrands();
 
   const { last_page, data: products } = await getProductsByCategoryId({
-    category_id: !isBrands ? subcategoryId : "",
+    category_slug: !isBrands ? subcategorySlug : "",
     page: page,
     sort_by: responseSearchParams.sort,
     sort_direction: responseSearchParams.direction,
-    brand_id: isBrands ? subcategoryId : responseSearchParams.brand_id,
+    brand_slug: isBrands ? subcategorySlug : responseSearchParams.brand_slug,
   });
 
   if ((!subcategory && !isBrands) || (!category && !isBrands)) notFound();

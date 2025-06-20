@@ -82,7 +82,7 @@ function SearchResult({ products, searchOptions, searchInputRef }: Props) {
         >
           {searchResult.map((result) => {
             const { item: product, refIndex } = result;
-            const { name, discount, slug, price, id, photo_path } = product;
+            const { name, discount, slug, price, photo_path } = product;
             const alt = name.toLowerCase();
 
             const isDiscount = !!Number(discount);
@@ -91,7 +91,7 @@ function SearchResult({ products, searchOptions, searchInputRef }: Props) {
             return (
               <Link
                 key={refIndex}
-                href={`/product/${slug}_${id}`}
+                href={`/product/${slug}`}
                 className="inline-flex py-[10px] lg:py-3 px-[18px] lg:px-6 gap-4 transition hover:bg-gray/20"
                 onClick={handleClickOnResultSearch}
               >

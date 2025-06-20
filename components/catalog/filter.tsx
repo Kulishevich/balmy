@@ -29,7 +29,7 @@ function CatalogFilter({ className, page, brands, showBrands }: Props) {
   const {
     sort,
     direction,
-    brand: currentBrand,
+    brand_slug: currentBrand,
     setSort,
     setDirection,
     setBrand,
@@ -59,10 +59,10 @@ function CatalogFilter({ className, page, brands, showBrands }: Props) {
     return () => {
       if (brand == currentBrand) {
         setBrand("");
-        params.delete("brand_id");
+        params.delete("brand_slug");
       } else {
         setBrand(brand);
-        params.set("brand_id", brand);
+        params.set("brand_slug", brand);
       }
 
       params.delete("page");
@@ -90,7 +90,7 @@ function CatalogFilter({ className, page, brands, showBrands }: Props) {
   useEffect(() => {
     const sort = (params.get("sort") || "name") as Sort;
     const direction = (params.get("direction") || "asc") as Direction;
-    const brand = params.get("brand") || "";
+    const brand = params.get("brand_slug") || "";
 
     setSort(sort);
     setDirection(direction);
@@ -107,19 +107,19 @@ function CatalogFilter({ className, page, brands, showBrands }: Props) {
           </p>
           <div className="mt-4 flex flex-col gap-y-3">
             {brands.map((brand) => {
-              const { id, name } = brand;
+              const { name, slug } = brand;
 
               return (
-                <div className="flex items-center gap-[10px]" key={id}>
+                <div className="flex items-center gap-[10px]" key={slug}>
                   <input
                     className="custom-checkbox border border-white/30"
-                    id={String(id)}
+                    id={String(slug)}
                     type="radio"
-                    checked={currentBrand == String(id)}
-                    onChange={handleBrandChange(String(id))}
-                    onClick={handleBrandChange(String(id))}
+                    checked={currentBrand == String(slug)}
+                    onChange={handleBrandChange(slug)}
+                    onClick={handleBrandChange(slug)}
                   />
-                  <label className="cursor-pointer" htmlFor={String(id)}>
+                  <label className="cursor-pointer" htmlFor={String(slug)}>
                     {name}
                   </label>
                 </div>

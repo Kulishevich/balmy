@@ -12,7 +12,7 @@ interface Props {
     page?: string;
     sort?: string;
     direction?: Direction;
-    brand_id?: string;
+    brand_slug?: string;
   }>;
 }
 
@@ -20,18 +20,18 @@ async function CatalogPage({ params, searchParams }: Props) {
   const { "category-slug": categorySlug, page } = await params;
   const responseSearchParams = await searchParams;
 
-  const categoryId = categorySlug.split("_").findLast((elem) => elem) || "";
-  const isBrands = categoryId === "brands";
+  const isBrands = categorySlug === "brands";
   const isDiscounts = categorySlug === "discounts";
-  const category = await getCategory(categoryId);
+
+  const category = await getCategory(categorySlug);
   const brands = await getBrands();
 
   const { last_page, data: products } = await getProductsByCategoryId({
-    category_id: !isDiscounts ? categoryId : "",
+    category_slug: !isDiscounts || !isBrands ? categorySlug : "",
     page: page,
     sort_by: responseSearchParams.sort,
     sort_direction: responseSearchParams.direction,
-    brand_id: responseSearchParams.brand_id,
+    brand_slug: responseSearchParams.brand_slug,
     on_sale: isDiscounts && true,
   });
 

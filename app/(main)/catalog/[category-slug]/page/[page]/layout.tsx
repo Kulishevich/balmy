@@ -19,8 +19,8 @@ export async function generateMetadata({
   const category = await getCategory("1");
 
   return {
-    title: seo.title || category?.id,
-    description: seo.description || category?.id,
+    title: seo.title || category?.name,
+    description: seo.description || category?.name,
     keywords: seo.keywords,
     alternates: {
       canonical: `${config.homeUrl}/catalog/${categorySlug}`,

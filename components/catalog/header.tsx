@@ -14,28 +14,16 @@ async function CatalogHeader({ category, subcategory }: Props) {
   const dynamicPath = subcategory
     ? [
         {
-          href: `/catalog/${
-            category?.slug !== "brands"
-              ? `${category?.slug}_${category.id}`
-              : `${category?.slug}`
-          }`,
+          href: `/catalog/${category?.slug}`,
           name: category?.name || "",
         },
         {
-          href: `/catalog/${
-            category?.slug !== "brands"
-              ? `${category?.slug}_${category.id}`
-              : `${category.slug}`
-          }/${subcategory.slug}_${subcategory.id}`,
+          href: `/catalog/${category.slug}/${subcategory.slug}`,
           name: subcategory.name || "",
         },
       ]
     : {
-        href: `/catalog/${
-          category?.slug !== "brands"
-            ? `${category?.slug}_${category.id}`
-            : `${category?.slug}`
-        }`,
+        href: `/catalog/${category?.slug}`,
         name: category?.name || "",
       };
 
