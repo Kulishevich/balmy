@@ -5,7 +5,13 @@ import Link from "next/link";
 import Search from "./search/search";
 import Image from "next/image";
 
-function Header({ phones }: { phones: string[] | [] }) {
+function Header({
+  phones,
+  logo,
+}: {
+  phones: string[] | [];
+  logo: string | null;
+}) {
   return (
     <header
       className="w-full bg-dark-grey sticky top-0 z-20
@@ -14,7 +20,7 @@ function Header({ phones }: { phones: string[] | [] }) {
       <div className="container py-7 hidden lg:flex items-center">
         <div className="w-[116px] h-[98px] relative">
           <Image
-            src={"/images/logo.png"}
+            src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
             fill
             alt="logo"
             className="object-cover"

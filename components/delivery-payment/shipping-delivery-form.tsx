@@ -81,8 +81,8 @@ function ShippingDeliveryForm({ className }: Props) {
     >
       <input
         id="fullName"
-        className={cn("custom-input--dark w-full", {
-          "custom-input--dark-error": errors["fullName"],
+        className={cn("custom-input--delivery w-full", {
+          "custom-input-delivery--error": errors["fullName"],
         })}
         placeholder="ФИО получателя"
         {...register("fullName")}
@@ -93,8 +93,8 @@ function ShippingDeliveryForm({ className }: Props) {
         </span>
       )}
       <input
-        className={cn("mt-5 custom-input--dark w-full", {
-          "custom-input--dark-error": errors["address"],
+        className={cn("mt-5 custom-input--delivery w-full", {
+          "custom-input-delivery--error": errors["address"],
         })}
         placeholder={post === "Европочта" ? "Номер отделения" : "Адрес"}
         {...register("address")}
@@ -105,8 +105,8 @@ function ShippingDeliveryForm({ className }: Props) {
         </span>
       )}
       <input
-        className={cn("mt-5 custom-input--dark w-full", {
-          "custom-input--dark-error": errors["phone"],
+        className={cn("mt-5 custom-input--delivery w-full", {
+          "custom-input-delivery--error": errors["phone"],
         })}
         placeholder="Номер телефона"
         {...register("phone")}
@@ -117,8 +117,8 @@ function ShippingDeliveryForm({ className }: Props) {
         </span>
       )}
       <input
-        className={cn("mt-5 custom-input--dark w-full", {
-          "custom-input--dark-error": errors["email"],
+        className={cn("mt-5 custom-input--delivery w-full", {
+          "custom-input-delivery--error": errors["email"],
         })}
         placeholder="Email, необязательно"
         {...register("email")}

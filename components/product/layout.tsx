@@ -68,7 +68,7 @@ function ProductLayout({ product, similarProducts }: Props) {
   useEffect(() => {
     addProduct({
       image: !!images?.[0]?.image_path
-        ? `https://balmy.webspaceteam.site/storage/${images?.[0]?.image_path}`
+        ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${images?.[0]?.image_path}`
         : "/icons/logo-gray.svg",
       slug: slug || "",
     });

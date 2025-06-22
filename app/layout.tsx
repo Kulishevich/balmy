@@ -7,9 +7,11 @@ import { config } from "@/utils/config";
 import Script from "next/script";
 import AnimationThemeLayout from "@/components/animation-theme/animation-theme";
 import ScrollToTopButton from "@/components/scroll-to-top-button";
+import { getSettings } from "@/api/settings";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoTags({ url: "home" });
+  const settings = await getSettings();
 
   return {
     title: seo.title,
@@ -22,6 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.ogTitle,
       description: seo.ogDescription,
       url: config?.homeUrl,
+    },
+    icons: {
+      icon: `${process.env.NEXT_PUBLIC_STORAGE_URL}/${settings?.favicon}`,
     },
     verification: {
       yandex: "3144b55aa33ab7e1",

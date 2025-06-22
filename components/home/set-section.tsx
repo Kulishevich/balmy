@@ -4,17 +4,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import ArrowRight from "../arrow-right";
 import ArrowLeft from "../arrow-left";
-import { Sale } from "@/types/sale";
+import { Banner } from "@/types/banner";
 
 interface Props {
-  sets: Sale[];
+  banners: Banner[];
 }
 
-function SetSection({ sets }: Props) {
-  const showSliderButtons = sets.length > 1;
+function SetSection({ banners }: Props) {
+  const showSliderButtons = banners.length > 1;
 
   return (
-    <section className="mt-[89px] container pt-[83px] overflow-hidden">
+    <section className="mt-[89px] container pt-[83px] overflow-x-hidden">
       <div className="relative bg-[url('/images/sets-bg.webp')] bg-cover bg-center w-full text-white rounded-[5px]">
         <Swiper
           className="overflow-visible"
@@ -25,10 +25,10 @@ function SetSection({ sets }: Props) {
           }}
           modules={[Navigation]}
         >
-          {sets.map((set, idx) => {
+          {banners.map((banner, idx) => {
             return (
               <SwiperSlide key={idx}>
-                <SetCard set={set} />
+                <SetCard banner={banner} />
               </SwiperSlide>
             );
           })}

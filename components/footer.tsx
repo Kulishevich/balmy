@@ -16,6 +16,7 @@ import { Contacts } from "@/types/contacts";
 interface Props {
   categories: Category[];
   contacts: Contacts;
+  logo: string | null;
 }
 
 const information = [
@@ -25,7 +26,7 @@ const information = [
   { name: "Политика конфиденциальности", link: "/privacy-policy" },
 ];
 
-function Footer({ categories, contacts }: Props) {
+function Footer({ categories, contacts, logo }: Props) {
   const pathname = usePathname();
   const { isTablet } = useScreenSize();
   const { createPopup } = usePopupStore();
@@ -43,7 +44,7 @@ function Footer({ categories, contacts }: Props) {
             {pathname === "/" ? (
               <div className="w-[145px] h-[122px] relative">
                 <Image
-                  src={"/images/logo.png"}
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
                   fill
                   alt="logo"
                   className="object-cover"
@@ -55,7 +56,7 @@ function Footer({ categories, contacts }: Props) {
                 href="/"
               >
                 <Image
-                  src={"/images/logo.png"}
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
                   fill
                   alt="logo"
                   className="object-cover"

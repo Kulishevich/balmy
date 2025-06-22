@@ -86,7 +86,7 @@ function BuyOneClickPopup() {
           <Image
             className="object-contain"
             src={
-              `https://balmy.webspaceteam.site/storage/${product?.photo_path}` ||
+              `${process.env.NEXT_PUBLIC_STORAGE_URL}${product?.photo_path}` ||
               "/icons/logo-gray.svg"
             }
             alt={product?.name.toLowerCase() || "продукт"}

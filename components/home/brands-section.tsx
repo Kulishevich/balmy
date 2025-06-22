@@ -41,7 +41,7 @@ function BrandsSection({ brands }: { brands: Brand[] }) {
                 <Link href={`/catalog/brands/${slug}`}>
                   <Image
                     className="mx-auto object-contain h-[120px] sm:h-[200px]"
-                    src={`https://balmy.webspaceteam.site/storage/${image_path}`}
+                    src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${image_path}`}
                     alt={slug}
                     width={200}
                     height={200}

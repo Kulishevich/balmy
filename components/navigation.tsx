@@ -1,12 +1,11 @@
 "use client";
 import LocationIcon from "@/public/icons/location.svg";
 import BurgerIcon from "@/public/icons/burger.svg";
+import ProfileIcon from "@/public/icons/profile.svg";
 import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import SearchMobileIcon from "@/public/icons/search-mobile.svg";
 import Link from "next/link";
-import Action from "@/components/action";
-import { ADDRESS, PHONE_NUMBER } from "@/utils/constants";
-import { usePopupStore } from "@/store/popup";
+import { ADDRESS } from "@/utils/constants";
 import { useScreenSize } from "@/hooks/use-screen-size";
 import CartInfo from "./cart-info";
 import { AnimatePresence, m } from "motion/react";
@@ -22,15 +21,16 @@ const navigation = [
   { name: "Контакты", link: "/contacts" },
 ];
 
-function Navigation() {
-  const { createPopup } = usePopupStore();
+function Navigation({
+  phones,
+  logo,
+}: {
+  phones: string[];
+  logo: string | null;
+}) {
   const { openMobileMenu } = useMobileMenuStore();
   const { closeSearch, openSearch, show } = useSearchStore();
   const { isTablet } = useScreenSize();
-
-  function handleClickOnCallbackButton() {
-    createPopup({ type: "callback" });
-  }
 
   function toggleSearch() {
     return show ? closeSearch() : openSearch();
@@ -49,16 +49,18 @@ function Navigation() {
           </button>
           <Link className="ml-9 w-[67px] h-[57px] relative" href="/">
             <Image
-              src={"/images/logo.png"}
+              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
               fill
               alt="logo"
               className="object-cover"
             />
           </Link>
           <div className="ml-auto flex gap-6">
-            <Link href={PHONE_NUMBER.href}>
-              <PhoneOutlineIcon />
-            </Link>
+            {phones.map((phone, index) => (
+              <Link href={`tel:${phone}`} key={index}>
+                <PhoneOutlineIcon />
+              </Link>
+            ))}
             <button onClick={toggleSearch}>
               <SearchMobileIcon
                 className={cn("stroke-2 transition", {
@@ -110,9 +112,14 @@ function Navigation() {
             </menu>
           </nav>
         )}
-        <Action color="white" onClick={handleClickOnCallbackButton}>
-          Обратный звонок
-        </Action>
+
+        <Link
+          href={"/authorization"}
+          className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
+        >
+          <ProfileIcon />
+          Личный кабинет
+        </Link>
       </div>
     </div>
   );

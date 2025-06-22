@@ -14,7 +14,7 @@ async function PrivacyPolicyPage() {
       <Breadcrumbs className="mt-4 mx-auto" />
       <div className="container">
         <div
-          className="docs mt-8 sm:mt-10"
+          className="docs mt-8 sm:mt-10 whitespace-pre-line"
           dangerouslySetInnerHTML={{
             __html: settings.privacy_policy.text || privacyPolicy,
           }}

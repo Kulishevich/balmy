@@ -44,7 +44,7 @@ function ThumbSlider({ setThumbsSwiper, photos }: Props) {
               <div className="relative max-w-[100px] w-full aspect-square border border-gold rounded-[5px] overflow-hidden">
                 <Image
                   className="object-contain"
-                  src={`https://balmy.webspaceteam.site/storage/${photo.image_path}`}
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${photo.image_path}`}
                   alt="фото продукта"
                   fill
                 />

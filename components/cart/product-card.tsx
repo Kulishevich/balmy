@@ -37,7 +37,7 @@ function CartProductCard({ cartProduct }: Props) {
               className="object-contain"
               src={
                 image
-                  ? `https://balmy.webspaceteam.site/storage/${image}`
+                  ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${image}`
                   : "/icons/logo-gray.svg"
               }
               alt={alt}

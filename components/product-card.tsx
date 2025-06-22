@@ -86,7 +86,7 @@ function ProductCard({ product }: Props) {
             className="object-contain"
             src={
               !!photo_path
-                ? `https://balmy.webspaceteam.site/storage/${photo_path}`
+                ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${photo_path}`
                 : "/icons/logo-gray.svg"
             }
             alt={name}

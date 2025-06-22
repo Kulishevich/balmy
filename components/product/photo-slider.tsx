@@ -55,7 +55,7 @@ function PhotoSlider({ thumbsSwiper, photos }: Props) {
           close={handleCloseLightBox}
           open={isOpen}
           slides={photos?.map((photo) => ({
-            src: `https://balmy.webspaceteam.site/storage/${photo.image_path}`,
+            src: `${process.env.NEXT_PUBLIC_STORAGE_URL}${photo.image_path}`,
           }))}
           plugins={[Zoom]}
           zoom={{
@@ -90,7 +90,7 @@ function PhotoSlider({ thumbsSwiper, photos }: Props) {
               >
                 <Image
                   className="object-contain"
-                  src={`https://balmy.webspaceteam.site/storage/${photo.image_path}`}
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${photo.image_path}`}
                   alt="фото продукта"
                   fill
                 />
