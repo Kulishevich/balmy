@@ -115,15 +115,12 @@ export const useOrderState = create<OrderState>((set, get) => ({
     const { cart } = useCartStore.getState();
     const cartTotal = cart.reduce((total, product) => total + product.price, 0);
     const shippingPrice = cartTotal >= FREE_SHIPPING_PRICE ? 0 : SHIPPING_PRICE;
-    const orderPositions: OrderPosition[] = cart.map((cartProduct) => {
-      const { id, name, discount, basePrice, quantity } = cartProduct;
+    const items: OrderPosition[] = cart.map((cartProduct) => {
+      const { id, quantity } = cartProduct;
 
       return {
-        productId: id,
-        name,
-        price: basePrice,
-        quantity,
-        discount,
+        product_id: id,
+        quantity: quantity,
       };
     });
 
@@ -136,6 +133,6 @@ export const useOrderState = create<OrderState>((set, get) => ({
       ...order
     } = get();
 
-    return { ...order, orderPositions, shippingPrice };
+    return { ...order, items, shippingPrice };
   },
 }));

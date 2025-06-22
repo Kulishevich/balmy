@@ -1,7 +1,7 @@
 import { Banner } from "@/types/banner";
 
 export async function getBanners() {
-  const res = await fetch(`https://balmy.webspaceteam.site/api/v1/banners`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/banners`, {
     cache: "no-store",
   });
   const clonedResponse = res.clone();

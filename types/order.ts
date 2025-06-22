@@ -1,16 +1,25 @@
 export interface Order {
-  deliveryType: "Courier" | "Post";
-  orderPositions: OrderPosition[];
+  deliveryType: string;
   shippingPrice: number;
-  paymentType: "Card" | "Cash" | "CardPhys";
-  country: "Беларусь";
+  paymentType: string;
+  country: string;
   comment: string;
+  items: OrderPosition[];
+}
+
+export interface OrderRequest {
+  customer_name: string;
+  phone: string;
+  email?: string;
+  address: string;
+  comment: string;
+  delivery_method_id: string;
+  payment_method_id: string;
+  promo_code: string;
+  items: OrderPosition[];
 }
 
 export interface OrderPosition {
-  productId: string;
-  name: string;
-  price: number;
+  product_id: number;
   quantity: number;
-  discount: number;
 }

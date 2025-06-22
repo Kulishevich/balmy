@@ -69,13 +69,29 @@ function CourierDeliveryForm({ className }: Props) {
     toast.success("Отправляем вашу заявку, пожалуйста подождите...", {
       duration: 4000,
     });
+
+    const requestData = {
+      customer_name: orderDataCopy.fullName,
+      phone: orderDataCopy.phone,
+      email: orderDataCopy.email,
+      address: orderDataCopy.address,
+      comment: order.comment,
+      delivery_method_id: order.deliveryType,
+      payment_method_id: order.paymentType,
+      promo_code: "убрать",
+      items: order.items.map((elem) => ({
+        product_id: elem.product_id,
+        quantity: elem.quantity,
+      })),
+    };
+
     reset();
     try {
-      const { order: orderResponse } = await sendOrder(order);
-
-      if (orderResponse) {
-        window.open(orderResponse, "_blank");
-      }
+      const data = await sendOrder(requestData);
+      console.log(data);
+      // if (orderResponse) {
+      //   window.open(orderResponse, "_blank");
+      // }
 
       const message = createNewOrderMessage({
         name: orderDataCopy.fullName,

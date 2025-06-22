@@ -4,7 +4,7 @@ import { Category } from "@/types/category";
 // import { getBrands } from "./brands";
 
 export async function getCategories() {
-  const res = await fetch(`https://balmy.webspaceteam.site/api/v1/categories`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
     cache: "no-store",
   });
   const clonedResponse = res.clone();
@@ -15,7 +15,7 @@ export async function getCategories() {
 
 export async function getCategory(categorySlug: string) {
   const res = await fetch(
-    `https://balmy.webspaceteam.site/api/v1/categories/slug/${categorySlug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/categories/slug/${categorySlug}`,
     {
       cache: "no-store",
     }
