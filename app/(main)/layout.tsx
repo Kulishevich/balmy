@@ -33,7 +33,7 @@ export default async function MainLayout({
         categories={categories}
         contacts={contacts}
       />
-      <Popups />
+      <Popups brands={brands} />
       <MobileMenu categories={categories} />
     </div>
   );

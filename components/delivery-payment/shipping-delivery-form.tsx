@@ -46,12 +46,27 @@ function ShippingDeliveryForm({ className }: Props) {
     const order = getOrder();
     const orderDataCopy = orderData;
 
+    const requestData = {
+      customer_name: orderDataCopy.fullName,
+      phone: orderDataCopy.phone,
+      email: orderDataCopy.email,
+      address: orderDataCopy.address,
+      comment: order.comment,
+      delivery_method_id: order.deliveryType,
+      payment_method_id: order.paymentType,
+      promo_code: "убрать",
+      items: order.items.map((elem) => ({
+        product_id: elem.product_id,
+        quantity: elem.quantity,
+      })),
+    };
+
     toast.success("Отправляем вашу заявку, пожалуйста подождите...", {
       duration: 4000,
     });
     reset();
     try {
-      const { order: orderResponse } = await sendOrder(order);
+      const { order: orderResponse } = await sendOrder(requestData);
 
       if (orderResponse) {
         window.open(orderResponse, "_blank");

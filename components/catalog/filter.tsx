@@ -113,9 +113,9 @@ function CatalogFilter({ className, page, brands, showBrands }: Props) {
                 <div className="flex items-center gap-[10px]" key={slug}>
                   <input
                     className="custom-checkbox border border-white/30"
-                    id={String(slug)}
+                    id={slug}
                     type="radio"
-                    checked={currentBrand == String(slug)}
+                    checked={currentBrand == slug}
                     onChange={handleBrandChange(slug)}
                     onClick={handleBrandChange(slug)}
                   />

@@ -1,6 +1,6 @@
 import LongArrowDownIcon from "@/public/icons/long-arrow-down.svg";
 import Action from "../action";
-import { brands, sorts } from "./filter";
+import { sorts } from "./filter";
 import { m } from "motion/react";
 import { leftAppearanceAnimation } from "@/utils/animations";
 import { usePopupStore } from "@/store/popup";
@@ -9,8 +9,13 @@ import { Direction, Sort, useFilterStore } from "@/store/filter";
 import CloseIcon from "@/public/icons/close.svg";
 import cn from "clsx";
 import { useSwipeable } from "react-swipeable";
+import { Brand } from "@/types/brand";
 
-function FilterPopup() {
+interface Props {
+  brands: Brand[];
+}
+
+function FilterPopup({ brands }: Props) {
   const { removePopup } = usePopupStore();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -19,7 +24,7 @@ function FilterPopup() {
   const {
     sort,
     direction,
-    brand: currentBrand,
+    brand_slug: currentBrand,
     setSort,
     setDirection,
     setBrand,
@@ -117,22 +122,22 @@ function FilterPopup() {
           </p>
           <div className="mt-[10px] flex flex-col">
             {brands.map((brand) => {
-              const { id, name } = brand;
+              const { slug, name } = brand;
 
               return (
                 <div
                   className="flex items-center gap-[10px] py-[6px]"
-                  key={id}
-                  onClick={handleBrandClick(id)}
+                  key={slug}
+                  onClick={handleBrandClick(slug)}
                 >
                   <input
                     className="custom-checkbox border-white/30"
-                    id={id}
+                    id={slug}
                     type="radio"
-                    checked={currentBrand == id}
-                    onChange={handleBrandChange(id)}
+                    checked={currentBrand == slug}
+                    onChange={handleBrandChange(slug)}
                   />
-                  <label className="cursor-pointer w-full" htmlFor={id}>
+                  <label className="cursor-pointer w-full" htmlFor={slug}>
                     {name}
                   </label>
                 </div>

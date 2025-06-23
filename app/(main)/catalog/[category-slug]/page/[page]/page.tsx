@@ -12,7 +12,7 @@ interface Props {
     page?: string;
     sort?: string;
     direction?: Direction;
-    brand_id?: string;
+    brand_slug?: string;
   }>;
 }
 
@@ -31,7 +31,7 @@ async function CatalogPage({ params, searchParams }: Props) {
     page: page,
     sort_by: responseSearchParams.sort,
     sort_direction: responseSearchParams.direction,
-    brand_id: responseSearchParams.brand_id,
+    brand_slug: responseSearchParams.brand_slug,
     on_sale: isDiscounts && true,
   });
 

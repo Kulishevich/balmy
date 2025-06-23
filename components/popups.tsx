@@ -6,8 +6,9 @@ import { AnimatePresence, m } from "motion/react";
 import { usePopupStore } from "@/store/popup";
 import { popupBackgroundAnimation } from "@/utils/animations";
 import FilterPopup from "./catalog/filter-popup";
+import { Brand } from "@/types/brand";
 
-function Popups() {
+function Popups({ brands }: { brands: Brand[] }) {
   const { popup, removePopup } = usePopupStore();
 
   if (typeof window == "undefined") return null;
@@ -20,7 +21,7 @@ function Popups() {
             <>
               {popup.type == "callback" && <CallbackPopup />}
               {popup.type == "buy-one-click" && <BuyOneClickPopup />}
-              {popup.type == "filter" && <FilterPopup />}
+              {popup.type == "filter" && <FilterPopup brands={brands} />}
               <m.div
                 {...popupBackgroundAnimation}
                 className="fixed inset-0 bg-dark-gray/70 z-10"
