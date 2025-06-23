@@ -34,7 +34,7 @@ function CartPage() {
 
     handleFetchCategories();
   }, []);
-  console.log(cart);
+
   return (
     <>
       <Title className="mt-10 text-center">Корзина</Title>

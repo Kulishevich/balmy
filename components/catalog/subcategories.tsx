@@ -15,7 +15,6 @@ async function Subcategories({ category, subcategory }: Props) {
       {category?.subcategories?.map((subcategoryItem, idx) => {
         const { name, slug } = subcategoryItem;
         const isActive = slug == subcategory?.slug;
-        console.log(slug, subcategory?.slug);
         return (
           <Action
             key={idx}

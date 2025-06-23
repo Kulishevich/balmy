@@ -93,7 +93,7 @@ export async function getProductsByCategoryId({
   const url = `${
     process.env.NEXT_PUBLIC_API_URL
   }/products?${params.toString()}`;
-  console.log(url);
+
   const res = await fetch(url, { cache: "no-store" });
   const clonedResponse = res.clone();
   const { data } = (await clonedResponse.json()) as {

@@ -2,8 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import Action from "./action";
 import RepeatIcon from "@/public/icons/repeat.svg";
+import image from "@/public/images/accessory-bg.webp";
 
-function OrderHistoryElem({ order }: { order: any }) {
+const order = {
+  date: "17.06.2025",
+  id: 121122,
+  products: [
+    { id: 123522, image: image, price: 100, slug: "hui" },
+    { id: 241213, image: image, price: 100, slug: "hui" },
+    { id: 351242, image: image, price: 100, slug: "hui" },
+    { id: 322322, image: image, price: 100, slug: "hui" },
+  ],
+  totalPrice: 1000,
+  status: "В пути",
+};
+
+function OrderHistoryElem() {
   return (
     <div className="flex flex-col items-start gap-7 p-6 w-[960px] border border-white rounded-[5px]">
       <div className="flex justify-between w-full">

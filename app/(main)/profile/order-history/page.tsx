@@ -2,48 +2,8 @@ import Action from "@/components/action";
 import Breadcrumbs from "@/components/breadcrumbs";
 import OrderHistoryElem from "@/components/order-history-elem";
 import Title from "@/components/title";
-import image from "@/public/images/accessory-bg.webp";
 import LongArrowDownIcon from "@/public/icons/long-arrow-down.svg";
 import clsx from "clsx";
-
-const orders = [
-  {
-    date: "17.06.2025",
-    id: 121122,
-    products: [
-      { id: 123522, image: image, price: 100, slug: "hui" },
-      { id: 241213, image: image, price: 100, slug: "hui" },
-      { id: 351242, image: image, price: 100, slug: "hui" },
-      { id: 322322, image: image, price: 100, slug: "hui" },
-    ],
-    totalPrice: 1000,
-    status: "В пути",
-  },
-  {
-    date: "17.06.2025",
-    id: 121122,
-    products: [
-      { id: 123522, image: image, price: 100, slug: "hui" },
-      { id: 241213, image: image, price: 100, slug: "hui" },
-      { id: 351242, image: image, price: 100, slug: "hui" },
-      { id: 322322, image: image, price: 100, slug: "hui" },
-    ],
-    totalPrice: 1000,
-    status: "В пути",
-  },
-  {
-    date: "17.06.2025",
-    id: 121122,
-    products: [
-      { id: 123522, image: image, price: 100, slug: "hui" },
-      { id: 241213, image: image, price: 100, slug: "hui" },
-      { id: 351242, image: image, price: 100, slug: "hui" },
-      { id: 322322, image: image, price: 100, slug: "hui" },
-    ],
-    totalPrice: 1000,
-    status: "В пути",
-  },
-];
 
 async function PrivacyPolicyPage() {
   return (
@@ -176,10 +136,9 @@ async function PrivacyPolicyPage() {
             Очистить фильтр
           </Action>
         </div>
+
         <div className="flex flex-col gap-[30px]">
-          {orders.map((order) => (
-            <OrderHistoryElem order={order} key={order.id} />
-          ))}
+          <OrderHistoryElem />
         </div>
       </div>
     </>

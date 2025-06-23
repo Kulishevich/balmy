@@ -3,7 +3,7 @@ import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import CartInfo from "@/components/cart-info";
 import Link from "next/link";
 import Search from "./search/search";
-import Image from "next/image";
+import SecondLogo from "./second-logo";
 
 function Header({
   phones,
@@ -18,14 +18,7 @@ function Header({
     "
     >
       <div className="container py-7 hidden lg:flex items-center">
-        <div className="w-[116px] h-[98px] relative">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
-            fill
-            alt="logo"
-            className="object-cover"
-          />
-        </div>
+        <SecondLogo logo={logo || ""} />
         <Search className="ml-[37px]" />
         <CartInfo className="ml-4" />
         <div className="ml-auto pl-2 flex flex-col flex-shrink-0">

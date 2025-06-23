@@ -1,20 +1,36 @@
 "use client";
-import Logo from "@/public/icons/logo-dark.svg";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-function SecondLogo() {
+function SecondLogo({
+  logo,
+  width = "116",
+  height = "98",
+}: {
+  logo: string;
+  width?: string;
+  height?: string;
+}) {
   const pathname = usePathname();
 
   return pathname === "/" ? (
-    <div>
-      <Logo className="fill-white z-10" />
-      <p className="text-white z-10">Официальный дистрибьютор</p>
+    <div className={`w-[${width}px] h-[${height}px] relative`}>
+      <Image
+        src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
+        fill
+        alt="logo"
+        className="object-cover"
+      />
     </div>
   ) : (
-    <Link href="/">
-      <Logo className="fill-white z-10" />
-      <p className="text-white z-10">Официальный дистрибьютор</p>
+    <Link href="/" className="w-[116px] h-[98px] relative">
+      <Image
+        src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
+        fill
+        alt="logo"
+        className="object-cover"
+      />
     </Link>
   );
 }

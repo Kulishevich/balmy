@@ -57,8 +57,6 @@ function CategoryLayout({
   page,
   brands,
 }: Props) {
-  console.log(category);
-
   return (
     <>
       <CatalogHeader category={category} subcategory={subcategory} />

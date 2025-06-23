@@ -19,8 +19,6 @@ function CartProductCard({ cartProduct }: Props) {
     removeFromCart(slug);
   }
 
-  console.log(cartProduct);
-
   return (
     <div className="flex justify-between flex-col 2xl:grid grid-cols-[705px,1fr,1fr,1fr] items-center py-[30px] border-b border-b-white/30">
       <div className="flex items-center w-full">

@@ -16,8 +16,8 @@ interface Props {
 
 export const sorts = [
   { id: "name", direction: "asc", name: "По имени" },
-  { id: "salePrices", direction: "asc", name: "По возрастанию цены" },
-  { id: "salePrices", direction: "desc", name: "По убыванию цены" },
+  { id: "price", direction: "asc", name: "По возрастанию цены" },
+  { id: "price", direction: "desc", name: "По убыванию цены" },
 ];
 
 function CatalogFilter({ className, page, brands, showBrands }: Props) {

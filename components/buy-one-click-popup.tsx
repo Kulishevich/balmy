@@ -42,7 +42,6 @@ function BuyOneClickPopup() {
   const isDiscount = !!Number(product?.discount);
   const discountPrices =
     (Number(product?.price) * (100 - Number(product?.discount))) / 100;
-  console.log(isDiscount);
 
   function resetFormFields() {
     setValue("name", "");

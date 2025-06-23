@@ -9,9 +9,8 @@ import { useScreenSize } from "@/hooks/use-screen-size";
 import { Category } from "@/types/category";
 import { usePopupStore } from "@/store/popup";
 import Payments from "./payments";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { Contacts } from "@/types/contacts";
+import SecondLogo from "./second-logo";
 
 interface Props {
   categories: Category[];
@@ -27,7 +26,6 @@ const information = [
 ];
 
 function Footer({ categories, contacts, logo }: Props) {
-  const pathname = usePathname();
   const { isTablet } = useScreenSize();
   const { createPopup } = usePopupStore();
   const currentYear = new Date().getFullYear();
@@ -41,28 +39,7 @@ function Footer({ categories, contacts, logo }: Props) {
       <div className="bg-dark-gray text-white">
         <div className="container py-12 flex flex-col lg:flex-row sm:bg-[url('/images/footer-bg.webp')] bg-no-repeat bg-center">
           <div className="w-max mx-auto flex flex-col lg:mx-0">
-            {pathname === "/" ? (
-              <div className="w-[145px] h-[122px] relative">
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
-                  fill
-                  alt="logo"
-                  className="object-cover"
-                />
-              </div>
-            ) : (
-              <Link
-                className="mx-auto lg:mx-0 w-[145px] h-[122px] relative"
-                href="/"
-              >
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
-                  fill
-                  alt="logo"
-                  className="object-cover"
-                />
-              </Link>
-            )}
+            <SecondLogo width="145" height="122" logo={logo || ""} />
             <div className="mt-8 lg:mt-3 flex items-center lg:items-start lg:flex-col">
               {!isTablet && (
                 <p className="hidden lg:block mt-4 max-w-[280px] 2xl:max-w-[310px] text-base opacity-70 whitespace-pre-line">
