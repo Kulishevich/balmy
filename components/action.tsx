@@ -54,22 +54,25 @@ function Action({
     className
   );
 
-  const wrapperClassName = cn("block rounded-[5px] transition ", {
-    "bg-gold hover:bg-gold hover:text-black": color == "gold" && !disabled,
-    "py-4 text-[20px] px-6": size == "big",
-    "py-3 px-6": size == "medium",
-    "py-2 px-3": size == "small",
-    "bg-dark-gray text-white": color == "dark-gray" && !disabled,
-    "bg-black text-white border border-white": color == "black" && !disabled,
-    "bg-light-green text-white": color == "light-green" && !disabled,
-    "bg-gray text-white": color == "gray" && !disabled,
-    "bg-white text-dark-gray hover:bg-gold": color == "white" && !disabled,
-    "bg-green text-white": color == "green" && !disabled,
-    "bg-light-gray text-dark-gray group-hover:bg-light-green group-hover:text-white":
-      color == "light-gray" && !disabled,
-    "bg-white/0 text-white": variant == "outline",
-    "bg-light-gray/30 text-dark-gray": disabled,
-  });
+  const wrapperClassName = cn(
+    "flex items-center justify-center gap-[6px] rounded-[5px] transition ",
+    {
+      "bg-gold hover:bg-gold hover:text-black": color == "gold" && !disabled,
+      "py-4 text-[20px] px-6": size == "big",
+      "py-3 px-6": size == "medium",
+      "py-2 px-3": size == "small",
+      "bg-dark-gray text-white": color == "dark-gray" && !disabled,
+      "bg-black text-white border border-white": color == "black" && !disabled,
+      "bg-light-green text-white": color == "light-green" && !disabled,
+      "bg-gray text-white": color == "gray" && !disabled,
+      "bg-white text-dark-gray hover:bg-gold": color == "white" && !disabled,
+      "bg-green text-white": color == "green" && !disabled,
+      "bg-light-gray text-dark-gray group-hover:bg-light-green group-hover:text-white":
+        color == "light-gray" && !disabled,
+      "bg-white/0 text-white": variant == "outline",
+      "bg-light-gray/30 text-dark-gray": disabled,
+    }
+  );
 
   if (type == "button") {
     return (
