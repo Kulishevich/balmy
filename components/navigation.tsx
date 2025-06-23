@@ -114,7 +114,7 @@ function Navigation({
         )}
 
         <Link
-          href={"/authorization"}
+          href={"/profile"}
           className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
         >
           <ProfileIcon />

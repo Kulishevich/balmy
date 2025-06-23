@@ -9,13 +9,10 @@ import { usePopupStore } from "@/store/popup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { buyOneClickSchema } from "@/utils/schemes/buy-one-click";
-import {
-  createBuyOneClickMessage,
-  sendMessageToTelegram,
-} from "@/api/telegram";
 import { toast } from "sonner";
 import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
+import { sendBuyOneClickOrder } from "@/api/buy-one-click-order";
 
 export type BuyOneClickInputs = {
   name: string;
@@ -42,10 +39,10 @@ function BuyOneClickPopup() {
     trackTouch: true,
   });
   const personalInfo = watch("personal-info");
-
   const isDiscount = !!Number(product?.discount);
   const discountPrices =
     (Number(product?.price) * (100 - Number(product?.discount))) / 100;
+  console.log(isDiscount);
 
   function resetFormFields() {
     setValue("name", "");
@@ -55,16 +52,30 @@ function BuyOneClickPopup() {
   }
 
   async function onSubmit(buyOneClickData: BuyOneClickInputs) {
-    const message = createBuyOneClickMessage({
-      buyOneClickData,
-      product: product!,
-    });
-    await sendMessageToTelegram(message);
+    if (!product) {
+      toast.error("Ошибка при получении продукта");
+      return;
+    }
 
-    resetFormFields();
-    removePopup();
+    const requestData = {
+      product_id: product.id,
+      name: buyOneClickData.name,
+      phone: buyOneClickData.phone,
+      comment: buyOneClickData.comment || "",
+    };
 
-    toast.success("Сообщение отправлено");
+    try {
+      const data = await sendBuyOneClickOrder(requestData);
+      console.log(data);
+
+      resetFormFields();
+      removePopup();
+
+      toast.success("Сообщение отправлено");
+    } catch (err: unknown) {
+      console.log(err);
+      toast.error("Что-то пошло не так. Попробуйте ещё раз позже");
+    }
   }
 
   return (
@@ -96,12 +107,16 @@ function BuyOneClickPopup() {
         <div className="flex flex-col gap-2">
           <span>{product?.name}</span>
           <span className="text-[15px] font-bold inline-flex gap-[6px]">
-            <span
-              className={cn({ "opacity-50 line-through": !!product?.discount })}
-            >
-              {product?.price} byn
-            </span>
-            {isDiscount && discountPrices.toFixed(2) + " byn"}
+            {isDiscount && (
+              <span
+                className={cn({
+                  "opacity-50 line-through": !!product?.discount,
+                })}
+              >
+                {product?.price} byn
+              </span>
+            )}
+            {discountPrices.toFixed(2) + " byn"}
           </span>
         </div>
       </div>

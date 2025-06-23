@@ -23,3 +23,10 @@ export interface OrderPosition {
   product_id: number;
   quantity: number;
 }
+
+export interface BuyOneClickOrder {
+  product_id: number;
+  name: string;
+  phone: string;
+  comment: string;
+}
