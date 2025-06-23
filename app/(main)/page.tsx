@@ -10,7 +10,7 @@ import SetSection from "@/components/home/set-section";
 async function HomePage() {
   const brands = await getBrands();
   const banners = await getBanners();
-
+  console.log(brands);
   return (
     <>
       <MainSection />
