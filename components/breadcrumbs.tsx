@@ -30,6 +30,12 @@ function Breadcrumbs({ className, dynamicPath }: Props) {
         return { href: "/privacy-policy", name: "Политика конфиденциальности" };
       case "contacts":
         return { href: "/contacts", name: "Контакты" };
+      case "profile":
+        return { href: "/profile", name: "Личный кабинет" };
+      case "personal-data":
+        return { href: "/personal-data", name: "Личные данные" };
+      case "order-history":
+        return { href: "/order-history", name: "История заказов" };
       default:
         break;
     }

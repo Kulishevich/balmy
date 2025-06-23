@@ -27,7 +27,7 @@ body {
 }
 
 .custom-input--dark {
-  @apply py-[18px] px-[16px] font-normal text-[#171717] placeholder:text-[#171717]/50 border border-[#171717]/50 bg-transparent rounded-[10px];
+  @apply py-[18px] px-[16px] font-normal text-dark-gray placeholder:text-dark-gray/50 border border-dark-gray/50 bg-transparent rounded-[10px];
 }
 
 .custom-input--dark-error {
@@ -35,10 +35,18 @@ body {
 }
 
 .custom-input--delivery {
-  @apply py-[20px] px-[16px] font-normal text-[#1C1C1C] placeholder:text-[#1C1C1C] bg-[#D9D9D9] rounded-[10px];
+  @apply py-[20px] px-[16px] font-normal text-dark-grey placeholder:text-dark-grey bg-[#D9D9D9] rounded-[10px];
 }
 
 .custom-input-delivery--error {
+  @apply placeholder:text-[#EB001B] border-[#EB001B]/30;
+}
+
+.custom-input--white {
+  @apply py-[18px] px-[20px] font-normal text-dark-grey placeholder:text-dark-grey bg-white rounded-[10px];
+}
+
+.custom-input-white--error {
   @apply placeholder:text-[#EB001B] border-[#EB001B]/30;
 }
 
