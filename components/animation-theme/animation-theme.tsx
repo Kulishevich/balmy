@@ -1,5 +1,17 @@
 "use client";
+import { Theme } from "@/types/theme";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
+
+const themes = [
+  "winter",
+  "autumn",
+  "spring",
+  "green",
+  "rain",
+  "hearts",
+  "eggs",
+  "default",
+];
 
 interface Particle {
   type: "snow" | "leaf" | "raindrop" | "heart" | "egg";
@@ -17,13 +29,15 @@ interface Particle {
 
 export default function AnimationThemeLayout({
   children,
+  activeTheme,
 }: {
   children: ReactNode;
+  activeTheme: Theme | undefined;
 }) {
-  const [theme, setTheme] = useState("default");
+  const theme = activeTheme?.name || "default";
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
-  const [elemsCount, setElemsCount] = useState(0);
+  const elemsCount = 100;
   const [elemsQuantity, setElemsQuantity] = useState(0);
 
   useEffect(() => {
@@ -33,18 +47,8 @@ export default function AnimationThemeLayout({
   }, [elemsCount]);
 
   useEffect(() => {
-    fetch("/not-api/theme")
-      .then((res) => res.json())
-      .then((data) => {
-        setTheme(data.theme);
-        setElemsCount(Number(data.themeCountElems));
-      })
-      .catch((err) => console.error("Ошибка загрузки темы:", err));
-  }, []);
-
-  useEffect(() => {
-    if (theme === "default" || elemsQuantity === 0) return;
-
+    if (theme === "default" || elemsQuantity === 0 || !themes.includes(theme))
+      return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -140,7 +144,16 @@ export default function AnimationThemeLayout({
           color: colors[Math.floor(Math.random() * colors.length)],
         };
       }
-      throw new Error("Invalid theme");
+
+      return {
+        type: "snow",
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 4 + 1,
+        speed: Math.random() * 2 + 0.5,
+        wind: Math.random() * 1 - 0.5,
+        color: "white",
+      };
     }
 
     function draw() {

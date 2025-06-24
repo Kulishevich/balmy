@@ -8,6 +8,7 @@ import Script from "next/script";
 import AnimationThemeLayout from "@/components/animation-theme/animation-theme";
 import ScrollToTopButton from "@/components/scroll-to-top-button";
 import { getSettings } from "@/api/settings";
+import { getActiveTheme } from "@/api/themes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoTags({ url: "home" });
@@ -52,6 +53,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const activeTheme = await getActiveTheme();
+
   return (
     <html lang="ru">
       <head>
@@ -111,7 +114,7 @@ export default async function RootLayout({
         className={`${quicksand.variable} ${golosText.variable} flex flex-col h-full bg-dark-grey`}
       >
         <InitialWrapper>
-          <AnimationThemeLayout>
+          <AnimationThemeLayout activeTheme={activeTheme}>
             {children}
             <ScrollToTopButton />
           </AnimationThemeLayout>
