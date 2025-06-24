@@ -51,7 +51,7 @@ async function Page({ params, searchParams }: Props) {
     subcategories: brands,
   };
 
-  const activeBrand = brands.find(
+  const activeBrand = brands?.find(
     (elem) =>
       String(elem.slug) === subcategorySlug.split("_").find((elem) => elem)
   );
@@ -63,7 +63,7 @@ async function Page({ params, searchParams }: Props) {
       subcategory={!isBrands ? subcategory : activeBrand}
       products={products}
       totalPages={last_page}
-      brands={brands}
+      brands={brands || []}
     />
   );
 }

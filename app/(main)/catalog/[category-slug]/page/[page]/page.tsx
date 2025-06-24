@@ -58,7 +58,7 @@ async function CatalogPage({ params, searchParams }: Props) {
       }
       products={products}
       totalPages={last_page}
-      brands={brands}
+      brands={brands || []}
     />
   );
 }

@@ -38,7 +38,7 @@ function CategoryBarItem({ category, activeCategorySlug }: Props) {
       </AnimatePresence>
       <div className="pt-[3px] absolute top-full left-1/2 -translate-x-1/2 z-10 opacity-0 h-0 transition pointer-events-none group-hover:opacity-100 group-hover:h-auto group-hover:pointer-events-auto">
         <ul className="bg-[#252525] min-w-[180px] flex flex-col py-3 text-center rounded-[5px] border-t-[5px] border-gold">
-          {subcategories.map((subcategory) => {
+          {subcategories?.map((subcategory) => {
             const { name, slug, id } = subcategory;
             const isActive = subcategorySlug == slug;
 

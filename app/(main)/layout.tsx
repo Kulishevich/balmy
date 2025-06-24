@@ -26,14 +26,14 @@ export default async function MainLayout({
       <Navigation phones={contacts.phones} logo={settings.logo} />
       <SearchMobile />
       <Header phones={contacts.phones} logo={settings.logo} />
-      <CategoryBar categories={categories} brands={brands} />
+      <CategoryBar categories={categories} brands={brands || []} />
       {children}
       <Footer
         logo={settings.logo}
         categories={categories}
         contacts={contacts}
       />
-      <Popups brands={brands} />
+      <Popups brands={brands || []} />
       <MobileMenu categories={categories} />
     </div>
   );

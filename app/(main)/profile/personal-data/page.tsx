@@ -2,14 +2,15 @@ import Action from "@/components/action";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
 import MedalIcon from "@/public/icons/medal-star.svg";
-async function PrivacyPolicyPage() {
+
+function PrivacyPolicyPage() {
   return (
     <>
       <Title type="h1" className="mt-10 text-center">
         Личные данные
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <div className="container w-[850px] flex flex-col gap-8 mt-10">
+      <div className="container w-full lg:w-[850px] flex flex-col gap-8 mt-10">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-[10px]">
             <label
@@ -41,7 +42,7 @@ async function PrivacyPolicyPage() {
             <p className="font-normal cursor-pointer">Статус</p>
             <button
               disabled
-              className="border border-light-gold flex gap-[6px] py-[17px] px-[50px] rounded-[5px]"
+              className="border border-light-gold flex gap-[6px] py-[17px] px-[50px] rounded-[5px] w-full lg:w-[292px] items-center justify-center"
             >
               <MedalIcon />
               Партнёр Balmy
@@ -62,7 +63,7 @@ async function PrivacyPolicyPage() {
             </span>
           </div>
         </div>
-        <Action className="w-[300px]" color={"gold"}>
+        <Action className="w-full lg:w-[300px]" color={"gold"}>
           Назад
         </Action>
       </div>

@@ -5,7 +5,7 @@ import UserIcon from "@/public/icons/user.svg";
 import ReceiptIcon from "@/public/icons/receipt-text.svg";
 import Link from "next/link";
 
-async function PrivacyPolicyPage() {
+function PrivacyPolicyPage() {
   return (
     <>
       <Title type="h1" className="mt-10 text-center">

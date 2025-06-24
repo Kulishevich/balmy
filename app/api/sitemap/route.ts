@@ -55,7 +55,7 @@ export async function GET() {
   }));
 
   const subcategoryPages = categories.flatMap((cat) =>
-    cat.subcategories.map((sub) => ({
+    cat.subcategories?.map((sub) => ({
       loc: `${HOST}/catalog/${cat.slug}/${sub.slug}`,
       changefreq: "daily",
       priority: 0.8,
@@ -73,7 +73,9 @@ export async function GET() {
     ...categoryPages,
     ...subcategoryPages,
     ...productPages,
-  ];
+  ].filter((p): p is { loc: string; changefreq: string; priority: number } =>
+    Boolean(p)
+  );
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

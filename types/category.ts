@@ -9,6 +9,6 @@ export interface Category {
   parent_id: string | null;
   photo_path: string | null;
   slug: string;
-  subcategories: Omit<Category, "subcategories">[];
+  subcategories?: Category[];
   updated_at: string;
 }

@@ -17,7 +17,7 @@ async function HomePage() {
       <PopularProductsSection />
       <SetSection banners={banners} />
       <OurCatalogSection />
-      <BrandsSection brands={brands} />
+      <BrandsSection brands={brands || []} />
       <CallbackSectoin />
     </>
   );

@@ -114,7 +114,7 @@ function FilterPopup({ brands }: Props) {
           Фильтр
         </h3>
       </div>
-      {showBrands && (
+      {showBrands && !!brands.length && (
         <>
           <p className="mt-6 text-[21px] font-semibold inline-flex justify-between items-center w-full">
             Бренды

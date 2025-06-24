@@ -1,19 +1,36 @@
+"use client";
 import Action from "@/components/action";
+import FilterIcon from "@/public/icons/filter.svg";
 import Breadcrumbs from "@/components/breadcrumbs";
 import OrderHistoryElem from "@/components/order-history-elem";
 import Title from "@/components/title";
 import LongArrowDownIcon from "@/public/icons/long-arrow-down.svg";
 import clsx from "clsx";
+import { usePopupStore } from "@/store/popup";
 
-async function PrivacyPolicyPage() {
+function PrivacyPolicyPage() {
+  const { createPopup } = usePopupStore();
+
+  function handleClickOnFilterButton() {
+    createPopup({ type: "filter" });
+  }
+
   return (
-    <>
+    <div className="container">
       <Title type="h1" className="mt-10 text-center">
         История заказов
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <div className="container flex gap-[95px] mt-10">
-        <div className="flex flex-col gap-6">
+      <div className="lg:hidden flex justify-end mt-6">
+        <button
+          className="w-[42px] h-[42px] rounded-full border border-white grid place-items-center"
+          onClick={handleClickOnFilterButton}
+        >
+          <FilterIcon />
+        </button>
+      </div>
+      <div className="flex gap-[95px] mt-8 lg:mt-10">
+        <div className="flex-col gap-6 hidden lg:flex">
           <div className="flex flex-col">
             <p
               className={clsx(
@@ -137,11 +154,11 @@ async function PrivacyPolicyPage() {
           </Action>
         </div>
 
-        <div className="flex flex-col gap-[30px]">
+        <div className="flex flex-col gap-[30px] w-full">
           <OrderHistoryElem />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

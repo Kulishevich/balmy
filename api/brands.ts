@@ -5,7 +5,7 @@ export async function getBrands() {
     cache: "no-store",
   });
   const clonedResponse = res.clone();
-  const { data } = (await clonedResponse.json()) as { data: Brand[] };
+  const { data } = (await clonedResponse.json()) as { data?: Brand[] };
 
   return data;
 }

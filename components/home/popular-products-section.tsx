@@ -6,10 +6,12 @@ async function PopularProductsSection() {
   const popularProducts = await getPopularProducts();
 
   return (
-    <section className="mt-[796px] lg:mt-[194px] container">
-      <Title className="text-center">Популярные товары</Title>
-      <PopularProductsSlider popularProducts={popularProducts} />
-    </section>
+    !!popularProducts.length && (
+      <section className="mt-[796px] lg:mt-[194px] container">
+        <Title className="text-center">Популярные товары</Title>
+        <PopularProductsSlider popularProducts={popularProducts} />
+      </section>
+    )
   );
 }
 
