@@ -13,21 +13,23 @@ async function PrivacyPolicyPage() {
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
       <div className="container">
-        <div className="flex gap-[30px] mt-10">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-[30px] mt-10">
           <Link
             href={"/profile/personal-data"}
-            className="w-full h-[300px] flex flex-col items-center justify-center gap-8 bg-gray rounded-[5px] text-[20px] font-[600] hover:bg-light-gold hover:text-black transition"
+            className="w-full h-[180px] lg:h-[300px] flex flex-col items-center justify-center gap-[16px] lg:gap-6 bg-gray rounded-[5px] text-[20px] font-[600] hover:bg-light-gold hover:text-black transition"
           >
-            <UserIcon /> Личные данные
+            <UserIcon className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]" />
+            Личные данные
           </Link>
           <Link
             href={"/profile/order-history"}
-            className="w-full h-[300px] flex flex-col items-center justify-center gap-8 bg-gray rounded-[5px] text-[20px] font-[600] hover:bg-light-gold hover:text-black transition"
+            className="w-full h-[180px] lg:h-[300px] flex flex-col items-center justify-center gap-[16px] lg:gap-6 bg-gray rounded-[5px] text-[20px] font-[600] hover:bg-light-gold hover:text-black transition"
           >
-            <ReceiptIcon /> История заказов
+            <ReceiptIcon className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]" />{" "}
+            История заказов
           </Link>
         </div>
-        <Action className="w-full mt-[30px]" color="white">
+        <Action className="w-full mt-6 lg:mt-[30px]" color="white">
           Выйти
         </Action>
       </div>
