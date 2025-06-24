@@ -25,14 +25,12 @@ const ScrollToTopButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-10 right-10 z-[999] rounded-full bg-light-gold w-[100px] h-[100px] text-black flex items-center justify-center transition-all duration-500 hover:bg-green-dark hover:scale-105 ${
+      className={`fixed bottom-10 right-10 z-[999] bg-gold flex gap-1 items-center px-3 py-1 rounded-[5px] transition ${
         visible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
-      <span className="flex flex-col items-center justify-center gap-1 border border-black rounded-full w-24 h-24">
-        <ArrowUpLong />
-        <span>Наверх</span>
-      </span>
+      <ArrowUpLong />
+      <span>Наверх</span>
     </button>
   );
 };
