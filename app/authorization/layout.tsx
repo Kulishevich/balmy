@@ -4,16 +4,15 @@ import { getSeoTags } from "@/api/seo";
 import { config } from "@/utils/config";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo } = await getSeoTags({ url: "authorization" });
-  const seoEmpty = !Object.keys(seo).length;
+  const seo = await getSeoTags("/authorization");
 
   return {
-    title: seoEmpty ? "Авторизация" : seo.title,
-    description: seoEmpty ? "Авторизация" : seo.description,
+    title: seo.title || "Авторизация",
+    description: seo.description || "Авторизация",
     keywords: seo.keywords,
     openGraph: {
-      title: seo.ogTitle,
-      description: seo.ogDescription,
+      title: seo.og_title,
+      description: seo.og_description,
       url: config.homeUrl,
     },
     alternates: {

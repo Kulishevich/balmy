@@ -5,10 +5,10 @@ import SocialNetwokrs from "./social-networks";
 import { CallbackInputs } from "./callback-popup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { callbackSchema } from "@/utils/schemes/callback";
-import { createCallbackMessage, sendMessageToTelegram } from "@/api/telegram";
 import { toast } from "sonner";
 import cn from "clsx";
 import Link from "next/link";
+import { sendFeedback } from "@/api/feedback";
 
 function CallbackSectoin() {
   const {
@@ -29,11 +29,17 @@ function CallbackSectoin() {
   }
 
   async function onSubmit(callbackData: CallbackInputs) {
-    const message = createCallbackMessage(callbackData);
-    await sendMessageToTelegram(message);
-    resetFormFields();
+    try {
+      const data = await sendFeedback(callbackData);
 
-    toast.success("Сообщение отправлено");
+      console.log(data);
+
+      resetFormFields();
+      toast.success("Сообщение отправлено");
+    } catch (err) {
+      console.error(err);
+      toast.error("Ошибка при отправке формы обратной связи");
+    }
   }
 
   return (

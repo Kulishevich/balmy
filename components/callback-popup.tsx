@@ -8,10 +8,10 @@ import CloseIcon from "@/public/icons/close.svg";
 import Action from "./action";
 import { popupAnimation } from "@/utils/animations";
 import { callbackSchema } from "@/utils/schemes/callback";
-import { createCallbackMessage, sendMessageToTelegram } from "@/api/telegram";
 import cn from "clsx";
 import { toast } from "sonner";
 import Link from "next/link";
+import { sendFeedback } from "@/api/feedback";
 
 export type CallbackInputs = {
   phone: string;
@@ -43,11 +43,17 @@ function CallbackPopup() {
   }
 
   async function onSubmit(callbackData: CallbackInputs) {
-    const message = createCallbackMessage(callbackData);
-    await sendMessageToTelegram(message);
-    resetFormFields();
+    try {
+      const data = await sendFeedback(callbackData);
 
-    toast.success("Сообщение отправлено");
+      console.log(data);
+
+      resetFormFields();
+      toast.success("Сообщение отправлено");
+    } catch (err) {
+      console.error(err);
+      toast.error("Ошибка при отправке формы обратной связи");
+    }
   }
 
   return (

@@ -1,9 +1,11 @@
 export interface SEO {
-  id: number;
-  url: string;
-  title: string;
+  created_at: string;
   description: string;
+  id: number;
   keywords: string;
-  ogTitle: string;
-  ogDescription: string;
+  name: string;
+  og_description: string;
+  og_title: string;
+  title: string;
+  updated_at: string;
 }

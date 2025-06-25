@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { getSeoTags } from "@/api/seo";
 import { config } from "@/utils/config";
-import { generateSeoProduct } from "@/utils/helper";
 import { getProductBySlug } from "@/api/products";
 
 export async function generateMetadata({
@@ -11,22 +10,16 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug: productSlug } = await params;
-  const { seo } = await getSeoTags({
-    url: `product/${productSlug}`,
-  });
+  const seo = await getSeoTags(`/product/${productSlug}`);
   const product = await getProductBySlug("4");
-  const { title, description } = generateSeoProduct(
-    product?.name,
-    +product?.price
-  );
 
   return {
-    title: seo.title || title,
-    description: seo.description || description,
+    title: seo.title || product.name,
+    description: seo.description || product.description,
     keywords: seo.keywords,
     openGraph: {
-      title: seo.ogTitle,
-      description: seo.ogDescription,
+      title: seo.og_title,
+      description: seo.og_description,
       url: config.homeUrl,
     },
     alternates: { canonical: `${config.homeUrl}/product/${productSlug}` },

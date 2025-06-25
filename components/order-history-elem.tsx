@@ -19,7 +19,7 @@ const order = {
 
 function OrderHistoryElem() {
   return (
-    <div className="flex flex-col items-start gap-7 p-6 w-full lg:w-[960px] border border-white rounded-[5px]">
+    <div className="flex flex-col items-start gap-7 p-6 w-full border border-white rounded-[5px]">
       <div className="flex justify-between w-full">
         <p className="text-[26px]">
           Заказ №<span className="underline">{order.id}</span> от {order.date}

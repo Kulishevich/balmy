@@ -12,7 +12,7 @@ import { getActiveTheme } from "@/api/themes";
 import PhoneAnimation from "@/components/phone-animation/PhoneAnimation";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo } = await getSeoTags({ url: "home" });
+  const seo = await getSeoTags("home");
   const settings = await getSettings();
 
   return {
@@ -23,8 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: config.homeUrl,
     },
     openGraph: {
-      title: seo.ogTitle,
-      description: seo.ogDescription,
+      title: seo.og_title,
+      description: seo.og_description,
       url: config?.homeUrl,
     },
     icons: {

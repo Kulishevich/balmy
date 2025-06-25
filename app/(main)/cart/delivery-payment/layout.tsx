@@ -4,16 +4,15 @@ import { getSeoTags } from "@/api/seo";
 import { config } from "@/utils/config";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo } = await getSeoTags({ url: "cart/delivery-payment" });
-  const seoEmpty = !Object.keys(seo).length;
+  const seo = await getSeoTags("/cart/delivery-payment");
 
   return {
-    title: seoEmpty ? "Доставка и оплата" : seo.title,
-    description: seoEmpty ? "Доставка и оплата" : seo.description,
+    title: seo.title || "Доставка и оплата",
+    description: seo.description || "Доставка и оплата",
     keywords: seo.keywords,
     openGraph: {
-      title: seo.ogTitle,
-      description: seo.ogDescription,
+      title: seo.og_title,
+      description: seo.og_description,
       url: config.homeUrl,
     },
     alternates: {

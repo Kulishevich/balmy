@@ -12,7 +12,7 @@ function PrivacyPolicyPage() {
   const { createPopup } = usePopupStore();
 
   function handleClickOnFilterButton() {
-    createPopup({ type: "filter" });
+    createPopup({ type: "orders-filter" });
   }
 
   return (
@@ -30,7 +30,7 @@ function PrivacyPolicyPage() {
         </button>
       </div>
       <div className="flex gap-[95px] mt-8 lg:mt-10">
-        <div className="flex-col gap-6 hidden lg:flex">
+        <div className="flex-col gap-6 hidden lg:flex w-[235px]">
           <div className="flex flex-col">
             <p
               className={clsx(
@@ -154,7 +154,7 @@ function PrivacyPolicyPage() {
           </Action>
         </div>
 
-        <div className="flex flex-col gap-[30px] w-full">
+        <div className="flex flex-col gap-[30px] w-full lg:w-[960px]">
           <OrderHistoryElem />
         </div>
       </div>

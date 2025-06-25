@@ -15,9 +15,7 @@ export async function generateMetadata({
   const searchParams = await params;
   const categorySlug = searchParams["category-slug"];
   const subcategorySlug = searchParams["subcategory-slug"];
-  const { seo } = await getSeoTags({
-    url: `catalog/${categorySlug}/${subcategorySlug}`,
-  });
+  const seo = await getSeoTags(`/catalog/${categorySlug}/${subcategorySlug}`);
 
   const subcategory = await getCategory(subcategorySlug);
 
@@ -29,8 +27,8 @@ export async function generateMetadata({
       canonical: `${config.homeUrl}/catalog/${categorySlug}/${subcategorySlug}`,
     },
     openGraph: {
-      title: seo.ogTitle,
-      description: seo.ogDescription,
+      title: seo.og_title,
+      description: seo.og_description,
       url: config.homeUrl,
     },
   };

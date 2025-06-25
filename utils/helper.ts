@@ -128,17 +128,3 @@ export function calculateDiscountedPrice(
 ) {
   return originalPrice - (originalPrice * discountPercentage) / 100;
 }
-
-export function generateSeoProduct(name?: string, price?: number) {
-  if (!name || !price) {
-    return {
-      title: "",
-      description: "",
-    };
-  }
-
-  return {
-    title: `${name} купить в Минске, цена`,
-    description: `${name} по доступной цене в каталоге balmy.by. Большой ассортимент, качественные товары, помощь с выбором. Звоните`,
-  };
-}

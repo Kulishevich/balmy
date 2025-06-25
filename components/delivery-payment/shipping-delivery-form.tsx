@@ -10,7 +10,6 @@ import { toast } from "sonner";
 import { sendOrder } from "@/api/order";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
-import { createNewOrderMessage, sendMessageToTelegram } from "@/api/telegram";
 
 export type Post = "Европочта" | "Белпочта" | "СДЭК";
 
@@ -71,12 +70,6 @@ function ShippingDeliveryForm({ className }: Props) {
       if (orderResponse) {
         window.open(orderResponse, "_blank");
       }
-
-      const message = createNewOrderMessage({
-        name: orderDataCopy.fullName,
-        phone: orderDataCopy.phone,
-      });
-      await sendMessageToTelegram(message);
 
       clearCart();
       router.push("/");

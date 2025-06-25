@@ -14,7 +14,6 @@ import { sendOrder } from "@/api/order";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
-import { createNewOrderMessage, sendMessageToTelegram } from "@/api/telegram";
 
 interface Props {
   className?: string;
@@ -92,12 +91,6 @@ function CourierDeliveryForm({ className }: Props) {
       // if (orderResponse) {
       //   window.open(orderResponse, "_blank");
       // }
-
-      const message = createNewOrderMessage({
-        name: orderDataCopy.fullName,
-        phone: orderDataCopy.phone,
-      });
-      await sendMessageToTelegram(message);
 
       clearCart();
       router.push("/");

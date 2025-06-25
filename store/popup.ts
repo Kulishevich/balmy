@@ -2,7 +2,7 @@ import { preventScroll } from "@/utils/helper";
 import { create } from "zustand";
 
 type Popup = {
-  type: "callback" | "buy-one-click" | "filter";
+  type: "callback" | "buy-one-click" | "filter" | "orders-filter";
 };
 
 type PopupState = {
