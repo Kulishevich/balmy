@@ -23,6 +23,7 @@ export default async function MainLayout({
 
   return (
     <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative">
+      {/* <div className="relative"> */}
       <Navigation phones={contacts.phones} logo={settings.logo} />
       <SearchMobile />
       <Header phones={contacts.phones} logo={settings.logo} />

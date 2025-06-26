@@ -16,8 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
 
   return {
-    title: seo.title,
-    description: seo.description,
+    title: seo.title || "Balmy",
+    description: seo.description || "Balmy",
     keywords: seo.keywords,
     alternates: {
       canonical: config.homeUrl,
@@ -55,7 +55,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const activeTheme = await getActiveTheme();
-
+  console.log(activeTheme);
   return (
     <html lang="ru">
       <head>

@@ -30,7 +30,10 @@ function CallbackSectoin() {
 
   async function onSubmit(callbackData: CallbackInputs) {
     try {
-      const data = await sendFeedback(callbackData);
+      const data = await sendFeedback({
+        comment: callbackData.comment,
+        phone: callbackData.phone,
+      });
 
       console.log(data);
 

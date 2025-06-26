@@ -14,7 +14,7 @@ export async function generateMetadata({
 
   const seo = await getSeoTags(`/catalog/${categorySlug}`);
 
-  const category = await getCategory("1");
+  const category = await getCategory(categorySlug);
 
   return {
     title: seo.title || category?.name,

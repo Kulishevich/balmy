@@ -217,7 +217,7 @@ function ProductLayout({ product, similarProducts }: Props) {
                   Описание:
                 </p>
                 <div
-                  className="mt-5 max-w-[630px] text-center sm:text-left"
+                  className="mt-5 max-w-[630px] text-center sm:text-left break-words"
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
               </>

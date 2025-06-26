@@ -15,17 +15,6 @@ async function ProductPage({ params }: Props) {
 
   const product = await getProductBySlug(productSlug);
 
-  // if (!product) {
-  //   const { products } = await getProducts();
-  //   const foundProduct = products.find((elem) => elem.id === productSlug);
-
-  //   if (foundProduct?.slug) {
-  //     redirect(`/product/${foundProduct.slug}`);
-  //   } else {
-  //     redirect("/404");
-  //   }
-  // }
-
   if (!product) {
     notFound();
   }

@@ -3,7 +3,7 @@ import { Product, ProductResponse } from "@/types/product";
 
 export async function getProducts() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
-    cache: "no-store",
+    next: { revalidate: 60 },
   });
   const clonedResponse = res.clone();
   const { data } = (await clonedResponse.json()) as {
@@ -17,7 +17,7 @@ export async function getProductBySlug(productSlug: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/products/${productSlug}`,
     {
-      cache: "no-store",
+      next: { revalidate: 60 },
     }
   );
   const clonedResponse = res.clone();
@@ -32,7 +32,7 @@ export async function getPopularProducts() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/products/popular`,
     {
-      cache: "no-store",
+      next: { revalidate: 60 },
     }
   );
   const clonedResponse = res.clone();
@@ -94,7 +94,7 @@ export async function getProductsByCategoryId({
     process.env.NEXT_PUBLIC_API_URL
   }/products?${params.toString()}`;
 
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { next: { revalidate: 60 } });
   const clonedResponse = res.clone();
   const { data } = (await clonedResponse.json()) as {
     data: ProductResponse;
