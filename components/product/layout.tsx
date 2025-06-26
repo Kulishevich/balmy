@@ -175,7 +175,7 @@ function ProductLayout({ product, similarProducts }: Props) {
               </>
             )}
             {!!quantity && (
-              <div className="max-w-[660px] mt-[30px] grid grid-cols-2 2xl:grid-cols-3 gap-3">
+              <div className="max-w-[660px] mt-[30px] grid grid-cols-2 2xl:flex gap-3">
                 {!cartProduct && (
                   <CountControl
                     className="w-full col-span-1 2xl:col-span-1"
@@ -217,7 +217,7 @@ function ProductLayout({ product, similarProducts }: Props) {
                   Описание:
                 </p>
                 <div
-                  className="mt-5 max-w-[630px] text-center sm:text-left break-words"
+                  className="mt-5 max-w-full text-center sm:text-left break-words overflow-hidden [word-break:break-word] [overflow-wrap:anywhere] [&>*]:[overflow-wrap:anywhere] [&>*]:[word-break:break-word]"
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
               </>
