@@ -1,8 +1,6 @@
 "use client";
-import { WORK_DAYS, WORK_TIME } from "@/utils/constants";
 import Link from "next/link";
 import CartInfo from "../cart-info";
-import { ADDRESS, MAIL, PHONE_NUMBER } from "@/utils/constants";
 import PhoneIcon from "@/public/icons/phone.svg";
 import MapPinIcon from "@/public/icons/map-pin.svg";
 import MailIcon from "@/public/icons/mail.svg";
@@ -19,11 +17,12 @@ import {
 import { useScreenSize } from "@/hooks/use-screen-size";
 import { Category } from "@/types/category";
 import MobileMenuCatalog from "./catalog";
-import { ISocailLinks } from "@/types/contacts";
+import { Contacts } from "@/types/contacts";
+import { ADDRESS } from "@/utils/constants";
 
 interface Props {
   categories: Category[];
-  socialLinks: ISocailLinks;
+  contacts: Contacts;
 }
 
 const links = [
@@ -31,7 +30,7 @@ const links = [
   { name: "Контакты", href: "/contacts" },
 ];
 
-function MobileMenu({ categories, socialLinks }: Props) {
+function MobileMenu({ categories, contacts }: Props) {
   const { isTablet } = useScreenSize();
   const { isOpen, closeMobileMenu } = useMobileMenuStore();
   const swipeHandlers = useSwipeable({
@@ -42,6 +41,8 @@ function MobileMenu({ categories, socialLinks }: Props) {
   if (!isTablet) {
     return <></>;
   }
+
+  console.log(contacts);
 
   return (
     <>
@@ -74,15 +75,18 @@ function MobileMenu({ categories, socialLinks }: Props) {
                   </li>
                 </ul>
                 <div className="mt-auto pt-[32px] flex flex-col">
-                  <Link
-                    className="mt-4 text-[17px] inline-flex gap-3 items-center"
-                    href={PHONE_NUMBER.href}
-                  >
-                    <PhoneIcon className="flex-shrink-0 fill-white" />
-                    {PHONE_NUMBER.value}
-                  </Link>
+                  {contacts.phones.map((phone, index) => (
+                    <Link
+                      key={index}
+                      className="mt-4 text-[17px] inline-flex gap-3 items-center"
+                      href={`tel:${phone}`}
+                    >
+                      <PhoneIcon className="flex-shrink-0 fill-white" />
+                      {phone}
+                    </Link>
+                  ))}
                   <time className="text-[14px] font-light ml-10 mt-1 text-light-gray 2xl:inline-block">
-                    {WORK_DAYS} {WORK_TIME}
+                    {contacts.working_hours}
                   </time>
                   <Link
                     className="mt-4 text-[17px] inline-flex gap-3 items-center"
@@ -94,10 +98,10 @@ function MobileMenu({ categories, socialLinks }: Props) {
                   </Link>
                   <Link
                     className="mt-4 text-[17px] inline-flex gap-3 items-center"
-                    href={MAIL.href}
+                    href={`mailto:${contacts.email}`}
                   >
                     <MailIcon className="flex-shrink-0 fill-white" />
-                    {MAIL.value}
+                    {contacts.email}
                   </Link>
                   <Action
                     className="mt-6 max-w-[234px]"
@@ -108,7 +112,7 @@ function MobileMenu({ categories, socialLinks }: Props) {
                   </Action>
                   <SocialNetwokrs
                     className="-ml-12 lg:ml-0 mt-6 scale-75 lg:scale-100"
-                    socialLinks={socialLinks}
+                    socialLinks={contacts.social_links}
                   />
                 </div>
               </m.div>

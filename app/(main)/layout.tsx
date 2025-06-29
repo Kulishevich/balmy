@@ -28,7 +28,7 @@ export default async function MainLayout({
     <div className="relative">
       <Navigation phones={contacts.phones} logo={settings.logo} />
       <SearchMobile />
-      <Header phones={contacts.phones} logo={settings.logo} />
+      <Header contacts={contacts} logo={settings.logo} />
       <CategoryBar categories={categories} brands={brands || []} />
       {children}
       <Footer
@@ -37,7 +37,7 @@ export default async function MainLayout({
         contacts={contacts}
       />
       <Popups brands={brands || []} />
-      <MobileMenu categories={categories} socialLinks={contacts.social_links} />
+      <MobileMenu categories={categories} contacts={contacts} />
       <PhoneAnimation />
       <ScrollToTopButton />
     </div>

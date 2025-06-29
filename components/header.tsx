@@ -1,15 +1,15 @@
-import { WORK_DAYS, WORK_TIME } from "@/utils/constants";
 import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import CartInfo from "@/components/cart-info";
 import Link from "next/link";
 import Search from "./search/search";
 import SecondLogo from "./second-logo";
+import { Contacts } from "@/types/contacts";
 
 function Header({
-  phones,
+  contacts,
   logo,
 }: {
-  phones: string[] | [];
+  contacts: Contacts;
   logo: string | null;
 }) {
   return (
@@ -22,7 +22,7 @@ function Header({
         <Search className="ml-[37px]" />
         <CartInfo className="ml-4" />
         <div className="ml-auto pl-2 flex flex-col flex-shrink-0">
-          {phones.map((phone, index) => (
+          {contacts.phones.map((phone, index) => (
             <Link
               key={index}
               className="font-semibold text-[21px]"
@@ -33,7 +33,7 @@ function Header({
             </Link>
           ))}
           <time className="text-[15px] font-normal text-white/50 hidden 2xl:inline-block">
-            {WORK_DAYS} {WORK_TIME}
+            {contacts.working_hours}
           </time>
         </div>
       </div>
