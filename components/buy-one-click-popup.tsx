@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
 import { sendBuyOneClickOrder } from "@/api/buy-one-click-order";
+import { showToast } from "./toast";
 
 export type BuyOneClickInputs = {
   name: string;
@@ -70,10 +71,14 @@ function BuyOneClickPopup() {
       resetFormFields();
       removePopup();
 
-      toast.success("Сообщение отправлено");
+      showToast({ title: "Сообщение отправлено" });
     } catch (err: unknown) {
       console.log(err);
-      toast.error("Что-то пошло не так. Попробуйте ещё раз позже");
+      showToast({
+        title: "Произошла ошибка",
+        description: "Пожалуйста, повторите попытку ещё раз.",
+        variant: "error",
+      });
     }
   }
 

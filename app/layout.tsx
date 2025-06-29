@@ -8,6 +8,7 @@ import Script from "next/script";
 import AnimationThemeLayout from "@/components/animation-theme/animation-theme";
 import { getSettings } from "@/api/settings";
 import { getActiveTheme } from "@/api/themes";
+import { Toaster } from "sonner";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("home");
@@ -115,6 +116,7 @@ export default async function RootLayout({
         <InitialWrapper>
           <AnimationThemeLayout activeTheme={activeTheme}>
             {children}
+            <Toaster />
           </AnimationThemeLayout>
         </InitialWrapper>
       </body>
