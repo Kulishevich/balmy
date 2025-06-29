@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Action from "../action";
 import clsx from "clsx";
+import { SignUpForm } from "./sign-up-form";
+import { SignInForm } from "./sign-in-form";
 
 export const AuthorizationWindow = () => {
   const [state, setState] = useState<"sign_up" | "log_in">("sign_up");
@@ -28,92 +29,7 @@ export const AuthorizationWindow = () => {
           /Вход
         </button>
       </div>
-      {state === "sign_up" ? (
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-[6px]">
-            <label className="font-normal cursor-pointer" htmlFor="date">
-              ФИО
-            </label>
-            <input
-              className={"custom-input--dark mt-[6px] "}
-              id="name"
-              placeholder="Введите ваше имя"
-            />
-          </div>
-          <div className="flex flex-col gap-[6px]">
-            <label className="font-normal cursor-pointer" htmlFor="date">
-              Email*
-            </label>
-            <input
-              className={"custom-input--dark mt-[6px]"}
-              id="name"
-              placeholder="Введите ваше имя"
-            />
-          </div>
-          <div className="flex flex-col gap-[6px]">
-            <label className="font-normal cursor-pointer" htmlFor="date">
-              Пароль*
-            </label>
-            <input
-              className={"custom-input--dark mt-[6px]"}
-              id="name"
-              placeholder="Введите ваше имя"
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <input
-              className="custom-checkbox border border-[#1717174D]/20"
-              id="date"
-              type="checkbox"
-            />
-            <label
-              className="font-normal lg:text-[17px] text-[14px]  cursor-pointer"
-              htmlFor="date"
-            >
-              Согласие на обработку персональных данных
-            </label>
-          </div>
-          <Action
-            type="link"
-            href="/cart/delivery-payment"
-            className="mt-2"
-            size="big"
-          >
-            Зарегистрироваться
-          </Action>
-        </form>
-      ) : (
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-[6px]">
-            <label className="font-normal cursor-pointer" htmlFor="date">
-              Email*
-            </label>
-            <input
-              className={"custom-input--dark mt-[6px]"}
-              id="email"
-              placeholder="Email"
-            />
-          </div>
-          <div className="flex flex-col gap-[6px]">
-            <label className="font-normal cursor-pointer" htmlFor="date">
-              Пароль*
-            </label>
-            <input
-              className={"custom-input--dark mt-[6px]"}
-              id="password"
-              placeholder="Пароль"
-            />
-          </div>
-          <Action
-            type="link"
-            href="/cart/delivery-payment"
-            className="mt-2"
-            size="big"
-          >
-            Зарегистрироваться
-          </Action>
-        </form>
-      )}
+      {state === "sign_up" ? <SignUpForm /> : <SignInForm />}
     </div>
   );
 };

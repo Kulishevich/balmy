@@ -19,9 +19,11 @@ import {
 import { useScreenSize } from "@/hooks/use-screen-size";
 import { Category } from "@/types/category";
 import MobileMenuCatalog from "./catalog";
+import { ISocailLinks } from "@/types/contacts";
 
 interface Props {
   categories: Category[];
+  socialLinks: ISocailLinks;
 }
 
 const links = [
@@ -29,7 +31,7 @@ const links = [
   { name: "Контакты", href: "/contacts" },
 ];
 
-function MobileMenu({ categories }: Props) {
+function MobileMenu({ categories, socialLinks }: Props) {
   const { isTablet } = useScreenSize();
   const { isOpen, closeMobileMenu } = useMobileMenuStore();
   const swipeHandlers = useSwipeable({
@@ -104,7 +106,10 @@ function MobileMenu({ categories }: Props) {
                   >
                     Заказать звонок
                   </Action>
-                  <SocialNetwokrs className="-ml-12 lg:ml-0 mt-6 scale-75 lg:scale-100" />
+                  <SocialNetwokrs
+                    className="-ml-12 lg:ml-0 mt-6 scale-75 lg:scale-100"
+                    socialLinks={socialLinks}
+                  />
                 </div>
               </m.div>
               <m.div

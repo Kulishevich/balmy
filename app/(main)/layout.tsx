@@ -10,6 +10,8 @@ import SearchMobile from "@/components/search/mobile";
 import { getSettings } from "@/api/settings";
 import { getContacts } from "@/api/contacts";
 import { getBrands } from "@/api/brands";
+import PhoneAnimation from "@/components/phone-animation/PhoneAnimation";
+import ScrollToTopButton from "@/components/scroll-to-top-button";
 
 export default async function MainLayout({
   children,
@@ -35,7 +37,9 @@ export default async function MainLayout({
         contacts={contacts}
       />
       <Popups brands={brands || []} />
-      <MobileMenu categories={categories} />
+      <MobileMenu categories={categories} socialLinks={contacts.social_links} />
+      <PhoneAnimation />
+      <ScrollToTopButton />
     </div>
   );
 }

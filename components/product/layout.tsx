@@ -18,13 +18,15 @@ import { useRouter } from "next/navigation";
 import { useBuyOneClickStore } from "@/store/buy-one-click";
 import { usePopupStore } from "@/store/popup";
 import cn from "clsx";
+import { ISocailLinks } from "@/types/contacts";
 
 interface Props {
   product: Product;
   similarProducts: Product[];
+  socialLinks: ISocailLinks;
 }
 
-function ProductLayout({ product, similarProducts }: Props) {
+function ProductLayout({ product, similarProducts, socialLinks }: Props) {
   const [localCartProduct, setLocalCartProduct] = useState<CartProduct>(
     getCartProductFromProduct(product)
   );
@@ -227,7 +229,7 @@ function ProductLayout({ product, similarProducts }: Props) {
       </section>
       <TabsSection similarProducts={similarProducts} />
       <RecentlyViewedProductsSection currentProductSlug={slug} />
-      <CallbackSectoin />
+      <CallbackSectoin socialLinks={socialLinks} />
     </>
   );
 }

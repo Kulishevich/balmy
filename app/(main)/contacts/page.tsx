@@ -85,7 +85,7 @@ async function ContactsPage() {
         </div>
         <YandexMap className="mt-8 xl:mt-0 h-[327px] sm:h-[565.5px] rounded-[5px]" />
       </section>
-      <CallbackSectoin />
+      <CallbackSectoin socialLinks={contacts.social_links} />
     </>
   );
 }

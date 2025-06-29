@@ -5,6 +5,7 @@ import { Direction } from "@/store/filter";
 import CategoryLayout from "@/components/catalog/category-layout";
 import React from "react";
 import { getBrands } from "@/api/brands";
+import { getContacts } from "@/api/contacts";
 
 interface Props {
   params: Promise<{ "category-slug": string; page: string }>;
@@ -25,6 +26,7 @@ async function CatalogPage({ params, searchParams }: Props) {
 
   const category = await getCategory(categorySlug);
   const brands = await getBrands();
+  const { social_links } = await getContacts();
 
   const { last_page, data: products } = await getProductsByCategoryId({
     category_slug: !isDiscounts || !isBrands ? categorySlug : "",
@@ -59,6 +61,7 @@ async function CatalogPage({ params, searchParams }: Props) {
       products={products}
       totalPages={last_page}
       brands={brands || []}
+      socialLinks={social_links}
     />
   );
 }

@@ -6,10 +6,8 @@ import { getSeoTags } from "@/api/seo";
 import { config } from "@/utils/config";
 import Script from "next/script";
 import AnimationThemeLayout from "@/components/animation-theme/animation-theme";
-import ScrollToTopButton from "@/components/scroll-to-top-button";
 import { getSettings } from "@/api/settings";
 import { getActiveTheme } from "@/api/themes";
-import PhoneAnimation from "@/components/phone-animation/PhoneAnimation";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("home");
@@ -117,8 +115,6 @@ export default async function RootLayout({
         <InitialWrapper>
           <AnimationThemeLayout activeTheme={activeTheme}>
             {children}
-            <PhoneAnimation />
-            <ScrollToTopButton />
           </AnimationThemeLayout>
         </InitialWrapper>
       </body>

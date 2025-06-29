@@ -10,6 +10,7 @@ import React from "react";
 import FilterHeader from "./filter-header";
 import { Category } from "@/types/category";
 import { Brand } from "@/types/brand";
+import { ISocailLinks } from "@/types/contacts";
 
 interface Props {
   category:
@@ -20,6 +21,7 @@ interface Props {
   totalPages: number;
   page: string;
   brands: Brand[];
+  socialLinks: ISocailLinks;
 }
 
 function CategoryLayout({
@@ -29,6 +31,7 @@ function CategoryLayout({
   totalPages,
   page,
   brands,
+  socialLinks,
 }: Props) {
   return (
     <>
@@ -59,7 +62,7 @@ function CategoryLayout({
         <Pagination totalPages={totalPages} currentPage={page} />
       </section>
       <RecentlyViewedProductsSection />
-      <CallbackSectoin />
+      <CallbackSectoin socialLinks={socialLinks} />
     </>
   );
 }

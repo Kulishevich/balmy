@@ -5,6 +5,7 @@ import React from "react";
 import { Direction } from "@/store/filter";
 import { getCategory } from "@/api/category";
 import { getBrands } from "@/api/brands";
+import { getContacts } from "@/api/contacts";
 
 interface Props {
   params: Promise<{
@@ -33,6 +34,7 @@ async function Page({ params, searchParams }: Props) {
   const category = await getCategory(categorySlug);
   const subcategory = await getCategory(subcategorySlug);
   const brands = await getBrands();
+  const { social_links } = await getContacts();
 
   const { last_page, data: products } = await getProductsByCategoryId({
     category_slug: !isBrands ? subcategorySlug : "",
@@ -64,6 +66,7 @@ async function Page({ params, searchParams }: Props) {
       products={products}
       totalPages={last_page}
       brands={brands || []}
+      socialLinks={social_links}
     />
   );
 }

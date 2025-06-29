@@ -5,11 +5,13 @@ export interface Contacts {
   company_info: string | null;
   email: string | null;
   phones: string[] | [];
-  social_links: {
-    instagram: string | null;
-    telegram: string | null;
-    whatsapp: string | null;
-    viber: string | null;
-  };
+  social_links: ISocailLinks;
   working_hours: string | null;
+}
+
+export interface ISocailLinks {
+  instagram: string | null;
+  telegram: string | null;
+  whatsapp: string | null;
+  viber: string | null;
 }

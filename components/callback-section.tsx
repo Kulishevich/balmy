@@ -9,8 +9,9 @@ import { toast } from "sonner";
 import cn from "clsx";
 import Link from "next/link";
 import { sendFeedback } from "@/api/feedback";
+import { ISocailLinks } from "@/types/contacts";
 
-function CallbackSectoin() {
+function CallbackSectoin({ socialLinks }: { socialLinks: ISocailLinks }) {
   const {
     register,
     handleSubmit,
@@ -63,7 +64,7 @@ function CallbackSectoin() {
           </p>
           <div className="mt-12 lg:mt-auto mx-auto lg:mx-0">
             <span>Соцсети:</span>
-            <SocialNetwokrs className="mt-3" />
+            <SocialNetwokrs className="mt-3" socialLinks={socialLinks} />
           </div>
         </div>
         <form
