@@ -1,5 +1,5 @@
 import TopBrands from "@/components/home/top-brands";
-import Title from "@/components/title";
+// import Title from "@/components/title";
 import Image from "next/image";
 
 function MainSection() {
@@ -11,13 +11,13 @@ function MainSection() {
             src="/images/beard-balm-mobile.webp"
             fill
             alt="main screen"
-            className="object-contain"
+            className="object-cover lg:object-contain"
           />
 
           <div className="absolute inset-0 bg-[linear-gradient(180deg,#080F08_0%,rgba(8,15,8,0)_35%)] pointer-events-none" />
         </div>
 
-        <div className="absolute inset-0">
+        {/* <div className="absolute inset-0">
           <div className="mt-[64px] text-center lg:text-left max-w-[280px] mx-auto lg:max-w-full lg:mx-0 lg:ml-[96px] text-white">
             <Title type="main" className="max-w-[728px]">
               Профессиональная косметика оптом
@@ -26,7 +26,7 @@ function MainSection() {
               Только оригинальная продукция
             </p>
           </div>
-        </div>
+        </div> */}
         <TopBrands className="absolute top-[calc(100%-82px)] lg:-bottom-[101px] w-[calc(100%-24px)] left-1/2 -translate-x-1/2 lg:w-full" />
       </div>
     </section>

@@ -10,33 +10,6 @@ import React from "react";
 import FilterHeader from "./filter-header";
 import { Category } from "@/types/category";
 import { Brand } from "@/types/brand";
-// import DeodorantDescription from "../descriptions/deodorant-description";
-// import VoskDlyaUsovDescription from "../descriptions/vosk-dlya-usov-description";
-// import RascheskiDlyaVolosDescription from "../descriptions/rascheski-dlya-volos-description";
-// import PomadyDlyaUkladkiVolos from "../descriptions/pomady-dlya-ukladki-volos-description";
-// import BalzamyDescription from "../descriptions/balzamy-description";
-// import GelDlyaDushaDescription from "../descriptions/gel-dlya-dusha-description";
-// import MasloDlyaBorodyDescription from "../descriptions/maslo-dlya-borody-description";
-// import ShampuniDescription from "../descriptions/shampuni-description";
-// import ShampuniDlyaVolosDescription from "../descriptions/shampuni-dlya-volos-description";
-// import OpasnyeBritvyDescription from "../descriptions/opasnye-britvy-description";
-// import LosonyPosleBrityaDescription from "../descriptions/losony-posle-britya-description";
-// import BalzamPosleBrityaDescription from "../descriptions/balzam-posle-britya-description";
-
-// const descriptionComponents: Record<string, React.ReactNode> = {
-//   deodorant: <DeodorantDescription />,
-//   "vosk-dlya-usov": <VoskDlyaUsovDescription />,
-//   "rascheski-dlya-volos": <RascheskiDlyaVolosDescription />,
-//   "pomady-dlya-ukladki-volos": <PomadyDlyaUkladkiVolos />,
-//   balzamy: <BalzamyDescription />,
-//   "gel-dlya-dusha": <GelDlyaDushaDescription />,
-//   "maslo-dlya-borody": <MasloDlyaBorodyDescription />,
-//   shampuni: <ShampuniDescription />,
-//   "balzam-posle-britya": <BalzamPosleBrityaDescription />,
-//   "shampuni-dlya-volos": <ShampuniDlyaVolosDescription />,
-//   "opasnye-britvy": <OpasnyeBritvyDescription />,
-//   "losony-posle-britya": <LosonyPosleBrityaDescription />,
-// };
 
 interface Props {
   category:

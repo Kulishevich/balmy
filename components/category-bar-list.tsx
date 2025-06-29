@@ -60,9 +60,10 @@ function CategoryBarList({ categories, brands }: Props) {
       )}
     >
       <ul className="container w-full  hidden lg:flex justify-between">
-        {menuItems?.map((category) => {
+        {menuItems?.map((category, index) => {
           return (
             <CategoryBarItem
+              index={index}
               key={category.id}
               category={category}
               activeCategorySlug={activeCategorySlug}

@@ -29,7 +29,7 @@ function DeliveryPayment() {
       <div className="container mt-[42px] lg:mt-[120px]">
         <div className="flex items-center gap-2">
           <input
-            className="custom-checkbox"
+            className="custom-checkbox border border-white/30"
             id="personal-data"
             type="checkbox"
             checked={personalInfo}

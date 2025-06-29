@@ -96,8 +96,9 @@ function BuyOneClickPopup() {
           <Image
             className="object-contain"
             src={
-              `${process.env.NEXT_PUBLIC_STORAGE_URL}${product?.photo_path}` ||
-              "/icons/logo-gray.svg"
+              !!product?.photo_path
+                ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${product?.photo_path}`
+                : "/icons/logo-gray.svg"
             }
             alt={product?.name.toLowerCase() || "продукт"}
             fill
