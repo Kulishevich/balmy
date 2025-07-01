@@ -5,7 +5,7 @@ import ErrorIcon from "@/public/icons/error-icon.svg";
 import SuccessIcon from "@/public/icons/success-icon.svg";
 import Action from "./action";
 
-const DEFAULT_DURATION = 55000;
+const DEFAULT_DURATION = 5000;
 const DEFAULT_POSITION = "top-center";
 
 type ToastType = "error" | "success";

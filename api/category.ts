@@ -1,7 +1,4 @@
 import { Category } from "@/types/category";
-// import { config } from "@/utils/config";
-// import { slugifyWithOpts } from "@/utils/helper";
-// import { getBrands } from "./brands";
 
 export async function getCategories() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {

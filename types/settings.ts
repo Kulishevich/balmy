@@ -22,4 +22,5 @@ export interface Settings {
   feedback_image: string | null;
   logo: string | null;
   privacy_policy: { text: string | null };
+  terms_of_service: { text: string | null };
 }

@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
 export const signInSchema = yup.object({
-  email: yup
+  phone: yup
     .string()
-    .email("Введите корректный адрес электронной почты")
-    .required("Введите ваш email"),
+    .matches(/^(\+375|\+7)/, "Номер телефона должен начинаться с +375 или +7")
+    .required("Введите номер телефона"),
   password: yup.string().required("Введите пароль"),
 });

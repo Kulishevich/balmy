@@ -1,11 +1,10 @@
-"use client";
+import { getSettings } from "@/api/settings";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
-import { offerContract } from "@/docs/offer-contract";
-import { useSSR } from "@/hooks/use-ssr";
 
-function OfferContractPage() {
-  const isSSR = useSSR();
+async function OfferContractPage() {
+  const setting = await getSettings();
+
   return (
     <>
       <Title type="h1" className="mt-10 text-center">
@@ -13,14 +12,12 @@ function OfferContractPage() {
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
       <div className="container">
-        {!isSSR && (
-          <div
-            className="docs mt-8 sm:mt-10"
-            dangerouslySetInnerHTML={{
-              __html: offerContract,
-            }}
-          />
-        )}
+        <div
+          className="docs mt-8 sm:mt-10 whitespace-pre-line"
+          dangerouslySetInnerHTML={{
+            __html: setting.terms_of_service.text || "",
+          }}
+        />
       </div>
     </>
   );

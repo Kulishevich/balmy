@@ -42,8 +42,6 @@ function MobileMenu({ categories, contacts }: Props) {
     return <></>;
   }
 
-  console.log(contacts);
-
   return (
     <>
       {createPortal(

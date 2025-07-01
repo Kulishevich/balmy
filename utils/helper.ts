@@ -8,6 +8,10 @@ export function slugifyWithOpts(name: string) {
   return slugify(name, { lower: true, remove: /[^\w\s-]/g, locale: "ru" });
 }
 
+export function normalizePhone(phone: string) {
+  return phone.replace(/[^\d+]/g, "");
+}
+
 export function getPaginationPages({
   totalPages,
   currentPage,

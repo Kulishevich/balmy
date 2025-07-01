@@ -1,11 +1,11 @@
 import * as yup from "yup";
 
 export const signUpSchema = yup.object({
-  name: yup.string().required("Введите ФИО получателя"),
-  email: yup
+  fullName: yup.string().required("Введите ФИО получателя"),
+  phone: yup
     .string()
-    .email("Введите корректный адрес электронной почты")
-    .required("Введите ваш email"),
-  password: yup.string().required("Введите пароль"),
+    .matches(/^(\+375|\+7)/, "Номер телефона должен начинаться с +375 или +7")
+    .required("Введите номер телефона"),
+  comment: yup.string().required("Введите комментарий"),
   "personal-info": yup.boolean().required(),
 });

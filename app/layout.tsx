@@ -54,7 +54,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const activeTheme = await getActiveTheme();
-  console.log(activeTheme);
+
   return (
     <html lang="ru">
       <head>

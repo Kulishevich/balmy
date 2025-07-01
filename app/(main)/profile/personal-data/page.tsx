@@ -1,9 +1,25 @@
+import { getMe, LogoutRequest } from "@/api/auth";
 import Action from "@/components/action";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
 import MedalIcon from "@/public/icons/medal-star.svg";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-function PrivacyPolicyPage() {
+async function PrivacyPolicyPage() {
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get("token")?.value || "";
+
+  const me = await getMe(token);
+
+  if (!me) {
+    await LogoutRequest(token);
+
+    cookiesStore.delete("token");
+
+    redirect("/authorization");
+  }
+
   return (
     <>
       <Title type="h1" className="mt-10 text-center">
@@ -15,7 +31,7 @@ function PrivacyPolicyPage() {
           <div className="flex flex-col gap-[10px]">
             <label
               className="font-normal cursor-pointer relative after:content-['*'] after:text-[#EB001B]"
-              htmlFor="date"
+              htmlFor="name"
             >
               ФИО / Название компании
             </label>
@@ -23,19 +39,23 @@ function PrivacyPolicyPage() {
               className={"custom-input--white mt-[6px] "}
               id="name"
               placeholder="ФИО / Название компании"
+              value={me.name}
+              disabled
             />
           </div>
           <div className="flex flex-col gap-[10px]">
             <label
               className="font-normal cursor-pointer relative after:content-['*'] after:text-[#EB001B]"
-              htmlFor="date"
+              htmlFor="phone"
             >
               Номер телефона
             </label>
             <input
               className={"custom-input--white mt-[6px] "}
-              id="name"
-              placeholder="ФИО / Название компании"
+              id="phone"
+              placeholder="Номер телефона"
+              value={me.phone}
+              disabled
             />
           </div>
           <div className="flex flex-col gap-[10px] items-start">
@@ -49,13 +69,13 @@ function PrivacyPolicyPage() {
             </button>
           </div>
           <div className="flex flex-col gap-[10px]">
-            <label className="font-normal cursor-pointer" htmlFor="date">
+            <label className="font-normal cursor-pointer" htmlFor="discount">
               Персональная скидка
             </label>
             <input
               className={"custom-input--white mt-[6px] "}
-              id="name"
-              placeholder="ФИО / Название компании"
+              id="discount"
+              placeholder="Персональная скидка"
             />
             <span className="text-[#9E9E9E] relative before:content-['*'] before:text-gold">
               персональная скидка зависит от общей суммы заказов: 5%-при покупке
@@ -63,7 +83,12 @@ function PrivacyPolicyPage() {
             </span>
           </div>
         </div>
-        <Action className="w-full lg:w-[300px]" color={"gold"}>
+        <Action
+          type="link"
+          href="/profile"
+          className="w-full lg:w-[300px]"
+          color={"gold"}
+        >
           Назад
         </Action>
       </div>

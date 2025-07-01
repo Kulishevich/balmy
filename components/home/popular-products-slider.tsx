@@ -46,13 +46,6 @@ function PopularProductsSlider({ popularProducts }: Props) {
             </SwiperSlide>
           );
         })}
-        {popularProducts.map((product) => {
-          return (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} />
-            </SwiperSlide>
-          );
-        })}
       </Swiper>
       <ArrowLeft className="hidden xl:block popular-products-arrow-left absolute -left-24 top-[118px] " />
       <ArrowRight className="hidden xl:block popular-products-arrow-right absolute -right-24 top-[118px] " />

@@ -219,7 +219,7 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
                   Описание:
                 </p>
                 <div
-                  className="mt-5 max-w-full text-center sm:text-left break-words overflow-hidden [word-break:break-word] [overflow-wrap:anywhere] [&>*]:[overflow-wrap:anywhere] [&>*]:[word-break:break-word]"
+                  className="mt-5 max-w-full text-center sm:text-left break-words overflow-hidden [word-break:break-word] [&>*]:[overflow-wrap:anywhere] [&>*]:[word-break:break-word]"
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
               </>

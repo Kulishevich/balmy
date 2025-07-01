@@ -5,13 +5,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signInSchema } from "@/utils/schemes/sign-in";
 import clsx from "clsx";
+import { LoginRequest } from "@/api/auth";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 type SignInForm = {
-  email: string;
+  phone: string;
   password: string;
 };
 
 export const SignInForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -21,28 +26,37 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const onSubmit = (data: SignInForm) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data: SignInForm) => {
+    try {
+      const res = await LoginRequest(data);
+      const token = `${res.data.token_type} ${res.data.token}`;
+
+      Cookies.set("token", token, { path: "/", secure: true });
+      reset();
+
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-[6px]">
         <label className="font-normal cursor-pointer" htmlFor="email">
-          Email*
+          Телефон
         </label>
         <input
           className={clsx("custom-input--dark mt-[6px] ", {
-            "custom-input--dark-error": errors["email"],
+            "custom-input--dark-error": errors["phone"],
           })}
-          id="email"
-          placeholder="Email"
-          {...register("email")}
+          id="phone"
+          placeholder="Телефон"
+          {...register("phone")}
         />
-        {errors["email"] && (
+        {errors["phone"] && (
           <span className="mt-2 text-[#EB001B] text-[15px] font-normal">
-            *{errors["email"].message}
+            *{errors["phone"].message}
           </span>
         )}
       </div>

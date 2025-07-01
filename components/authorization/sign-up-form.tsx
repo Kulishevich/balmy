@@ -5,11 +5,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import clsx from "clsx";
 import { signUpSchema } from "@/utils/schemes/sign-up";
+import { showToast } from "../toast";
+import { CreateClientRequest } from "@/api/auth";
+import { normalizePhone } from "@/utils/helper";
 
 type SignUpForm = {
-  name: string;
-  email: string;
-  password: string;
+  fullName: string;
+  phone: string;
+  comment: string;
   "personal-info": boolean;
 };
 
@@ -26,9 +29,34 @@ export const SignUpForm = () => {
 
   const personalInfo = watch("personal-info");
 
-  const onSubmit = (data: SignUpForm) => {
+  const onSubmit = async (data: SignUpForm) => {
     console.log(data);
-    reset();
+
+    const phone = normalizePhone(data.phone);
+
+    try {
+      const res = await CreateClientRequest({
+        phone: phone,
+        comment: data.comment,
+        full_name: data.fullName,
+      });
+
+      console.log(res);
+      showToast({
+        title: "Спасибо за регистрацию!",
+        description:
+          "Ожидайте подтверждения регистрации на вашей почте, заявка должна быть одобрена менеджерами.",
+        variant: "success",
+      });
+      reset();
+    } catch (err) {
+      console.log(err);
+      showToast({
+        title: "Произошла ошибка",
+        description: "Пожалуйста, повторите попытку ещё раз.",
+        variant: "error",
+      });
+    }
   };
 
   return (
@@ -39,53 +67,52 @@ export const SignUpForm = () => {
         </label>
         <input
           className={clsx("custom-input--dark mt-[6px] ", {
-            "custom-input--dark-error": errors["name"],
+            "custom-input--dark-error": errors["fullName"],
           })}
           id="name"
           placeholder="Введите ваше ФИО"
-          {...register("name")}
+          {...register("fullName")}
         />
 
-        {errors["name"] && (
+        {errors["fullName"] && (
           <span className="mt-2 text-[#EB001B] text-[15px] font-normal">
-            *{errors["name"].message}
+            *{errors["fullName"].message}
           </span>
         )}
       </div>
       <div className="flex flex-col gap-[6px]">
         <label className="font-normal cursor-pointer" htmlFor="email">
-          Email*
+          Телефон
         </label>
         <input
-          className={clsx("custom-input--dark mt-[6px] ", {
-            "custom-input--dark-error": errors["email"],
+          className={clsx("custom-input--dark mt-[6px]", {
+            "custom-input--dark-error": errors["phone"],
           })}
-          {...register("email")}
-          id="email"
-          placeholder="Введите ваш email"
+          {...register("phone")}
+          id="phone"
+          placeholder="Введите ваш телефон"
         />
-        {errors["email"] && (
+        {errors["phone"] && (
           <span className="mt-2 text-[#EB001B] text-[15px] font-normal">
-            *{errors["email"].message}
+            *{errors["phone"].message}
           </span>
         )}
       </div>
       <div className="flex flex-col gap-[6px]">
         <label className="font-normal cursor-pointer" htmlFor="password">
-          Пароль*
+          Комментарий
         </label>
-        <input
-          className={clsx("custom-input--dark mt-[6px] ", {
-            "custom-input--dark-error": errors["password"],
+        <textarea
+          className={clsx("custom-input--dark mt-[6px] h-[200px] resize-none", {
+            "custom-input--dark-error": errors["comment"],
           })}
-          {...register("password")}
-          id="password"
-          placeholder="Придумайте пароль"
-          type="password"
+          id="comment-2"
+          placeholder="Комментарий"
+          {...register("comment")}
         />
-        {errors["password"] && (
+        {errors["comment"] && (
           <span className="mt-2 text-[#EB001B] text-[15px] font-normal">
-            *{errors["password"].message}
+            *{errors["comment"].message}
           </span>
         )}
       </div>
