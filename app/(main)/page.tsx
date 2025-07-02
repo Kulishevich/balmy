@@ -1,6 +1,7 @@
 import { getBanners } from "@/api/banners";
 import { getBrands } from "@/api/brands";
 import { getContacts } from "@/api/contacts";
+import { getMainBanner } from "@/api/main-banner";
 import CallbackSectoin from "@/components/callback-section";
 import BrandsSection from "@/components/home/brands-section";
 import MainSection from "@/components/home/main-section";
@@ -12,10 +13,11 @@ async function HomePage() {
   const brands = await getBrands();
   const banners = await getBanners();
   const { social_links } = await getContacts();
+  const mainBanner = await getMainBanner();
 
   return (
     <>
-      <MainSection />
+      <MainSection mainBanner={mainBanner} />
       <PopularProductsSection />
       <SetSection banners={banners} />
       <OurCatalogSection />

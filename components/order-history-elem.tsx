@@ -1,5 +1,5 @@
-// import Image from "next/image";
-// import Link from "next/link";
+import Image from "next/image";
+import Link from "next/link";
 import Action from "./action";
 import RepeatIcon from "@/public/icons/repeat.svg";
 import { IOrderItem } from "@/types/orders";
@@ -13,34 +13,35 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
           {new Date(order.order_date).toLocaleDateString("RU-ru")}
         </p>
         <span className="px-4 py-1 bg-[#E68721] rounded-[5px]">
-          {order.status}
+          {order.status?.name}
         </span>
       </div>
       <div className="flex flex-col gap-3 w-full">
         <p className="text-[#9E9E9E]">Товары:</p>
         <div className="flex gap-4 w-full overflow-auto">
-          {order.items.map((_, index) => (
-            <span key={index}>пока не приходят</span>
-            // <Link
-            //   href={`/product/${product.slug}`}
-            //   className="relative w-[120px] h-[120px] shrink-0"
-            //   key={product.id}
-            // >
-            //   <Image
-            //     src={product.image}
-            //     fill
-            //     alt={product.slug}
-            //     className="object-cover rounded-[5px]"
-            //   />
-            // </Link>
+          {order.items.map((product) => (
+            <Link
+              href={`/product/${product.id}`}
+              className="relative w-[120px] h-[120px] shrink-0"
+              key={product.id}
+            >
+              <Image
+                src={
+                  !!product.product_images
+                    ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${product.product_images}`
+                    : "/icons/logo-gray.svg"
+                }
+                fill
+                alt={product.product_name}
+                className="object-contain rounded-[5px]"
+              />
+            </Link>
           ))}
         </div>
       </div>
       <div className="flex flex-col gap-3">
         <p className="text-[#9E9E9E]">Сумма:</p>
-        <p className="text-[30px]">
-          {order.total_amount} byn скидка - {order.total_discount} удалить
-        </p>
+        <p className="text-[30px]">{order.total_amount}</p>
       </div>
       <Action color="gold" className="w-full lg:w-[300px]">
         <RepeatIcon />

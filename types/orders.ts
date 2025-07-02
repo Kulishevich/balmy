@@ -28,6 +28,35 @@ export interface IOrderItem {
   moysklad_updated_at: string | null;
   sync_status: string;
   sync_error: string | null;
-  status: string | null;
-  items: [];
+  status: IOrderStatus | null;
+  items: IOrderProduct[];
+}
+
+export interface IOrderStatus {
+  id: number;
+  name: string;
+  code: string;
+  color: string;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface IOrderProduct {
+  created_at: string;
+  discount: string;
+  discount_amount: string;
+  discount_id: string | null;
+  discount_type: string | null;
+  id: number;
+  order_id: number;
+  price: string;
+  product_id: number;
+  product_images: string | null;
+  product_name: string;
+  product_sku: string;
+  quantity: number;
+  specifications: string | null;
+  total: string;
+  total_amount: string;
+  updated_at: string;
 }

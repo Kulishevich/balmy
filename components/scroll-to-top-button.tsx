@@ -25,12 +25,12 @@ const ScrollToTopButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-10 right-[72px] z-[999] bg-gold flex gap-1 items-center px-3 py-1 rounded-[5px] transition ${
+      className={`fixed  right-3  bottom-[90px] lg:bottom-[172px] lg:right-[72px] z-[999] bg-gold flex gap-1 items-center p-[6px] lg:px-3 lg:py-1 rounded-[5px] transition ${
         visible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <ArrowUpLong />
-      <span className="text-[15px]">Наверх</span>
+      <span className="text-[13px] lg:text-[15px]">Наверх</span>
     </button>
   );
 };

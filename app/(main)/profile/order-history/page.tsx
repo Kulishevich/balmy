@@ -14,7 +14,7 @@ async function PrivacyPolicyPage() {
 
   const orders = await getOrders(token);
   const me = await getMe(token);
-
+  console.log(orders);
   if (!me) {
     await LogoutRequest(token);
 

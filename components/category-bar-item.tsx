@@ -81,29 +81,35 @@ function CategoryBarItem({ category, activeCategorySlug, index }: Props) {
                     />
                   </Link>
                 )}
-
-                <div
-                  className={cn(
-                    "bg-[#252525] p-6 w-full absolute rounded-[5px] min-w-[380px] top-[7px] opacity-0 h-0 group-hover/item:opacity-100 group-hover/item:min-h-[calc(100%-7px)] group-hover/item:h-auto",
-                    {
-                      "left-[195px]": index <= 3,
-                      "right-[195px]": index > 3,
-                    }
+                {"subcategories" in subcategory &&
+                  !!subcategory.subcategories?.length && (
+                    <div
+                      className={cn(
+                        "bg-[#252525] p-6 w-full absolute rounded-[5px] min-w-[380px] transition top-[7px] opacity-0 h-0 group-hover/item:opacity-100 group-hover/item:min-h-[calc(100%-7px)] group-hover/item:h-auto",
+                        {
+                          "left-[195px]": index <= 3,
+                          "right-[195px]": index > 3,
+                        }
+                      )}
+                    >
+                      <ul className="grid grid-cols-2 gap-x-[64px] gap-y-3 w-full">
+                        {subcategory.subcategories.map((sub, index) => (
+                          <li
+                            className={cn(
+                              "cursor-pointer text-[15px] text-white font-normal hover transition hover:text-gold inline-block"
+                            )}
+                            key={index}
+                          >
+                            <Link
+                              href={`/catalog/${categorySlug}/${slug}/${sub.slug}`}
+                            >
+                              {sub.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
-                >
-                  <ul className="grid grid-cols-2 gap-x-[64px] gap-y-3 w-full">
-                    {new Array(10).fill("").map((_, index) => (
-                      <li
-                        className={cn(
-                          "cursor-pointer text-[15px] text-white font-normal hover transition hover:text-gold inline-block"
-                        )}
-                        key={index}
-                      >
-                        <Link href={"#"}>Воск для усов</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </li>
             );
           })}

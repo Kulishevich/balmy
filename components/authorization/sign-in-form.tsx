@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { LoginRequest } from "@/api/auth";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { showToast } from "../toast";
 
 type SignInForm = {
   phone: string;
@@ -33,10 +34,20 @@ export const SignInForm = () => {
 
       Cookies.set("token", token, { path: "/", secure: true });
       reset();
-
+      showToast({
+        title: "Спасибо за регистрацию!",
+        description:
+          "Ожидайте подтверждения регистрации на вашей почте, заявка должна быть одобрена менеджерами.",
+        variant: "success",
+      });
       router.push("/");
     } catch (err) {
       console.log(err);
+      showToast({
+        title: "Произошла ошибка",
+        description: "Пожалуйста, повторите попытку ещё раз.",
+        variant: "error",
+      });
     }
   };
 

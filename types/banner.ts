@@ -10,3 +10,12 @@ export interface Banner {
   title: string;
   updated_at: string;
 }
+
+export interface MainBanner {
+  id: number;
+  desktop_image: string;
+  mobile_image: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
