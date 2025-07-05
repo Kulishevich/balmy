@@ -17,6 +17,7 @@ interface Props {
     | Category
     | { id: string; slug: string; name: string; subcategories?: Brand[] };
   subcategory?: Category | Brand;
+  subsubcategory?: Category;
   products: Product[];
   totalPages: number;
   page: string;
@@ -26,6 +27,7 @@ interface Props {
 
 function CategoryLayout({
   subcategory,
+  subsubcategory,
   category,
   products,
   totalPages,
@@ -35,10 +37,18 @@ function CategoryLayout({
 }: Props) {
   return (
     <>
-      <CatalogHeader category={category} subcategory={subcategory} />
+      <CatalogHeader
+        category={category}
+        subcategory={subcategory}
+        subsubcategory={subsubcategory}
+      />
       <FilterHeader totalPages={+totalPages} countProducts={products.length} />
       <section className="mt-10 container flex flex-col">
-        <Subcategories category={category} subcategory={subcategory} />
+        <Subcategories
+          category={category}
+          subcategory={subcategory}
+          subsubcategory={subsubcategory}
+        />
         <div className="relative flex items-start lg:mt-10">
           <CatalogFilter
             className="hidden 2xl:block min-[1921px]:absolute min-[1921px]:left-0 min-[1921px]:-translate-x-[calc(100%+40px)] min-[1921px]:top-0"

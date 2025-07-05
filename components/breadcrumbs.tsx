@@ -4,7 +4,7 @@ import Link from "next/link";
 import cn from "clsx";
 import LongArrowRightIcon from "@/public/icons/long-arrow-right.svg";
 
-interface DynamicPath {
+export interface DynamicPath {
   href: string;
   name: string;
 }
