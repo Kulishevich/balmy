@@ -7,12 +7,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("/profile/personal-data");
 
   return {
-    title: seo.title || "Персональные данные",
-    description: seo.description || "Персональные данные",
-    keywords: seo.keywords,
+    title: seo?.title || "Персональные данные",
+    description: seo?.description || "Персональные данные",
+    keywords: seo?.keywords,
     openGraph: {
-      title: seo.og_title,
-      description: seo.og_description,
+      title: seo?.og_title,
+      description: seo?.og_description,
       url: config.homeUrl,
     },
     alternates: {

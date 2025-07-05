@@ -2,8 +2,13 @@
 import React from "react";
 import FilterIcon from "@/public/icons/filter.svg";
 import { usePopupStore } from "@/store/popup";
+import { IOrderStatus } from "@/types/orders";
 
-export default function OrderFilterMobile() {
+export default function OrderFilterMobile({
+  statuses,
+}: {
+  statuses: IOrderStatus[] | null;
+}) {
   const { createPopup } = usePopupStore();
 
   function handleClickOnFilterButton() {

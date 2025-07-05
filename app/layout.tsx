@@ -15,15 +15,15 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
 
   return {
-    title: seo.title || "Balmy",
-    description: seo.description || "Balmy",
-    keywords: seo.keywords,
+    title: seo?.title || "Balmy",
+    description: seo?.description || "Balmy",
+    keywords: seo?.keywords,
     alternates: {
       canonical: config.homeUrl,
     },
     openGraph: {
-      title: seo.og_title,
-      description: seo.og_description,
+      title: seo?.og_title,
+      description: seo?.og_description,
       url: config?.homeUrl,
     },
     icons: {

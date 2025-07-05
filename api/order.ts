@@ -2,15 +2,25 @@ import { OrderRequest } from "@/types/order";
 
 export async function sendOrder(orderData: OrderRequest) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/orders`;
-  const data = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(orderData),
-  });
 
-  const order = await data.text();
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
 
-  return { order };
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error(`Ошибка API: ${res.status} — ${message}`);
+    }
+
+    const order = await res.text();
+    return order;
+  } catch (err) {
+    console.error("Ошибка при отправке one-click заказа:", err);
+    throw err;
+  }
 }

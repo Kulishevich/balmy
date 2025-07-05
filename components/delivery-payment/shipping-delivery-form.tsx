@@ -6,10 +6,10 @@ import { OrderInputs } from "./courier-delivery-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { orderSchema } from "@/utils/schemes/order";
 import { useState } from "react";
-import { toast } from "sonner";
 import { sendOrder } from "@/api/order";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
+import { showToast } from "../toast";
 
 export type Post = "Европочта" | "Белпочта" | "СДЭК";
 
@@ -51,8 +51,8 @@ function ShippingDeliveryForm({ className }: Props) {
       email: orderDataCopy.email,
       address: orderDataCopy.address,
       comment: order.comment,
-      delivery_method_id: order.deliveryType,
-      payment_method_id: order.paymentType,
+      delivery_method: order.deliveryType,
+      payment_method: order.paymentType,
       promo_code: "убрать",
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
@@ -60,22 +60,28 @@ function ShippingDeliveryForm({ className }: Props) {
       })),
     };
 
-    toast.success("Отправляем вашу заявку, пожалуйста подождите...", {
-      duration: 4000,
+    showToast({
+      title: "Отправляем вашу заявку, пожалуйста подождите...",
+      variant: "success",
     });
     reset();
     try {
-      const { order: orderResponse } = await sendOrder(requestData);
+      await sendOrder(requestData);
 
-      if (orderResponse) {
-        window.open(orderResponse, "_blank");
-      }
+      // if (orderResponse) {
+      //   window.open(orderResponse, "_blank");
+      // }
 
       clearCart();
       router.push("/");
-      toast.success("Заказ оформлен успешно", { duration: 5000 });
+      showToast({ title: "Заказ оформлен успешно", variant: "success" });
     } catch (err) {
-      toast.error("Что-то пошло не так");
+      showToast({
+        title: "Произошла ошибка",
+        description: "Пожалуйста, повторите попытку ещё раз.",
+        variant: "error",
+      });
+
       console.log(err);
     }
   }

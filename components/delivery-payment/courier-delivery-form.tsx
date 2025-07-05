@@ -11,9 +11,9 @@ import { useOrderState } from "@/store/order";
 import { formatTimestampToDDMMYYYY } from "@/utils/helper";
 import Calendar from "react-calendar";
 import { sendOrder } from "@/api/order";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
+import { showToast } from "../toast";
 
 interface Props {
   className?: string;
@@ -65,8 +65,9 @@ function CourierDeliveryForm({ className }: Props) {
     const order = getOrder();
     const orderDataCopy = orderData;
 
-    toast.success("Отправляем вашу заявку, пожалуйста подождите...", {
-      duration: 4000,
+    showToast({
+      title: "Отправляем вашу заявку, пожалуйста подождите...",
+      variant: "success",
     });
 
     const requestData = {
@@ -75,8 +76,8 @@ function CourierDeliveryForm({ className }: Props) {
       email: orderDataCopy.email,
       address: orderDataCopy.address,
       comment: order.comment,
-      delivery_method_id: order.deliveryType,
-      payment_method_id: order.paymentType,
+      delivery_method: order.deliveryType,
+      payment_method: order.paymentType,
       promo_code: "убрать",
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
@@ -94,9 +95,13 @@ function CourierDeliveryForm({ className }: Props) {
 
       clearCart();
       router.push("/");
-      toast.success("Заказ оформлен успешно", { duration: 5000 });
+      showToast({ title: "Заказ оформлен успешно", variant: "success" });
     } catch (err) {
-      toast.error("Что-то пошло не так");
+      showToast({
+        title: "Произошла ошибка",
+        description: "Пожалуйста, повторите попытку ещё раз.",
+        variant: "error",
+      });
       console.log(err);
     }
   }

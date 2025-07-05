@@ -7,12 +7,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("/offer-contract");
 
   return {
-    title: seo.title || "Договор оферты",
-    description: seo.description || "Договор оферты",
-    keywords: seo.keywords,
+    title: seo?.title || "Договор оферты",
+    description: seo?.description || "Договор оферты",
+    keywords: seo?.keywords,
     openGraph: {
-      title: seo.og_title,
-      description: seo.og_description,
+      title: seo?.og_title,
+      description: seo?.og_description,
       url: config.homeUrl,
     },
     alternates: {

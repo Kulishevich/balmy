@@ -3,7 +3,7 @@ import OrderHistoryElem from "@/components/order-history-elem";
 import Title from "@/components/title";
 import OrderFilterMobile from "@/components/order-history/order-filter-mobile";
 import { cookies } from "next/headers";
-import { getOrders } from "@/api/orders";
+import { getOrders, getStatuses } from "@/api/orders";
 import { getMe, LogoutRequest } from "@/api/auth";
 import { redirect } from "next/navigation";
 import OrderFilterDesktop from "@/components/order-history/order-filter-desktop";
@@ -14,7 +14,8 @@ async function PrivacyPolicyPage() {
 
   const orders = await getOrders(token);
   const me = await getMe(token);
-  console.log(orders);
+  const statuses = await getStatuses();
+
   if (!me) {
     await LogoutRequest(token);
 
@@ -29,9 +30,9 @@ async function PrivacyPolicyPage() {
         История заказов
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <OrderFilterMobile />
+      <OrderFilterMobile statuses={statuses} />
       <div className="flex gap-[95px] mt-8 lg:mt-10">
-        <OrderFilterDesktop />
+        <OrderFilterDesktop statuses={statuses} />
 
         <div className="flex flex-col gap-[30px] w-full lg:w-[960px]">
           {orders?.individual.map((order) => (

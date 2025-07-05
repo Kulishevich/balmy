@@ -13,8 +13,8 @@ export interface OrderRequest {
   email?: string;
   address: string;
   comment: string;
-  delivery_method_id: string;
-  payment_method_id: string;
+  delivery_method: string;
+  payment_method: string;
   promo_code: string;
   items: OrderPosition[];
 }

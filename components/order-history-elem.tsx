@@ -21,7 +21,7 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
         <div className="flex gap-4 w-full overflow-auto">
           {order.items.map((product) => (
             <Link
-              href={`/product/${product.id}`}
+              href={`/product/${product.product.slug}`}
               className="relative w-[120px] h-[120px] shrink-0"
               key={product.id}
             >

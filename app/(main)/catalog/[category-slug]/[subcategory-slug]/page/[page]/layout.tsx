@@ -20,15 +20,15 @@ export async function generateMetadata({
   const subcategory = await getCategory(subcategorySlug);
 
   return {
-    title: seo.title || subcategory?.name,
-    description: seo.description || subcategory?.description,
-    keywords: seo.keywords,
+    title: seo?.title || subcategory?.name,
+    description: seo?.description || subcategory?.description,
+    keywords: seo?.keywords,
     alternates: {
       canonical: `${config.homeUrl}/catalog/${categorySlug}/${subcategorySlug}`,
     },
     openGraph: {
-      title: seo.og_title,
-      description: seo.og_description,
+      title: seo?.og_title,
+      description: seo?.og_description,
       url: config.homeUrl,
     },
   };

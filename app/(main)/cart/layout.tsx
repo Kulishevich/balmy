@@ -7,12 +7,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("/cart");
 
   return {
-    title: seo.title || "Корзина",
-    description: seo.description || "Корзина",
-    keywords: seo.keywords,
+    title: seo?.title || "Корзина",
+    description: seo?.description || "Корзина",
+    keywords: seo?.keywords,
     openGraph: {
-      title: seo.og_title,
-      description: seo.og_description,
+      title: seo?.og_title,
+      description: seo?.og_description,
       url: config.homeUrl,
     },
     alternates: {

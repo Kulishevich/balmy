@@ -1,3 +1,5 @@
+import { Product } from "./product";
+
 export interface IOrders {
   individual: IOrderItem[];
   legal_entity: [];
@@ -50,6 +52,7 @@ export interface IOrderProduct {
   id: number;
   order_id: number;
   price: string;
+  product: Product;
   product_id: number;
   product_images: string | null;
   product_name: string;
@@ -59,4 +62,11 @@ export interface IOrderProduct {
   total: string;
   total_amount: string;
   updated_at: string;
+}
+
+export interface IOrderStatus {
+  id: number;
+  name: string;
+  code: string;
+  color: string;
 }
