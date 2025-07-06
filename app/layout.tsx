@@ -9,6 +9,7 @@ import AnimationThemeLayout from "@/components/animation-theme/animation-theme";
 import { getSettings } from "@/api/settings";
 import { getActiveTheme } from "@/api/themes";
 import { Toaster } from "sonner";
+import { AuthGuard } from "@/components/auth-guard";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("home");
@@ -115,7 +116,7 @@ export default async function RootLayout({
       >
         <InitialWrapper>
           <AnimationThemeLayout activeTheme={activeTheme}>
-            {children}
+            <AuthGuard>{children}</AuthGuard>
             <Toaster />
           </AnimationThemeLayout>
         </InitialWrapper>

@@ -1,29 +1,39 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const PUBLIC_PATHS = ["/authorization"];
+export function middleware(req: NextRequest) {
+  const url = req.nextUrl;
+  const decodedPath = decodeURIComponent(url.pathname);
 
-export function middleware(request: NextRequest) {
-  const token = request.cookies.get("token")?.value;
+  let updatedPath = decodedPath
+    .replace("Бренды", "sets")
+    .replace("Для бороды", "dlya-borody")
+    .replace("Для бритья", "dlya-britya")
+    .replace("Для волос и тела", "dlya-volos-i-tela")
+    .replace("Наборы", "nabory")
+    .replace("Аксессуары", "aksecsuary")
+    .replace("Аксеcсуары", "aksecsuary")
+    .replace("Скидки", "discounts");
 
-  const isAuthPage = PUBLIC_PATHS.includes(request.nextUrl.pathname);
-  const isAuthenticated = Boolean(token);
+  const pathSegments = updatedPath.split("/");
 
-  if (!isAuthenticated && request.nextUrl.pathname === "/authorization") {
-    return NextResponse.next();
+  if (pathSegments.length > 3) {
+    const subcategoryIndex = 3;
+    pathSegments[subcategoryIndex] = pathSegments[subcategoryIndex]
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[!]/g, "");
   }
 
-  if (!isAuthenticated && !isAuthPage) {
-    return NextResponse.redirect(new URL("/authorization", request.url));
-  }
+  updatedPath = pathSegments.join("/");
 
-  if (isAuthenticated && isAuthPage) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (decodedPath !== updatedPath) {
+    const redirectUrl = new URL(updatedPath, req.nextUrl.origin);
+    return NextResponse.redirect(redirectUrl, 308);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: "/catalog/:path*",
 };
