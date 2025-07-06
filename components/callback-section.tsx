@@ -5,11 +5,11 @@ import SocialNetwokrs from "./social-networks";
 import { CallbackInputs } from "./callback-popup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { callbackSchema } from "@/utils/schemes/callback";
-import { toast } from "sonner";
 import cn from "clsx";
 import Link from "next/link";
 import { sendFeedback } from "@/api/feedback";
 import { ISocailLinks } from "@/types/contacts";
+import { showToast } from "./toast";
 
 function CallbackSectoin({ socialLinks }: { socialLinks: ISocailLinks }) {
   const {
@@ -39,10 +39,13 @@ function CallbackSectoin({ socialLinks }: { socialLinks: ISocailLinks }) {
       console.log(data);
 
       resetFormFields();
-      toast.success("Сообщение отправлено");
+      showToast({ title: "Сообщение отправлено", variant: "success" });
     } catch (err) {
       console.error(err);
-      toast.error("Ошибка при отправке формы обратной связи");
+      showToast({
+        title: "Ошибка при отправке формы обратной связи",
+        variant: "error",
+      });
     }
   }
 

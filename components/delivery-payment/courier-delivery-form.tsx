@@ -59,16 +59,10 @@ function CourierDeliveryForm({ className }: Props) {
 
   async function onSubmit(orderData: OrderInputs) {
     const date = formatTimestampToDDMMYYYY(calendarValue?.toString());
-
     setComment(orderData, { anonymously, date, whenToDeliver });
 
     const order = getOrder();
     const orderDataCopy = orderData;
-
-    showToast({
-      title: "Отправляем вашу заявку, пожалуйста подождите...",
-      variant: "success",
-    });
 
     const requestData = {
       customer_name: orderDataCopy.fullName,
@@ -88,10 +82,10 @@ function CourierDeliveryForm({ className }: Props) {
     reset();
     try {
       const data = await sendOrder(requestData);
-      console.log(data);
-      // if (orderResponse) {
-      //   window.open(orderResponse, "_blank");
-      // }
+
+      if (data?.data.payment_url) {
+        window.open(data?.data.payment_url, "_blank");
+      }
 
       clearCart();
       router.push("/");

@@ -1,6 +1,6 @@
+import { showToast } from "@/components/toast";
 import { CartProduct } from "@/types/product";
 import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "@/utils/constants";
-import { toast } from "sonner";
 import { create } from "zustand";
 
 interface CartStore {
@@ -44,7 +44,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
         return { cart: state.cart };
       }
 
-      toast.success("Товар добавлен в корзину");
+      showToast({ title: "Товар добавлен в корзину", variant: "success" });
 
       const updatedCart = [
         ...state.cart,
@@ -55,7 +55,8 @@ export const useCartStore = create<CartStore>((set, get) => ({
     }),
   removeFromCart: (slug) =>
     set((state) => {
-      toast.success("Товар удален из корзины");
+      showToast({ title: "Товар удален из корзины", variant: "success" });
+
       const updatedCart = state.cart.filter(
         (cartProduct) => cartProduct.slug !== slug
       );

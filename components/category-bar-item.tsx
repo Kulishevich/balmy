@@ -64,7 +64,7 @@ function CategoryBarItem({ category, activeCategorySlug, index }: Props) {
                     {name}{" "}
                     <ArrowRightIcon
                       className={cn(
-                        "transition text-white group-hover/item:text-gold"
+                        "transition text-white group-hover/item:text-gold flex-shrink-0"
                       )}
                     />
                   </Link>
@@ -76,7 +76,7 @@ function CategoryBarItem({ category, activeCategorySlug, index }: Props) {
                     {name}{" "}
                     <ArrowRightIcon
                       className={cn(
-                        "transition text-white group-hover/item:text-gold"
+                        "transition text-white group-hover/item:text-gold flex-shrink-0"
                       )}
                     />
                   </Link>

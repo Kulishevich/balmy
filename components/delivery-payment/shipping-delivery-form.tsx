@@ -60,17 +60,13 @@ function ShippingDeliveryForm({ className }: Props) {
       })),
     };
 
-    showToast({
-      title: "Отправляем вашу заявку, пожалуйста подождите...",
-      variant: "success",
-    });
     reset();
     try {
-      await sendOrder(requestData);
+      const data = await sendOrder(requestData);
 
-      // if (orderResponse) {
-      //   window.open(orderResponse, "_blank");
-      // }
+      if (data?.data.payment_url) {
+        window.open(data?.data.payment_url, "_blank");
+      }
 
       clearCart();
       router.push("/");

@@ -1,3 +1,5 @@
+import { IOrderItem } from "./orders";
+
 export interface Order {
   deliveryType: string;
   shippingPrice: number;
@@ -29,4 +31,15 @@ export interface BuyOneClickOrder {
   name: string;
   phone: string;
   comment: string;
+}
+
+export interface OrderResponse {
+  data: {
+    order: IOrderItem;
+    payment_url: string;
+    moysklad_order: {
+      id: string;
+      name: string;
+    };
+  };
 }

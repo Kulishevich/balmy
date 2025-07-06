@@ -9,7 +9,6 @@ import { usePopupStore } from "@/store/popup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { buyOneClickSchema } from "@/utils/schemes/buy-one-click";
-import { toast } from "sonner";
 import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
 import { sendBuyOneClickOrder } from "@/api/buy-one-click-order";
@@ -53,7 +52,7 @@ function BuyOneClickPopup() {
 
   async function onSubmit(buyOneClickData: BuyOneClickInputs) {
     if (!product) {
-      toast.error("Ошибка при получении продукта");
+      showToast({ title: "Ошибка при получении продукта", variant: "error" });
       return;
     }
 

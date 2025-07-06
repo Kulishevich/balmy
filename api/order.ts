@@ -1,6 +1,8 @@
-import { OrderRequest } from "@/types/order";
+import { OrderRequest, OrderResponse } from "@/types/order";
 
-export async function sendOrder(orderData: OrderRequest) {
+export async function sendOrder(
+  orderData: OrderRequest
+): Promise<OrderResponse | null> {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/orders`;
 
   try {
@@ -17,7 +19,7 @@ export async function sendOrder(orderData: OrderRequest) {
       throw new Error(`Ошибка API: ${res.status} — ${message}`);
     }
 
-    const order = await res.text();
+    const order = await res.json();
     return order;
   } catch (err) {
     console.error("Ошибка при отправке one-click заказа:", err);

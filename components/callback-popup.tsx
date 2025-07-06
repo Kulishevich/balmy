@@ -9,9 +9,9 @@ import Action from "./action";
 import { popupAnimation } from "@/utils/animations";
 import { callbackSchema } from "@/utils/schemes/callback";
 import cn from "clsx";
-import { toast } from "sonner";
 import Link from "next/link";
 import { sendFeedback } from "@/api/feedback";
+import { showToast } from "./toast";
 
 export type CallbackInputs = {
   phone: string;
@@ -49,10 +49,13 @@ function CallbackPopup() {
       console.log(data);
 
       resetFormFields();
-      toast.success("Сообщение отправлено");
+      showToast({ title: "Сообщение отправлено", variant: "success" });
     } catch (err) {
       console.error(err);
-      toast.error("Ошибка при отправке формы обратной связи");
+      showToast({
+        title: "Ошибка при отправке формы обратной связи",
+        variant: "error",
+      });
     }
   }
 
