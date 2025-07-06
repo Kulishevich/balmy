@@ -30,7 +30,7 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
 
   return (
     <div className="flex flex-col items-start gap-7 p-6 w-full border border-white rounded-[5px]">
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full items-start">
         <p className="text-[26px]">
           Заказ №<span className="underline">{order.order_number}</span> от{" "}
           {new Date(order.order_date).toLocaleDateString("RU-ru")}

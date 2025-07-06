@@ -80,6 +80,7 @@ export const SignInForm = () => {
             "custom-input--dark-error": errors["password"],
           })}
           id="password"
+          type="password"
           placeholder="Пароль"
           {...register("password")}
         />

@@ -4,16 +4,15 @@ import { m } from "motion/react";
 import { leftAppearanceAnimation } from "@/utils/animations";
 import { usePopupStore } from "@/store/popup";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { Direction, Sort, useFilterStore } from "@/store/filter";
 import CloseIcon from "@/public/icons/close.svg";
 import cn from "clsx";
-import { useSwipeable } from "react-swipeable";
 import { IOrderStatus } from "@/types/orders";
+import { useSwipeable } from "react-swipeable";
 
-const sorts = [
-  { id: "name", direction: "asc", name: "По дате" },
-  { id: "price", direction: "asc", name: "По возрастанию цены" },
-  { id: "price", direction: "desc", name: "По убыванию цены" },
+export const sorts = [
+  { id: "date_asc", name: "По дате" },
+  { id: "price_asc", name: "По возрастанию цены" },
+  { id: "price_desc", name: "По убыванию цены" },
 ];
 
 function OrderHistoryFilterPopup({
@@ -26,57 +25,43 @@ function OrderHistoryFilterPopup({
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
   const pathname = usePathname();
-  const { sort, direction, setSort, setDirection, clearFitler } =
-    useFilterStore();
+
+  const selectedStatus = searchParams.get("status") || "";
+  const selectedSort = searchParams.get("sort") || "";
+
   const swipeHandlers = useSwipeable({
     onSwipedRight: removePopup,
     trackTouch: true,
   });
 
-  const currentSort = `${sort}-${direction}`;
-  const categorySlug = pathname.split("/")[2];
-  const page = pathname.split("/")[4];
-  const showBrands = categorySlug !== "sets";
-
   function handleSortChange(sortDirection: string) {
-    return () => {
-      const [sort, direction] = sortDirection.split("-");
+    params.set("sort", sortDirection);
 
-      setSort(sort as Sort);
-      setDirection(direction as Direction);
+    const url = `?${params.toString()}`;
 
-      params.set("sort", sort);
-      params.set("direction", direction);
-
-      const newUrl = pathname.replace(`/page/${page}`, "");
-
-      const url = `${newUrl}?${params.toString()}`;
-
-      router.push(url);
-    };
+    router.push(url);
   }
 
   function handleSortClick() {
     removePopup();
   }
 
-  function handleClickOnCleanFilterButton() {
-    clearFitler();
-    params.delete("brand");
-    params.delete("sort");
-    params.delete("direction");
+  function handleStatusChange(status: string) {
+    params.set("status", status);
 
-    const newUrl = pathname.replace(`/page/${page}`, "");
-
-    const url = `${newUrl}?${params.toString()}`;
+    const url = `?${params.toString()}`;
 
     router.push(url);
+  }
+
+  function handleClickOnCleanFilterButton() {
     removePopup();
+    router.push(pathname);
   }
 
   return (
     <m.div
-      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-scroll sm:overflow-hidden bg-dark-grey py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
+      className="fixed z-20 sm:max-w-[425px] right-0 inset-y-0 w-full min-h-svh overflow-y-scroll bg-dark-grey py-4 sm:py-10 px-6 sm:px-8 flex flex-col"
       {...leftAppearanceAnimation}
       {...swipeHandlers}
     >
@@ -91,8 +76,7 @@ function OrderHistoryFilterPopup({
 
       <p
         className={cn(
-          "mt-[10px] text-[21px] font-semibold inline-flex justify-between items-center w-full",
-          { "mt-6": showBrands }
+          "mt-[10px] text-[21px] font-semibold inline-flex justify-between items-center w-full"
         )}
       >
         Статус заказа
@@ -101,23 +85,22 @@ function OrderHistoryFilterPopup({
       <div className="mt-4 flex flex-col">
         {statuses?.map((item) => {
           const { id, code, name } = item;
-          const sortDirection = `${id}-${code}`;
 
           return (
             <div
               className="flex items-center gap-[10px] py-[6px]"
-              key={sortDirection}
+              key={id}
               onClick={handleSortClick}
             >
               <input
                 className="custom-checkbox border border-white/30"
-                id={sortDirection}
+                id={code}
                 type="radio"
                 name="sort"
-                checked={sortDirection == currentSort}
-                onChange={handleSortChange(sortDirection)}
+                checked={code == selectedStatus}
+                onChange={() => handleStatusChange(code)}
               />
-              <label className="cursor-pointer w-full" htmlFor={sortDirection}>
+              <label className="cursor-pointer w-full" htmlFor={code}>
                 {name}
               </label>
             </div>
@@ -127,8 +110,7 @@ function OrderHistoryFilterPopup({
 
       <p
         className={cn(
-          "mt-[10px] text-[21px] font-semibold inline-flex justify-between items-center w-full",
-          { "mt-6": showBrands }
+          "mt-[10px] text-[21px] font-semibold inline-flex justify-between items-center w-full"
         )}
       >
         Сортировка
@@ -136,24 +118,23 @@ function OrderHistoryFilterPopup({
       </p>
       <div className="mt-4 flex flex-col">
         {sorts.map((item) => {
-          const { id, direction, name } = item;
-          const sortDirection = `${id}-${direction}`;
+          const { id, name } = item;
 
           return (
             <div
               className="flex items-center gap-[10px] py-[6px]"
-              key={sortDirection}
+              key={id}
               onClick={handleSortClick}
             >
               <input
                 className="custom-checkbox border border-white/30"
-                id={sortDirection}
+                id={id}
                 type="radio"
                 name="sort"
-                checked={sortDirection == currentSort}
-                onChange={handleSortChange(sortDirection)}
+                checked={id == selectedSort}
+                onChange={() => handleSortChange(id)}
               />
-              <label className="cursor-pointer w-full" htmlFor={sortDirection}>
+              <label className="cursor-pointer w-full" htmlFor={id}>
                 {name}
               </label>
             </div>

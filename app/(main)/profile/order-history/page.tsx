@@ -30,7 +30,7 @@ async function PrivacyPolicyPage({
 
     redirect("/authorization");
   }
-  console.log("s", orders?.individual[0]);
+
   const filteredOrders = orders?.individual?.filter((order) =>
     status ? order.status?.code === status : true
   );
