@@ -1,6 +1,7 @@
 import { getBrands } from "@/api/brands";
 import { getCategories } from "@/api/category";
 import { getContacts } from "@/api/contacts";
+import { getStatuses } from "@/api/orders";
 import { getSettings } from "@/api/settings";
 import Action from "@/components/action";
 import CategoryBar from "@/components/category-bar";
@@ -19,6 +20,7 @@ async function NotFoundPage() {
   const settings = await getSettings();
   const contacts = await getContacts();
   const brands = await getBrands();
+  const statuses = await getStatuses();
 
   return (
     <div className="relative">
@@ -49,7 +51,7 @@ async function NotFoundPage() {
         categories={categories}
         contacts={contacts}
       />
-      <Popups brands={brands || []} />
+      <Popups brands={brands || []} statuses={statuses} />
       <MobileMenu categories={categories} contacts={contacts} />
       <PhoneAnimation />
       <ScrollToTopButton />

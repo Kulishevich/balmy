@@ -1,14 +1,50 @@
+"use client";
 import React from "react";
 import Action from "@/components/action";
 import LongArrowDownIcon from "@/public/icons/long-arrow-down.svg";
 import clsx from "clsx";
 import { IOrderStatus } from "@/types/orders";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+export const sorts = [
+  { id: "date_asc", name: "По дате" },
+  { id: "price_asc", name: "По возрастанию цены" },
+  { id: "price_desc", name: "По убыванию цены" },
+];
 
 export default function OrderFilterDesktop({
   statuses,
 }: {
   statuses: IOrderStatus[] | null;
 }) {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const selectedStatus = searchParams.get("status") || "";
+  const selectedSort = searchParams.get("sort") || "";
+
+  function handleSortChange(sortDirection: string) {
+    params.set("sort", sortDirection);
+
+    const url = `?${params.toString()}`;
+
+    router.push(url);
+  }
+
+  function handleStatusChange(status: string) {
+    params.set("status", status);
+
+    const url = `?${params.toString()}`;
+
+    router.push(url);
+  }
+
+  function handleClickOnCleanFilterButton() {
+    router.push(pathname);
+  }
+
   return (
     <div className="flex-col gap-6 hidden lg:flex w-[235px]">
       <div className="flex flex-col">
@@ -21,18 +57,18 @@ export default function OrderFilterDesktop({
           <LongArrowDownIcon />
         </p>
         <div className="mt-4 flex flex-col gap-y-3">
-          {statuses?.map((status) => (
-            <div className="flex items-center gap-[10px]" key={"1"}>
+          {statuses?.map((statusItem) => (
+            <div className="flex items-center gap-[10px]" key={statusItem.id}>
               <input
                 className="custom-checkbox border border-white/30"
-                id={"1"}
+                id={statusItem.code}
                 type="radio"
-                name="sort"
-                // checked={sortDirection == currentSort}
-                // onChange={handleSortChange(sortDirection)}
+                name="status"
+                checked={selectedStatus === statusItem.code}
+                onChange={() => handleStatusChange(statusItem.code)}
               />
-              <label className="cursor-pointer" htmlFor={"1"}>
-                {status.name}
+              <label className="cursor-pointer" htmlFor={statusItem.code}>
+                {statusItem.name}
               </label>
             </div>
           ))}
@@ -49,49 +85,25 @@ export default function OrderFilterDesktop({
           <LongArrowDownIcon />
         </p>
         <div className="mt-4 flex flex-col gap-y-3">
-          <div className="flex items-center gap-[10px]" key={"1"}>
-            <input
-              className="custom-checkbox border border-white/30"
-              id={"1"}
-              type="radio"
-              name="sort"
-              // checked={sortDirection == currentSort}
-              // onChange={handleSortChange(sortDirection)}
-            />
-            <label className="cursor-pointer" htmlFor={"1"}>
-              По дате
-            </label>
-          </div>
-        </div>
-        <div className="mt-4 flex flex-col gap-y-3">
-          <div className="flex items-center gap-[10px]" key={"1"}>
-            <input
-              className="custom-checkbox border border-white/30"
-              id={"1"}
-              type="radio"
-              name="sort"
-              // checked={sortDirection == currentSort}
-              // onChange={handleSortChange(sortDirection)}
-            />
-            <label className="cursor-pointer" htmlFor={"1"}>
-              По возрастанию цены
-            </label>
-          </div>
-        </div>
-        <div className="mt-4 flex flex-col gap-y-3">
-          <div className="flex items-center gap-[10px]" key={"1"}>
-            <input
-              className="custom-checkbox border border-white/30"
-              id={"1"}
-              type="radio"
-              name="sort"
-              // checked={sortDirection == currentSort}
-              // onChange={handleSortChange(sortDirection)}
-            />
-            <label className="cursor-pointer" htmlFor={"1"}>
-              По убыванию цены
-            </label>
-          </div>
+          {sorts.map((item) => {
+            const { id, name } = item;
+
+            return (
+              <div className="flex items-center gap-[10px]" key={id}>
+                <input
+                  className="custom-checkbox border border-white/30"
+                  id={id}
+                  type="radio"
+                  name="sort"
+                  checked={selectedSort == id}
+                  onChange={() => handleSortChange(id)}
+                />
+                <label className="cursor-pointer" htmlFor={id}>
+                  {name}
+                </label>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -100,7 +112,7 @@ export default function OrderFilterDesktop({
         type="button"
         className="mt-6 w-full"
         size="big"
-        // onClick={handleClickOnCleanFilterButton}
+        onClick={handleClickOnCleanFilterButton}
       >
         Очистить фильтр
       </Action>

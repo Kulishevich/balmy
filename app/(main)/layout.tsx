@@ -12,6 +12,7 @@ import { getContacts } from "@/api/contacts";
 import { getBrands } from "@/api/brands";
 import PhoneAnimation from "@/components/phone-animation/PhoneAnimation";
 import ScrollToTopButton from "@/components/scroll-to-top-button";
+import { getStatuses } from "@/api/orders";
 
 export default async function MainLayout({
   children,
@@ -22,6 +23,7 @@ export default async function MainLayout({
   const settings = await getSettings();
   const contacts = await getContacts();
   const brands = await getBrands();
+  const statuses = await getStatuses();
 
   return (
     // <div className="transform origin-top md:scale-[0.9] 2xl:scale-[1] relative">
@@ -36,7 +38,8 @@ export default async function MainLayout({
         categories={categories}
         contacts={contacts}
       />
-      <Popups brands={brands || []} />
+      <Popups brands={brands || []} statuses={statuses} />
+
       <MobileMenu categories={categories} contacts={contacts} />
       <PhoneAnimation />
       <ScrollToTopButton />

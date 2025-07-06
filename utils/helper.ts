@@ -1,5 +1,6 @@
 import { getProductBySlug } from "@/api/products";
 import { Category } from "@/types/category";
+import { IOrderItem } from "@/types/orders";
 import { Product } from "@/types/product";
 import { Dispatch, SetStateAction } from "react";
 import slugify from "slugify";
@@ -131,4 +132,24 @@ export function calculateDiscountedPrice(
   discountPercentage: number
 ) {
   return originalPrice - (originalPrice * discountPercentage) / 100;
+}
+
+export function sortOrders(orders: IOrderItem[], sort: string) {
+  switch (sort) {
+    case "date_asc":
+      return [...orders].sort(
+        (a, b) =>
+          new Date(a.order_date).getTime() - new Date(b.order_date).getTime()
+      );
+    case "price_asc":
+      return [...orders].sort(
+        (a, b) => Number(a.total_amount) - Number(b.total_amount)
+      );
+    case "price_desc":
+      return [...orders].sort(
+        (a, b) => Number(b.total_amount) - Number(a.total_amount)
+      );
+    default:
+      return orders;
+  }
 }

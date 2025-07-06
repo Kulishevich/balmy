@@ -87,7 +87,6 @@ export async function getMe(token: string) {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 },
       method: "GET",
       headers: {
         Authorization: token ? `${token}` : "",

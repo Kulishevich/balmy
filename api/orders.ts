@@ -31,8 +31,8 @@ export async function getStatuses() {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 },
       method: "GET",
+      next: { revalidate: 60 },
       headers: {
         "Content-Type": "application/json",
       },

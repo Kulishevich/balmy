@@ -7,8 +7,15 @@ import { getOrders, getStatuses } from "@/api/orders";
 import { getMe, LogoutRequest } from "@/api/auth";
 import { redirect } from "next/navigation";
 import OrderFilterDesktop from "@/components/order-history/order-filter-desktop";
+import { sortOrders } from "@/utils/helper";
 
-async function PrivacyPolicyPage() {
+async function PrivacyPolicyPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sort: string; status: string }>;
+}) {
+  const { sort, status } = await searchParams;
+
   const cookiesStore = await cookies();
   const token = cookiesStore.get("token")?.value || "";
 
@@ -23,6 +30,12 @@ async function PrivacyPolicyPage() {
 
     redirect("/authorization");
   }
+  console.log("s", orders?.individual[0]);
+  const filteredOrders = orders?.individual?.filter((order) =>
+    status ? order.status?.code === status : true
+  );
+
+  const sortedOrders = sortOrders(filteredOrders ?? [], sort);
 
   return (
     <div className="container">
@@ -30,14 +43,20 @@ async function PrivacyPolicyPage() {
         История заказов
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <OrderFilterMobile statuses={statuses} />
+      <OrderFilterMobile />
       <div className="flex gap-[95px] mt-8 lg:mt-10">
         <OrderFilterDesktop statuses={statuses} />
 
         <div className="flex flex-col gap-[30px] w-full lg:w-[960px]">
-          {orders?.individual.map((order) => (
-            <OrderHistoryElem key={order.id} order={order} />
-          ))}
+          {!!sortedOrders?.length ? (
+            sortedOrders.map((order) => (
+              <OrderHistoryElem key={order.id} order={order} />
+            ))
+          ) : (
+            <p className="text-[21px] leading-[29px] text-center w-full">
+              Заказы не найдены :(
+            </p>
+          )}
         </div>
       </div>
     </div>

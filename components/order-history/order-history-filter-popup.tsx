@@ -8,6 +8,7 @@ import { Direction, Sort, useFilterStore } from "@/store/filter";
 import CloseIcon from "@/public/icons/close.svg";
 import cn from "clsx";
 import { useSwipeable } from "react-swipeable";
+import { IOrderStatus } from "@/types/orders";
 
 const sorts = [
   { id: "name", direction: "asc", name: "По дате" },
@@ -15,13 +16,11 @@ const sorts = [
   { id: "price", direction: "desc", name: "По убыванию цены" },
 ];
 
-const orderStatus = [
-  { id: "name", direction: "asc", name: "Собирается" },
-  { id: "price", direction: "asc", name: "В пути" },
-  { id: "price", direction: "desc", name: "Выполнен" },
-];
-
-function OrderHistoryFilterPopup() {
+function OrderHistoryFilterPopup({
+  statuses,
+}: {
+  statuses: IOrderStatus[] | null;
+}) {
   const { removePopup } = usePopupStore();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -100,9 +99,9 @@ function OrderHistoryFilterPopup() {
         <LongArrowDownIcon />
       </p>
       <div className="mt-4 flex flex-col">
-        {orderStatus.map((item) => {
-          const { id, direction, name } = item;
-          const sortDirection = `${id}-${direction}`;
+        {statuses?.map((item) => {
+          const { id, code, name } = item;
+          const sortDirection = `${id}-${code}`;
 
           return (
             <div

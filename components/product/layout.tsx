@@ -30,6 +30,7 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
   const [localCartProduct, setLocalCartProduct] = useState<CartProduct>(
     getCartProductFromProduct(product)
   );
+
   const router = useRouter();
   const { addToCart, getCartProduct } = useCartStore();
   const { setProduct } = useBuyOneClickStore();

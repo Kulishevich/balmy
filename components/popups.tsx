@@ -8,8 +8,15 @@ import { popupBackgroundAnimation } from "@/utils/animations";
 import FilterPopup from "./catalog/filter-popup";
 import { Brand } from "@/types/brand";
 import OrderHistoryFilterPopup from "./order-history/order-history-filter-popup";
+import { IOrderStatus } from "@/types/orders";
 
-function Popups({ brands }: { brands: Brand[] }) {
+function Popups({
+  brands,
+  statuses,
+}: {
+  brands: Brand[];
+  statuses: IOrderStatus[] | null;
+}) {
   const { popup, removePopup } = usePopupStore();
 
   if (typeof window == "undefined") return null;
@@ -23,7 +30,9 @@ function Popups({ brands }: { brands: Brand[] }) {
               {popup.type == "callback" && <CallbackPopup />}
               {popup.type == "buy-one-click" && <BuyOneClickPopup />}
               {popup.type == "filter" && <FilterPopup brands={brands} />}
-              {popup.type == "orders-filter" && <OrderHistoryFilterPopup />}
+              {popup.type == "orders-filter" && (
+                <OrderHistoryFilterPopup statuses={statuses} />
+              )}
               <m.div
                 {...popupBackgroundAnimation}
                 className="fixed inset-0 bg-dark-gray/70 z-10"

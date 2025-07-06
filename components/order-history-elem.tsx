@@ -1,10 +1,33 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import Action from "./action";
 import RepeatIcon from "@/public/icons/repeat.svg";
 import { IOrderItem } from "@/types/orders";
+import { useCartStore } from "@/store/cart";
 
 function OrderHistoryElem({ order }: { order: IOrderItem }) {
+  const { addToCart } = useCartStore();
+
+  function handleClickOnAddToCartButton() {
+    order.items.map((product) => {
+      addToCart({
+        id: product.product_id,
+        slug: product.product.slug,
+        name: product.product_name,
+        price: +product.price,
+        basePrice: +product.product.price,
+        discount: +product.product.discount,
+        discountPrices:
+          (Number(product.product.price) *
+            (100 - Number(product.product.discount))) /
+          100,
+        quantity: product.quantity,
+        image: product.product.photo_path,
+      });
+    });
+  }
+
   return (
     <div className="flex flex-col items-start gap-7 p-6 w-full border border-white rounded-[5px]">
       <div className="flex justify-between w-full">
@@ -41,9 +64,13 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
       </div>
       <div className="flex flex-col gap-3">
         <p className="text-[#9E9E9E]">Сумма:</p>
-        <p className="text-[30px]">{order.total_amount}</p>
+        <p className="text-[30px]">{order.total_amount} byn</p>
       </div>
-      <Action color="gold" className="w-full lg:w-[300px]">
+      <Action
+        color="gold"
+        className="w-full lg:w-[300px]"
+        onClick={handleClickOnAddToCartButton}
+      >
         <RepeatIcon />
         Повторить заказ
       </Action>
