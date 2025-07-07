@@ -14,7 +14,7 @@ function SetSection({ banners }: Props) {
   const showSliderButtons = banners.length > 1;
 
   return (
-    <section className="mt-[89px] container pt-[83px]">
+    <section className="container pt-[83px]">
       <div className="relative bg-[url('/images/sets-bg.webp')] bg-cover bg-center w-full text-white rounded-[5px] ">
         <div className="overflow-x-hidden overflow-y-visible">
           <Swiper

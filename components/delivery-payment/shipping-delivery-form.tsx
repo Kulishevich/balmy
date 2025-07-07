@@ -5,19 +5,21 @@ import { useForm } from "react-hook-form";
 import { OrderInputs } from "./courier-delivery-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { orderSchema } from "@/utils/schemes/order";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sendOrder } from "@/api/order";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
 import { showToast } from "../toast";
+import { IMe } from "@/types/auth";
 
 export type Post = "Европочта" | "Белпочта" | "СДЭК";
 
 interface Props {
   className?: string;
+  meInfo: IMe | null;
 }
 
-function ShippingDeliveryForm({ className }: Props) {
+function ShippingDeliveryForm({ className, meInfo }: Props) {
   const [post, setPost] = useState<Post>("Европочта");
   const { setDeliveryType, setComment, getOrder } = useOrderState();
   const router = useRouter();
@@ -26,10 +28,18 @@ function ShippingDeliveryForm({ className }: Props) {
     handleSubmit,
     register,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<OrderInputs>({
     resolver: yupResolver(orderSchema),
   });
+
+  useEffect(() => {
+    setValue("fullName", meInfo?.name || "");
+    setValue("email", meInfo?.email || "");
+    setValue("phone", meInfo?.phone || "");
+    setValue("address", meInfo?.actual_address || "");
+  }, [meInfo, setValue]);
 
   function handleClickOnForm() {
     setDeliveryType("Post");
@@ -53,7 +63,6 @@ function ShippingDeliveryForm({ className }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
-      promo_code: "убрать",
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,

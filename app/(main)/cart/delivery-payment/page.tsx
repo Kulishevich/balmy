@@ -5,11 +5,18 @@ import Action from "@/components/action";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
 import { useOrderState } from "@/store/order";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { getMe } from "@/api/auth";
+import { IMe } from "@/types/auth";
 
 function DeliveryPayment() {
+  const [meInfo, setMeInfo] = useState<IMe | null>(null);
   const [personalInfo, setPersonalInfo] = useState(false);
+
+  const router = useRouter();
   const { deliveryType } = useOrderState();
   const form =
     deliveryType == "Courier"
@@ -20,11 +27,31 @@ function DeliveryPayment() {
     setPersonalInfo(e.target.checked);
   }
 
+  useEffect(() => {
+    const token = Cookies.get("token");
+
+    const getMeInfo = async (token: string) => {
+      try {
+        const data = await getMe(token);
+        setMeInfo(data);
+      } catch (err) {
+        console.log(err);
+        router.push("/authorization");
+      }
+    };
+
+    if (token) {
+      getMeInfo(token);
+    } else {
+      router.push("/authorization");
+    }
+  }, []);
+
   return (
     <>
       <Title className="mt-10 text-center">Доставка и оплата</Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <DeliverySection />
+      <DeliverySection meInfo={meInfo} />
       <PaymentMethodsSection deliveryType={deliveryType} />
       <div className="container mt-[42px] lg:mt-[120px]">
         <div className="flex items-center gap-2">

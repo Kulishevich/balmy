@@ -17,7 +17,6 @@ export interface OrderRequest {
   comment: string;
   delivery_method: string;
   payment_method: string;
-  promo_code: string;
   items: OrderPosition[];
 }
 

@@ -42,7 +42,7 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
       <div className="flex flex-col gap-3 w-full">
         <p className="text-[#9E9E9E]">Товары:</p>
         <div className="flex gap-4 w-full overflow-auto">
-          {order.items.map((product) => (
+          {order.items?.map((product) => (
             <Link
               href={`/product/${product.product.slug}`}
               className="relative w-[120px] h-[120px] shrink-0"

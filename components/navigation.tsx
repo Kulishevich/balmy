@@ -2,6 +2,7 @@
 import LocationIcon from "@/public/icons/location.svg";
 import BurgerIcon from "@/public/icons/burger.svg";
 import ProfileIcon from "@/public/icons/profile.svg";
+import ProfileMobileIcon from "@/public/icons/profile-mobile.svg";
 import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import SearchMobileIcon from "@/public/icons/search-mobile.svg";
 import Link from "next/link";
@@ -71,6 +72,9 @@ function Navigation({
               <span className="sr-only">Открыть поиск</span>
             </button>
             <CartInfo />
+            <Link href={"/profile"}>
+              <ProfileMobileIcon />
+            </Link>
           </div>
         </m.div>
       </AnimatePresence>

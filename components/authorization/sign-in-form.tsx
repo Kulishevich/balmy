@@ -31,13 +31,12 @@ export const SignInForm = () => {
     try {
       const res = await LoginRequest(data);
       const token = `${res.data.token_type} ${res.data.token}`;
-
-      Cookies.set("token", token, { path: "/", secure: true });
+      // todo: change secure - true
+      Cookies.set("token", token, { path: "/", secure: false });
       reset();
       showToast({
-        title: "Спасибо за регистрацию!",
-        description:
-          "Ожидайте подтверждения регистрации на вашей почте, заявка должна быть одобрена менеджерами.",
+        title: "Успешный вход!",
+        description: `Токен ${token}`,
         variant: "success",
       });
       router.push("/");

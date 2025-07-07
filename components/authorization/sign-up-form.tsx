@@ -30,8 +30,6 @@ export const SignUpForm = () => {
   const personalInfo = watch("personal-info");
 
   const onSubmit = async (data: SignUpForm) => {
-    console.log(data);
-
     const phone = normalizePhone(data.phone);
 
     try {

@@ -1,6 +1,6 @@
 "use client";
 import cn from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, m } from "motion/react";
 import { Value } from "react-calendar/dist/esm/shared/types.js";
 import { appearanceAnimation } from "@/utils/animations";
@@ -14,9 +14,11 @@ import { sendOrder } from "@/api/order";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
 import { showToast } from "../toast";
+import { IMe } from "@/types/auth";
 
 interface Props {
   className?: string;
+  meInfo: IMe | null;
 }
 
 export type OrderInputs = {
@@ -26,12 +28,13 @@ export type OrderInputs = {
   email?: string;
 };
 
-function CourierDeliveryForm({ className }: Props) {
+function CourierDeliveryForm({ className, meInfo }: Props) {
   const { setDeliveryType, setComment, getOrder } = useOrderState();
   const {
     handleSubmit,
     register,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<OrderInputs>({
     resolver: yupResolver(orderSchema),
@@ -44,6 +47,13 @@ function CourierDeliveryForm({ className }: Props) {
   const [anonymously, setAnonymously] = useState(false);
   const router = useRouter();
   const minDate = new Date();
+
+  useEffect(() => {
+    setValue("fullName", meInfo?.name || "");
+    setValue("email", meInfo?.email || "");
+    setValue("phone", meInfo?.phone || "");
+    setValue("address", meInfo?.actual_address || "");
+  }, [meInfo, setValue]);
 
   function handleClickOnForm() {
     setDeliveryType("Courier");
@@ -72,7 +82,6 @@ function CourierDeliveryForm({ className }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
-      promo_code: "убрать",
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,

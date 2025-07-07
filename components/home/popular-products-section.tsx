@@ -7,7 +7,7 @@ async function PopularProductsSection() {
 
   return (
     !!popularProducts.length && (
-      <section className="mt-[796px] lg:mt-[194px] container">
+      <section className="container mb-[89px]">
         <Title className="text-center">Популярные товары</Title>
         <PopularProductsSlider popularProducts={popularProducts} />
       </section>

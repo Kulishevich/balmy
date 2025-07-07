@@ -5,8 +5,9 @@ import CourierDeliveryForm from "@/components/delivery-payment/courier-delivery-
 import ShippingDeliveryForm from "@/components/delivery-payment/shipping-delivery-form";
 import cn from "clsx";
 import { useOrderState } from "@/store/order";
+import { IMe } from "@/types/auth";
 
-function DeliverySection() {
+function DeliverySection({ meInfo }: { meInfo: IMe | null }) {
   const { deliveryType, setDeliveryType } = useOrderState();
 
   function handleClickOnCourierDelivery() {
@@ -61,12 +62,14 @@ function DeliverySection() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-[30px]">
         <CourierDeliveryForm
+          meInfo={meInfo}
           className={cn("transition", {
             "opacity-100": deliveryType == "Courier",
             "opacity-25 hidden lg:flex": deliveryType == "Post",
           })}
         />
         <ShippingDeliveryForm
+          meInfo={meInfo}
           className={cn("transition", {
             "opacity-100": deliveryType == "Post",
             "opacity-25 hidden lg:flex": deliveryType == "Courier",

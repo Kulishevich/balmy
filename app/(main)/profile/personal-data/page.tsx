@@ -68,7 +68,7 @@ async function PrivacyPolicyPage() {
               Партнёр Balmy
             </button>
           </div>
-          <div className="flex flex-col gap-[10px]">
+          {/* <div className="flex flex-col gap-[10px]">
             <label className="font-normal cursor-pointer" htmlFor="discount">
               Персональная скидка
             </label>
@@ -81,7 +81,7 @@ async function PrivacyPolicyPage() {
               персональная скидка зависит от общей суммы заказов: 5%-при покупке
               от 1000 BYN, 10% - при покупке от 2000 BYN.
             </span>
-          </div>
+          </div> */}
         </div>
         <Action
           type="link"

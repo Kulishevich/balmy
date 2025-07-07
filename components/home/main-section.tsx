@@ -8,7 +8,7 @@ function MainSection({ mainBanner }: { mainBanner: MainBanner | null }) {
   const { isMobile } = useScreenSize();
 
   return (
-    <section className="mt-4 lg:mt-[44px] container">
+    <section className="mt-4 lg:mt-[44px] mb-[786px] lg:mb-[221px] container">
       <div className="relative w-full lg:min-h-[400px] min-h-[431px] bg-[#080F08] bg-center bg-no-repeat bg-cover rounded-[5px]">
         <Image
           src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${
