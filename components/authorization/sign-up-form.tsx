@@ -14,6 +14,7 @@ type SignUpForm = {
   phone: string;
   comment: string;
   "personal-info": boolean;
+  email?: string;
 };
 
 export const SignUpForm = () => {
@@ -33,13 +34,13 @@ export const SignUpForm = () => {
     const phone = normalizePhone(data.phone);
 
     try {
-      const res = await CreateClientRequest({
+      await CreateClientRequest({
         phone: phone,
         comment: data.comment,
         full_name: data.fullName,
+        email: data.email || "",
       });
 
-      console.log(res);
       showToast({
         title: "Спасибо за регистрацию!",
         description:
@@ -79,7 +80,7 @@ export const SignUpForm = () => {
         )}
       </div>
       <div className="flex flex-col gap-[6px]">
-        <label className="font-normal cursor-pointer" htmlFor="email">
+        <label className="font-normal cursor-pointer" htmlFor="phone">
           Телефон
         </label>
         <input
@@ -97,14 +98,32 @@ export const SignUpForm = () => {
         )}
       </div>
       <div className="flex flex-col gap-[6px]">
-        <label className="font-normal cursor-pointer" htmlFor="password">
+        <label className="font-normal cursor-pointer" htmlFor="email">
+          Email
+        </label>
+        <input
+          className={clsx("custom-input--dark mt-[6px]", {
+            "custom-input--dark-error": errors["email"],
+          })}
+          {...register("email")}
+          id="email"
+          placeholder="Введите ваш телефон"
+        />
+        {errors["email"] && (
+          <span className="mt-2 text-[#EB001B] text-[15px] font-normal">
+            *{errors["email"].message}
+          </span>
+        )}
+      </div>
+      <div className="flex flex-col gap-[6px]">
+        <label className="font-normal cursor-pointer" htmlFor="comment">
           Комментарий
         </label>
         <textarea
-          className={clsx("custom-input--dark mt-[6px] h-[200px] resize-none", {
+          className={clsx("custom-input--dark mt-[6px] h-[100px] resize-none", {
             "custom-input--dark-error": errors["comment"],
           })}
-          id="comment-2"
+          id="comment"
           placeholder="Комментарий"
           {...register("comment")}
         />
@@ -117,13 +136,13 @@ export const SignUpForm = () => {
       <div className="flex items-center gap-2">
         <input
           className="custom-checkbox border border-[#1717174D]/20"
-          id="date"
+          id="personal-info"
           type="checkbox"
           {...register("personal-info")}
         />
         <label
           className="font-normal lg:text-[17px] text-[14px]  cursor-pointer"
-          htmlFor="date"
+          htmlFor="personal-info"
         >
           Согласие на обработку персональных данных
         </label>

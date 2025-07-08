@@ -15,12 +15,11 @@ export default function ProfileNavigation() {
   const logout = async () => {
     try {
       await LogoutRequest(token);
-
-      Cookies.remove("token");
-
-      router.push("/authorization");
     } catch (err) {
       console.error("Ошибка при выходе:", err);
+    } finally {
+      Cookies.remove("token");
+      router.push("/authorization");
     }
   };
 

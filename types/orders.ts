@@ -8,7 +8,9 @@ export interface IOrders {
 
 export interface IOrderItem {
   id: number;
+  client_id: string | null;
   moysklad_id: string;
+  client_moysklad_id: string;
   order_number: string;
   customer_name: string;
   phone: string;
@@ -17,8 +19,9 @@ export interface IOrderItem {
   order_date: string;
   comment: string;
   delivery_cost: string;
-  status_id: string | null;
+  status_id: string;
   payment_method: string | null;
+  delivery_method: string | null;
   is_paid: boolean;
   total_amount: string;
   total_discount: string;
@@ -30,8 +33,8 @@ export interface IOrderItem {
   moysklad_updated_at: string | null;
   sync_status: string;
   sync_error: string | null;
-  status: IOrderStatus | null;
-  items: IOrderProduct[];
+  items: IOrderItem[];
+  status: IOrderStatus;
 }
 
 export interface IOrderStatus {
@@ -43,25 +46,25 @@ export interface IOrderStatus {
   updated_at: string | null;
 }
 
-export interface IOrderProduct {
-  created_at: string;
-  discount: string;
-  discount_amount: string;
-  discount_id: string | null;
-  discount_type: string | null;
+export interface IOrderItem {
   id: number;
-  order_id: number;
-  price: string;
-  product: Product;
-  product_id: number;
-  product_images: string | null;
+  order_id: string;
+  product_id: string;
   product_name: string;
   product_sku: string;
-  quantity: number;
-  specifications: string | null;
+  quantity: 1;
+  price: string;
+  discount: string;
   total: string;
+  discount_amount: string;
+  discount_type: string | null;
+  discount_id: string | null;
   total_amount: string;
+  specifications: string | null;
+  created_at: string;
   updated_at: string;
+  product_images: string | null;
+  product: Product;
 }
 
 export interface IOrderStatus {
@@ -69,4 +72,46 @@ export interface IOrderStatus {
   name: string;
   code: string;
   color: string;
+}
+
+export interface IOrderProduct {
+  id: number;
+  moysklad_id: string;
+  name: string;
+  slug: string | null;
+  description: string;
+  country: string;
+  quantity: number;
+  weight: string;
+  volume: string;
+  uom: string | null;
+  article: string;
+  barcodes: {
+    ean13: string;
+  }[];
+  min_price: string;
+  buy_price: string;
+  photo_path: string | null;
+  price: string;
+  stock: number;
+  discount: string;
+  is_popular: boolean;
+  is_novelty: boolean;
+  sku: string;
+  specifications: string | null;
+  is_active: boolean;
+  is_deleted_locally: boolean;
+  category_id: string;
+  manufacturer_id: string | null;
+  created_at: string;
+  updated_at: string;
+  last_synced_at: string | null;
+  moysklad_updated_at: string | null;
+  sync_status: string;
+  sync_error: string | null;
+  order: number;
+  brand_id: string;
+  is_available: boolean;
+  images: [];
+  main_image: string | null;
 }

@@ -14,6 +14,8 @@ async function ProfilePage() {
   if (!me) {
     await LogoutRequest(token);
 
+    cookiesStore.delete("token");
+
     redirect("/authorization");
   }
 

@@ -1,7 +1,8 @@
 export interface ICreateClientRequest {
   phone: string;
-  comment: string;
   full_name: string;
+  email: string;
+  comment: string;
 }
 
 export interface ILoginRequest {

@@ -12,7 +12,7 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
   function handleClickOnAddToCartButton() {
     order.items.map((product) => {
       addToCart({
-        id: product.product_id,
+        id: +product.product_id,
         slug: product.product.slug,
         name: product.product_name,
         price: +product.price,
@@ -44,7 +44,7 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
         <div className="flex gap-4 w-full overflow-auto">
           {order.items?.map((product) => (
             <Link
-              href={`/product/${product.product.slug}`}
+              href={`/product/${product?.product?.slug || "404"}`}
               className="relative w-[120px] h-[120px] shrink-0"
               key={product.id}
             >
