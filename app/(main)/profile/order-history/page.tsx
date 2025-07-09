@@ -4,12 +4,11 @@ import Title from "@/components/title";
 import OrderFilterMobile from "@/components/order-history/order-filter-mobile";
 import { cookies } from "next/headers";
 import { getOrders, getStatuses } from "@/api/orders";
-import { getMe, LogoutRequest } from "@/api/auth";
 import { redirect } from "next/navigation";
 import OrderFilterDesktop from "@/components/order-history/order-filter-desktop";
 import { sortOrders } from "@/utils/helper";
 
-async function PrivacyPolicyPage({
+async function OrderHistoryPage({
   searchParams,
 }: {
   searchParams: Promise<{ sort: string; status: string }>;
@@ -20,14 +19,9 @@ async function PrivacyPolicyPage({
   const token = cookiesStore.get("token")?.value || "";
 
   const orders = await getOrders(token);
-  const me = await getMe(token);
   const statuses = await getStatuses();
 
-  if (!me) {
-    await LogoutRequest(token);
-
-    cookiesStore.delete("token");
-
+  if (!token) {
     redirect("/authorization");
   }
 
@@ -63,4 +57,4 @@ async function PrivacyPolicyPage({
   );
 }
 
-export default PrivacyPolicyPage;
+export default OrderHistoryPage;

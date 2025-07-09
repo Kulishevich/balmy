@@ -82,6 +82,7 @@ function CourierDeliveryForm({ className, meInfo }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
+      client_moysklad_id: meInfo?.id,
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,

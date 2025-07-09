@@ -1,4 +1,4 @@
-import { getMe, LogoutRequest } from "@/api/auth";
+import { getMe } from "@/api/auth";
 import Action from "@/components/action";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
@@ -6,17 +6,13 @@ import MedalIcon from "@/public/icons/medal-star.svg";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-async function PrivacyPolicyPage() {
+async function PersonalDataPage() {
   const cookiesStore = await cookies();
   const token = cookiesStore.get("token")?.value || "";
 
   const me = await getMe(token);
 
-  if (!me) {
-    await LogoutRequest(token);
-
-    cookiesStore.delete("token");
-
+  if (!token) {
     redirect("/authorization");
   }
 
@@ -39,7 +35,7 @@ async function PrivacyPolicyPage() {
               className={"custom-input--white mt-[6px] "}
               id="name"
               placeholder="ФИО / Название компании"
-              value={me.name}
+              value={me?.name}
               disabled
             />
           </div>
@@ -54,7 +50,7 @@ async function PrivacyPolicyPage() {
               className={"custom-input--white mt-[6px] "}
               id="phone"
               placeholder="Номер телефона"
-              value={me.phone}
+              value={me?.phone}
               disabled
             />
           </div>
@@ -96,4 +92,4 @@ async function PrivacyPolicyPage() {
   );
 }
 
-export default PrivacyPolicyPage;
+export default PersonalDataPage;

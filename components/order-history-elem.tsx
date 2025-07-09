@@ -15,7 +15,7 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
         id: +product.product_id,
         slug: product.product.slug,
         name: product.product_name,
-        price: +product.price,
+        price: +product.product.price,
         basePrice: +product.product.price,
         discount: +product.product.discount,
         discountPrices:

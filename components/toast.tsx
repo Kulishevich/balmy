@@ -53,7 +53,7 @@ const showToast = ({
           className="w-[210px]"
           onClick={() => toast.dismiss(t)}
         >
-          {variant === "success" ? "Спасибо, жду!" : "Назад"}
+          {variant === "success" ? "Ок" : "Назад"}
         </Action>
       </div>
     ),

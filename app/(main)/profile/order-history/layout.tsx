@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { getSeoTags } from "@/api/seo";
 import { config } from "@/utils/config";
+import { AuthGuard } from "@/components/auth-guard";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoTags("/profile/order-history");
@@ -21,10 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function PrivacyPolicyLayout({
+export default async function OrderHistoryLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+  return <AuthGuard>{children}</AuthGuard>;
 }

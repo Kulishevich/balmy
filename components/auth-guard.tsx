@@ -1,33 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-
-const PUBLIC_ROUTES = ["/authorization"];
+import { getMe, LogoutRequest } from "@/api/auth";
+import { showToast } from "./toast";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
-  const [isReady, setIsReady] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
+  const token = Cookies.get("token") || "";
+
+  const logout = async () => {
+    try {
+      await LogoutRequest(token);
+    } catch (err) {
+      console.error("Ошибка при выходе:", err);
+    } finally {
+      Cookies.remove("token");
+      router.push("/authorization");
+    }
+  };
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    const isPublic = PUBLIC_ROUTES.includes(pathname);
+    const checkTokenValid = async () => {
+      const me = await getMe(token);
+      if (!me) {
+        showToast({
+          title: "Ваш токен устарел, войдите снова.",
+          variant: "error",
+        });
 
-    if (!token && !isPublic) {
-      router.replace("/authorization");
-    } else if (token && isPublic) {
-      router.replace("/");
-    } else {
-      setIsReady(true);
-    }
-  }, [pathname]);
+        logout();
+      }
+    };
 
-  // Показываем children только если разрешено
-  if (!isReady && !PUBLIC_ROUTES.includes(pathname)) {
-    return null; // можно добавить спиннер или прелоадер
-  }
+    checkTokenValid();
+  }, [token]);
 
   return <>{children}</>;
 }
