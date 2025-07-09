@@ -112,7 +112,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${quicksand.variable} ${golosText.variable} flex flex-col h-full bg-dark-grey`}
+        className={`${quicksand.variable} ${golosText.variable} flex flex-col h-full bg-dark-grey overflow-x-hidden`}
       >
         <InitialWrapper>
           <AnimationThemeLayout activeTheme={activeTheme}>

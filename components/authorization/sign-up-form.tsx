@@ -12,9 +12,9 @@ import { normalizePhone } from "@/utils/helper";
 type SignUpForm = {
   fullName: string;
   phone: string;
-  comment: string;
+  comment?: string;
   "personal-info": boolean;
-  email?: string;
+  email: string;
 };
 
 export const SignUpForm = () => {
@@ -36,9 +36,9 @@ export const SignUpForm = () => {
     try {
       await CreateClientRequest({
         phone: phone,
-        comment: data.comment,
+        comment: data.comment || "",
         full_name: data.fullName,
-        email: data.email || "",
+        email: data.email,
       });
 
       showToast({

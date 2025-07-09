@@ -12,8 +12,8 @@ function SetCard({ banner }: Props) {
   const alt = title.toLowerCase();
 
   return (
-    <div className="px-[54px] lg:px-[110px] py-[60px] lg:py-[57px] flex justify-between">
-      <div className="mt-[185px] text-center mx-auto lg:mx-0 lg:text-left lg:mt-0 max-w-[438px]">
+    <div className="px-[54px] lg:px-[110px] lg:pt-[131px] flex justify-between h-full">
+      <div className="text-center mt-auto py-[70px] mx-auto lg:py-0 lg:mx-0 lg:text-left lg:mt-0 max-w-[438px]">
         <Title>{title}</Title>
         <p className="mt-4 lg:mt-0 text-[20px] lg:text-[30px] font-semibold">
           {subtitle}
@@ -28,7 +28,7 @@ function SetCard({ banner }: Props) {
           {button_text}
         </Action>
       </div>
-      <div className="absolute -top-[80px] lg:bottom-0 xl:-top-[83px] translate-x-1/2 lg:translate-x-0 right-1/2 lg:right-[46px] max-w-[321px] xl:max-w-[534px] z-10 w-full h-[276px] xl:h-[460px]">
+      <div className="absolute top-0 right-1/2 translate-x-1/2 w-[321px] h-[276px] lg:right-[46px] lg:translate-x-0 xl:w-[534px] xl:h-[460px]">
         <Image
           className="objectc-contain"
           src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${photo_path}`}

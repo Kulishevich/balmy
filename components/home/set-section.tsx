@@ -14,34 +14,33 @@ function SetSection({ banners }: Props) {
   const showSliderButtons = banners.length > 1;
 
   return (
-    <section className="container pt-[83px]">
-      <div className="relative bg-[url('/images/sets-bg.webp')] bg-cover bg-center w-full text-white rounded-[5px] ">
-        <div className="overflow-x-hidden overflow-y-visible">
-          <Swiper
-            slidesPerView={1}
-            navigation={{
-              nextEl: ".set-arrow-right",
-              prevEl: ".set-arrow-left",
-            }}
-            modules={[Navigation]}
-          >
-            {banners.map((banner, idx) => {
-              return (
-                <SwiperSlide key={idx}>
-                  <SetCard banner={banner} />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
+    <section className="container h-[496px] relative">
+      <Swiper
+        className="h-full"
+        slidesPerView={1}
+        navigation={{
+          nextEl: ".set-arrow-right",
+          prevEl: ".set-arrow-left",
+        }}
+        modules={[Navigation]}
+      >
+        {banners.map((banner, idx) => {
+          return (
+            <SwiperSlide key={idx}>
+              <SetCard banner={banner} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
 
-        {showSliderButtons && (
-          <>
-            <ArrowLeft className="set-arrow-left absolute -left-4 xl:-left-24 top-1/2 -translate-y-1/2" />
-            <ArrowRight className="set-arrow-right absolute -right-4 xl:-right-24 top-1/2 -translate-y-1/2" />
-          </>
-        )}
-      </div>
+      {showSliderButtons && (
+        <>
+          <ArrowLeft className="set-arrow-left absolute -left-1 xl:-left-25 bottom-[174px] z-[2]" />
+          <ArrowRight className="set-arrow-right absolute -right-1 xl:-right-25 bottom-[174px] z-[2]" />
+        </>
+      )}
+
+      <div className="absolute bottom-0 left-0 right-0 h-[413px] bg-[url('/images/sets-bg.webp')] bg-cover bg-center rounded-[5px] mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-20 2xl:mx-[123px]" />
     </section>
   );
 }

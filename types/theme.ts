@@ -10,4 +10,5 @@ export interface Theme {
     | "eggs"
     | "default";
   is_active: boolean;
+  elements_count: number;
 }

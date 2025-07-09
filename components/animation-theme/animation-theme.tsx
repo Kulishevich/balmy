@@ -37,7 +37,7 @@ export default function AnimationThemeLayout({
   const theme = activeTheme?.name || "default";
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
-  const elemsCount = 100;
+  const elemsCount = activeTheme?.elements_count || 100;
   const [elemsQuantity, setElemsQuantity] = useState(0);
 
   useEffect(() => {
