@@ -50,8 +50,8 @@ function OrderHistoryElem({ order }: { order: IOrderItem }) {
             >
               <Image
                 src={
-                  !!product.product_images
-                    ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${product.product_images}`
+                  !!product.product?.photo_path
+                    ? `${process.env.NEXT_PUBLIC_STORAGE_URL}${product.product.photo_path}`
                     : "/icons/logo-gray.svg"
                 }
                 fill
