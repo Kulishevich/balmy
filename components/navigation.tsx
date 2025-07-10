@@ -117,13 +117,22 @@ function Navigation({
           </nav>
         )}
 
-        <Link
-          href={"/profile"}
-          className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
-        >
-          <ProfileIcon />
-          Личный кабинет
-        </Link>
+        <div className="flex gap-[13px]">
+          <Link
+            href={"/news"}
+            className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
+          >
+            <ProfileIcon />
+            Лента новостей
+          </Link>
+          <Link
+            href={"/profile"}
+            className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
+          >
+            <ProfileIcon />
+            Личный кабинет
+          </Link>
+        </div>
       </div>
     </div>
   );
