@@ -63,7 +63,7 @@ function ShippingDeliveryForm({ className, meInfo }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
-      client_moysklad_id: meInfo?.id,
+      client_moysklad_id: meInfo?.id || 1,
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,
@@ -81,6 +81,7 @@ function ShippingDeliveryForm({ className, meInfo }: Props) {
       clearCart();
       router.push("/");
       showToast({ title: "Заказ оформлен успешно", variant: "success" });
+      window.open("/files/example.pdf", "_blank");
     } catch (err) {
       showToast({
         title: "Произошла ошибка",

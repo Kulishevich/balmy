@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
 import MedalIcon from "@/public/icons/medal-star.svg";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function PersonalDataPage() {
@@ -22,7 +23,7 @@ async function PersonalDataPage() {
         Личные данные
       </Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <div className="container w-full lg:w-[850px] flex flex-col gap-8 mt-10">
+      <div className="container p-0 w-full lg:w-[850px] flex flex-col gap-8 mt-10">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-[10px]">
             <label
@@ -64,20 +65,23 @@ async function PersonalDataPage() {
               Партнёр Balmy
             </button>
           </div>
-          {/* <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[10px]">
             <label className="font-normal cursor-pointer" htmlFor="discount">
-              Персональная скидка
+              Бонусные баллы
             </label>
             <input
               className={"custom-input--white mt-[6px] "}
               id="discount"
-              placeholder="Персональная скидка"
+              placeholder="23.40 BYN"
             />
-            <span className="text-[#9E9E9E] relative before:content-['*'] before:text-gold">
-              персональная скидка зависит от общей суммы заказов: 5%-при покупке
-              от 1000 BYN, 10% - при покупке от 2000 BYN.
+            <span className="text-[#9E9E9E] relative before:content-['*'] before:text-gold text-[17px] font-normal">
+              Бонусные баллы начисляются после совершения покупок на сайте
+              Balmypro.by Подробнее с акцией можно ознакомиться в разделе{" "}
+              <Link className="text-gold" href={"/offer-contract"}>
+                Договор оферты
+              </Link>
             </span>
-          </div> */}
+          </div>
         </div>
         <Action
           type="link"

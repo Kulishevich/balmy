@@ -15,9 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: seo?.og_description,
       url: config.homeUrl,
     },
-    alternates: {
-      canonical: `${config.homeUrl}/news`,
-    },
+    alternates: { canonical: `${config.homeUrl}/news` },
   };
 }
 

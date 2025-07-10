@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
 import { showToast } from "../toast";
 import { IMe } from "@/types/auth";
+import { OrderRequest } from "@/types/order";
 
 interface Props {
   className?: string;
@@ -74,7 +75,7 @@ function CourierDeliveryForm({ className, meInfo }: Props) {
     const order = getOrder();
     const orderDataCopy = orderData;
 
-    const requestData = {
+    const requestData: OrderRequest = {
       customer_name: orderDataCopy.fullName,
       phone: orderDataCopy.phone,
       email: orderDataCopy.email,
@@ -82,7 +83,7 @@ function CourierDeliveryForm({ className, meInfo }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
-      client_moysklad_id: meInfo?.id,
+      client_moysklad_id: meInfo?.id || 1,
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,
@@ -98,8 +99,9 @@ function CourierDeliveryForm({ className, meInfo }: Props) {
       }
 
       clearCart();
-      router.push("/");
       showToast({ title: "Заказ оформлен успешно", variant: "success" });
+      window.open("/files/example.pdf", "_blank");
+      router.push("/");
     } catch (err) {
       showToast({
         title: "Произошла ошибка",

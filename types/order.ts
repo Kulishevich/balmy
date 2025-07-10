@@ -15,6 +15,7 @@ export interface OrderRequest {
   email?: string;
   address: string;
   comment: string;
+  client_moysklad_id: number;
   delivery_method: string;
   payment_method: string;
   items: OrderPosition[];
