@@ -7,7 +7,13 @@ import cn from "clsx";
 import { useOrderState } from "@/store/order";
 import { IMe } from "@/types/auth";
 
-function DeliverySection({ meInfo }: { meInfo: IMe | null }) {
+function DeliverySection({
+  meInfo,
+  token,
+}: {
+  meInfo: IMe | null;
+  token: string;
+}) {
   const { deliveryType, setDeliveryType } = useOrderState();
 
   function handleClickOnCourierDelivery() {
@@ -62,6 +68,7 @@ function DeliverySection({ meInfo }: { meInfo: IMe | null }) {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-[30px]">
         <CourierDeliveryForm
+          token={token}
           meInfo={meInfo}
           className={cn("transition", {
             "opacity-100": deliveryType == "Courier",
@@ -69,6 +76,7 @@ function DeliverySection({ meInfo }: { meInfo: IMe | null }) {
           })}
         />
         <ShippingDeliveryForm
+          token={token}
           meInfo={meInfo}
           className={cn("transition", {
             "opacity-100": deliveryType == "Post",

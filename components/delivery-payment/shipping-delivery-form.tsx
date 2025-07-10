@@ -17,9 +17,10 @@ export type Post = "Европочта" | "Белпочта" | "СДЭК";
 interface Props {
   className?: string;
   meInfo: IMe | null;
+  token: string;
 }
 
-function ShippingDeliveryForm({ className, meInfo }: Props) {
+function ShippingDeliveryForm({ className, meInfo, token }: Props) {
   const [post, setPost] = useState<Post>("Европочта");
   const { setDeliveryType, setComment, getOrder } = useOrderState();
   const router = useRouter();
@@ -63,7 +64,7 @@ function ShippingDeliveryForm({ className, meInfo }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
-      client_moysklad_id: meInfo?.id || 1,
+      client_moysklad_id: meInfo?.moysklad_id || "",
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,
@@ -72,7 +73,7 @@ function ShippingDeliveryForm({ className, meInfo }: Props) {
 
     reset();
     try {
-      const data = await sendOrder(requestData);
+      const data = await sendOrder({ orderData: requestData, token });
 
       if (data?.data.payment_url) {
         window.open(data?.data.payment_url, "_blank");

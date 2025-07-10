@@ -15,7 +15,7 @@ import { IMe } from "@/types/auth";
 function DeliveryPayment() {
   const [meInfo, setMeInfo] = useState<IMe | null>(null);
   const [personalInfo, setPersonalInfo] = useState(false);
-
+  const token = Cookies.get("token") || "";
   const router = useRouter();
   const { deliveryType } = useOrderState();
   const form =
@@ -28,12 +28,11 @@ function DeliveryPayment() {
   }
 
   useEffect(() => {
-    const token = Cookies.get("token");
-
     const getMeInfo = async (token: string) => {
       try {
         const data = await getMe(token);
         setMeInfo(data);
+        console.log(data);
       } catch (err) {
         console.log(err);
         router.push("/authorization");
@@ -51,7 +50,7 @@ function DeliveryPayment() {
     <>
       <Title className="mt-10 text-center">Доставка и оплата</Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <DeliverySection meInfo={meInfo} />
+      <DeliverySection meInfo={meInfo} token={token} />
       <PaymentMethodsSection deliveryType={deliveryType} />
       <div className="container mt-[42px] lg:mt-[120px]">
         <div className="flex items-center gap-2">

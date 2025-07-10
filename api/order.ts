@@ -1,14 +1,19 @@
 import { OrderRequest, OrderResponse } from "@/types/order";
 
-export async function sendOrder(
-  orderData: OrderRequest
-): Promise<OrderResponse | null> {
+export async function sendOrder({
+  token,
+  orderData,
+}: {
+  token: string;
+  orderData: OrderRequest;
+}): Promise<OrderResponse | null> {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/orders`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(orderData),

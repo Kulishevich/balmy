@@ -41,6 +41,7 @@ export interface IMe {
   legal_address: string | null;
   actual_address: string | null;
   postal_address: string | null;
+  moysklad_id: string;
   last_login_at: string;
   created_at: string;
 }

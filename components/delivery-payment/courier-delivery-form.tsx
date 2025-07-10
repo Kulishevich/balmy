@@ -20,6 +20,7 @@ import { OrderRequest } from "@/types/order";
 interface Props {
   className?: string;
   meInfo: IMe | null;
+  token: string;
 }
 
 export type OrderInputs = {
@@ -29,7 +30,7 @@ export type OrderInputs = {
   email?: string;
 };
 
-function CourierDeliveryForm({ className, meInfo }: Props) {
+function CourierDeliveryForm({ className, meInfo, token }: Props) {
   const { setDeliveryType, setComment, getOrder } = useOrderState();
   const {
     handleSubmit,
@@ -83,7 +84,7 @@ function CourierDeliveryForm({ className, meInfo }: Props) {
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
-      client_moysklad_id: meInfo?.id || 1,
+      client_moysklad_id: meInfo?.moysklad_id || "",
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,
@@ -92,15 +93,15 @@ function CourierDeliveryForm({ className, meInfo }: Props) {
 
     reset();
     try {
-      const data = await sendOrder(requestData);
+      const data = await sendOrder({ orderData: requestData, token });
 
+      window.open("/files/example.pdf", "_blank");
       if (data?.data.payment_url) {
         window.open(data?.data.payment_url, "_blank");
       }
 
       clearCart();
       showToast({ title: "Заказ оформлен успешно", variant: "success" });
-      window.open("/files/example.pdf", "_blank");
       router.push("/");
     } catch (err) {
       showToast({
