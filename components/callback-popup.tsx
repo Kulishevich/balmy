@@ -12,6 +12,7 @@ import cn from "clsx";
 import Link from "next/link";
 import { sendFeedback } from "@/api/feedback";
 import { showToast } from "./toast";
+import { normalizePhone } from "@/utils/helper";
 
 export type CallbackInputs = {
   phone: string;
@@ -43,10 +44,10 @@ function CallbackPopup() {
   }
 
   async function onSubmit(callbackData: CallbackInputs) {
-    try {
-      const data = await sendFeedback(callbackData);
+    const normalPhone = normalizePhone(callbackData.phone);
 
-      console.log(data);
+    try {
+      await sendFeedback({ comment: callbackData.comment, phone: normalPhone });
 
       resetFormFields();
       showToast({ title: "Сообщение отправлено", variant: "success" });

@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { orderSchema } from "@/utils/schemes/order";
 import { useOrderState } from "@/store/order";
-import { formatTimestampToDDMMYYYY } from "@/utils/helper";
+import { formatTimestampToDDMMYYYY, normalizePhone } from "@/utils/helper";
 import Calendar from "react-calendar";
 import { sendOrder } from "@/api/order";
 import { useRouter } from "next/navigation";
@@ -76,9 +76,11 @@ function CourierDeliveryForm({ className, meInfo, token }: Props) {
     const order = getOrder();
     const orderDataCopy = orderData;
 
+    const normalPhone = normalizePhone(orderDataCopy.phone);
+
     const requestData: OrderRequest = {
       customer_name: orderDataCopy.fullName,
-      phone: orderDataCopy.phone,
+      phone: normalPhone,
       email: orderDataCopy.email,
       address: orderDataCopy.address,
       comment: order.comment,

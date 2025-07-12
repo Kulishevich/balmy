@@ -13,6 +13,7 @@ import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
 import { sendBuyOneClickOrder } from "@/api/buy-one-click-order";
 import { showToast } from "./toast";
+import { normalizePhone } from "@/utils/helper";
 
 export type BuyOneClickInputs = {
   name: string;
@@ -56,10 +57,12 @@ function BuyOneClickPopup() {
       return;
     }
 
+    const normalPhone = normalizePhone(buyOneClickData.phone);
+
     const requestData = {
       product_id: product.id,
       name: buyOneClickData.name,
-      phone: buyOneClickData.phone,
+      phone: normalPhone,
       comment: buyOneClickData.comment || "",
     };
 

@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
 import { showToast } from "../toast";
 import { IMe } from "@/types/auth";
+import { normalizePhone } from "@/utils/helper";
 
 export type Post = "Европочта" | "Белпочта" | "СДЭК";
 
@@ -56,9 +57,11 @@ function ShippingDeliveryForm({ className, meInfo, token }: Props) {
     const order = getOrder();
     const orderDataCopy = orderData;
 
+    const normalPhone = normalizePhone(orderDataCopy.phone);
+
     const requestData = {
       customer_name: orderDataCopy.fullName,
-      phone: orderDataCopy.phone,
+      phone: normalPhone,
       email: orderDataCopy.email,
       address: orderDataCopy.address,
       comment: order.comment,

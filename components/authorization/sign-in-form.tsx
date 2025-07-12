@@ -9,6 +9,7 @@ import { LoginRequest } from "@/api/auth";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { showToast } from "../toast";
+import { normalizePhone } from "@/utils/helper";
 
 type SignInForm = {
   phone: string;
@@ -28,8 +29,13 @@ export const SignInForm = () => {
   });
 
   const onSubmit = async (data: SignInForm) => {
+    const normalPhone = normalizePhone(data.phone);
+
     try {
-      const res = await LoginRequest(data);
+      const res = await LoginRequest({
+        password: data.password,
+        phone: normalPhone,
+      });
       const token = `${res.data.token_type} ${res.data.token}`;
 
       // todo: change secure - true

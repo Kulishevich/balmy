@@ -10,6 +10,7 @@ import Link from "next/link";
 import { sendFeedback } from "@/api/feedback";
 import { ISocailLinks } from "@/types/contacts";
 import { showToast } from "./toast";
+import { normalizePhone } from "@/utils/helper";
 
 function CallbackSectoin({ socialLinks }: { socialLinks: ISocailLinks }) {
   const {
@@ -30,10 +31,12 @@ function CallbackSectoin({ socialLinks }: { socialLinks: ISocailLinks }) {
   }
 
   async function onSubmit(callbackData: CallbackInputs) {
+    const normalPhone = normalizePhone(callbackData.phone);
+
     try {
       const data = await sendFeedback({
         comment: callbackData.comment,
-        phone: callbackData.phone,
+        phone: normalPhone,
       });
 
       console.log(data);
