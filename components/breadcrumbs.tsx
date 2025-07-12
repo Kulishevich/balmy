@@ -36,8 +36,8 @@ function Breadcrumbs({ className, dynamicPath }: Props) {
         return { href: "/personal-data", name: "Личные данные" };
       case "order-history":
         return { href: "/order-history", name: "История заказов" };
-      case "news":
-        return { href: "/news", name: "Лента новостей" };
+      // case "news":
+      //   return { href: "/news", name: "Лента новостей" };
       default:
         break;
     }

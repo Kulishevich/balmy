@@ -2,7 +2,7 @@
 import LocationIcon from "@/public/icons/location.svg";
 import BurgerIcon from "@/public/icons/burger.svg";
 import ProfileIcon from "@/public/icons/profile.svg";
-import NewsIcon from "@/public/icons/news.svg";
+// import NewsIcon from "@/public/icons/news.svg";
 import ProfileMobileIcon from "@/public/icons/profile-mobile.svg";
 import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import SearchMobileIcon from "@/public/icons/search-mobile.svg";
@@ -119,13 +119,13 @@ function Navigation({
         )}
 
         <div className="flex gap-[13px]">
-          <Link
+          {/* <Link
             href={"/news"}
             className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
           >
             <NewsIcon />
             Лента новостей
-          </Link>
+          </Link> */}
           <Link
             href={"/profile"}
             className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"

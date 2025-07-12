@@ -12,7 +12,7 @@ import { normalizePhone } from "@/utils/helper";
 type SignUpForm = {
   fullName: string;
   phone: string;
-  comment?: string;
+  comment: string;
   "personal-info": boolean;
   email: string;
 };
@@ -107,7 +107,7 @@ export const SignUpForm = () => {
           })}
           {...register("email")}
           id="email"
-          placeholder="Введите ваш телефон"
+          placeholder="Введите ваш email"
         />
         {errors["email"] && (
           <span className="mt-2 text-[#EB001B] text-[15px] font-normal">
@@ -117,14 +117,14 @@ export const SignUpForm = () => {
       </div>
       <div className="flex flex-col gap-[6px]">
         <label className="font-normal cursor-pointer" htmlFor="comment">
-          Комментарий
+          Ваша должность
         </label>
-        <textarea
-          className={clsx("custom-input--dark mt-[6px] h-[100px] resize-none", {
+        <input
+          className={clsx("custom-input--dark mt-[6px]", {
             "custom-input--dark-error": errors["comment"],
           })}
           id="comment"
-          placeholder="Комментарий"
+          placeholder="Барбер, Владелец барбершопа, Салон"
           {...register("comment")}
         />
         {errors["comment"] && (

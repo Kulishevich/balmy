@@ -10,6 +10,6 @@ export const signUpSchema = yup.object({
     .string()
     .matches(/^(\+375|\+7)/, "Номер телефона должен начинаться с +375 или +7")
     .required("Введите номер телефона"),
-  comment: yup.string(),
+  comment: yup.string().required("Введите вашу должность"),
   "personal-info": yup.boolean().required(),
 });

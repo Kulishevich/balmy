@@ -4,7 +4,7 @@ import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
 import MedalIcon from "@/public/icons/medal-star.svg";
 import { cookies } from "next/headers";
-import Link from "next/link";
+// import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function PersonalDataPage() {
@@ -65,7 +65,7 @@ async function PersonalDataPage() {
               Партнёр Balmy
             </button>
           </div>
-          <div className="flex flex-col gap-[10px]">
+          {/* <div className="flex flex-col gap-[10px]">
             <label className="font-normal cursor-pointer" htmlFor="discount">
               Бонусные баллы
             </label>
@@ -81,7 +81,7 @@ async function PersonalDataPage() {
                 Договор оферты
               </Link>
             </span>
-          </div>
+          </div> */}
         </div>
         <Action
           type="link"
