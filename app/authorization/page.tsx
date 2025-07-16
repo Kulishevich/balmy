@@ -11,7 +11,7 @@ function AuthorizationPage() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover -z-10"
       >
-        <source src="/videos/auth-bg.mp4" type="video/mp4" />
+        <source src="/videos/auth-bg-v2.mp4" type="video/mp4" />
         Ваш браузер не поддерживает видео фон.
       </video>
 

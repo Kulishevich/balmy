@@ -36,7 +36,7 @@ export const SignUpForm = () => {
     try {
       await CreateClientRequest({
         phone: phone,
-        comment: data.comment || "",
+        comment: data.comment,
         full_name: data.fullName,
         email: data.email,
       });
