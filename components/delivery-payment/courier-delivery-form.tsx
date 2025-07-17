@@ -54,7 +54,7 @@ function CourierDeliveryForm({ className, meInfo, token }: Props) {
     setValue("fullName", meInfo?.name || "");
     setValue("email", meInfo?.email || "");
     setValue("phone", meInfo?.phone || "");
-    setValue("address", meInfo?.actual_address || "");
+    setValue("address", meInfo?.addresses.full_address || "");
   }, [meInfo, setValue]);
 
   function handleClickOnForm() {

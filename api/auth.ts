@@ -83,7 +83,7 @@ export async function LogoutRequest(token: string) {
 }
 
 export async function getMe(token: string) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/client/me`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/client/profile`;
 
   try {
     const res = await fetch(url, {

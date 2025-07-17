@@ -29,19 +29,31 @@ export interface ILoginResponse {
 }
 
 export interface IMe {
+  moysklad_id: string;
   id: number;
   name: string;
   email: string | null;
   phone: string;
   company_type: string;
-  unp: string | null;
-  kpp: string | null;
-  ogrn: string | null;
-  ogrnip: string | null;
-  legal_address: string | null;
-  actual_address: string | null;
-  postal_address: string | null;
-  moysklad_id: string;
+  is_active: boolean;
   last_login_at: string;
   created_at: string;
+  updated_at: string;
+  legal_info: {
+    unp: string | null;
+    kpp: string | null;
+    ogrn: string | null;
+    ogrnip: string | null;
+    okpo: string | null;
+  };
+  addresses: {
+    legal_address: string | null;
+    actual_address: string | null;
+    postal_address: string | null;
+    full_address: string;
+  };
+  contact_info: {
+    email?: string;
+    phone?: string;
+  };
 }

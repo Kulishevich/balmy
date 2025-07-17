@@ -4,7 +4,6 @@ import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
 import MedalIcon from "@/public/icons/medal-star.svg";
 import { cookies } from "next/headers";
-// import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function PersonalDataPage() {
