@@ -97,7 +97,6 @@ function CourierDeliveryForm({ className, meInfo, token }: Props) {
     try {
       const data = await sendOrder({ orderData: requestData, token });
 
-      window.open("/files/example.pdf", "_blank");
       if (data?.data.payment_url) {
         window.open(data?.data.payment_url, "_blank");
       }

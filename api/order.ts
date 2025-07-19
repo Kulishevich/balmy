@@ -27,7 +27,7 @@ export async function sendOrder({
     const order = await res.json();
     return order;
   } catch (err) {
-    console.error("Ошибка при отправке one-click заказа:", err);
+    console.error("Ошибка при отправке заказа:", err);
     throw err;
   }
 }

@@ -6,6 +6,7 @@ import CashierPayIcon from "@/public/icons/cashier-pay.svg";
 import cn from "clsx";
 import { DeliveryType, PaymentType, useOrderState } from "@/store/order";
 import { useEffect } from "react";
+import Image from "next/image";
 
 const paymentMethods = [
   {
@@ -50,7 +51,7 @@ function PaymentMethodsSection({
       <Title className="text-center">Способ оплаты</Title>
       <div className="mt-6 lg:mt-20 grid grid-cols-2 lg:grid-cols-3 gap-y-[42px] gap-x-[21px]">
         {paymentMethods.map((paymentMethod, idx) => {
-          const isFirstItem = idx == 0;
+          // const isFirstItem = idx == 0;
           const { name, description, type } = paymentMethod;
           const isSelected = type == paymentType;
 
@@ -63,7 +64,7 @@ function PaymentMethodsSection({
                 {
                   "opacity-100": isSelected,
                   "opacity-50": !isSelected,
-                  "col-span-2 lg:col-span-1": isFirstItem,
+                  // "col-span-2 lg:col-span-1": isFirstItem,
                 }
               )}
               onClick={handleClickOnPaymentMethod(type as PaymentType)}
@@ -76,6 +77,32 @@ function PaymentMethodsSection({
             </div>
           );
         })}
+
+        <div
+          className={cn(
+            "flex flex-col items-center justify-between cursor-pointer transition",
+            {
+              "opacity-100": paymentType === "PaymentForLegalEntity",
+              "opacity-50": paymentType !== "PaymentForLegalEntity",
+            }
+          )}
+          onClick={handleClickOnPaymentMethod("PaymentForLegalEntity")}
+        >
+          <h3 className="text-center text-[20px] sm:text-[26px]">
+            Оплата для Юр.лица
+          </h3>
+          {/* <paymentMethod.Icon className="mt-[30px]" /> */}
+          <Image
+            src={"/icons/free-icon-financial.png"}
+            width={100}
+            height={100}
+            alt="payment-method-image"
+          />
+          <p className="mt-[21px] max-w-[196px] font-normal hidden lg:inline">
+            После формирование заказа в отдельном окне откроется счет-фактура в
+            pdf
+          </p>
+        </div>
       </div>
     </section>
   );

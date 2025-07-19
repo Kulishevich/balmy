@@ -5,7 +5,11 @@ import { OrderInputs } from "@/components/delivery-payment/courier-delivery-form
 import { useCartStore } from "./cart";
 import { Post } from "@/components/delivery-payment/shipping-delivery-form";
 
-export type PaymentType = "Card" | "Cash" | "CardPhys";
+export type PaymentType =
+  | "Card"
+  | "Cash"
+  | "CardPhys"
+  | "PaymentForLegalEntity";
 export type DeliveryType = "Courier" | "Post";
 type Country = "Беларусь";
 
