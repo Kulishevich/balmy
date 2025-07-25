@@ -13,7 +13,7 @@ export interface OrderRequest {
   customer_name: string;
   phone: string;
   email?: string;
-  address: string;
+  delivery_address: string;
   comment: string;
   client_moysklad_id: string;
   delivery_method: string;

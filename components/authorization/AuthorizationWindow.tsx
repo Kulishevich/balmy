@@ -1,35 +1,49 @@
 "use client";
 import React, { useState } from "react";
-import clsx from "clsx";
 import { SignUpForm } from "./sign-up-form";
 import { SignInForm } from "./sign-in-form";
+import { PasswordRecovery } from "./password-recovery";
+import { NotPartner } from "./not-partner";
+import { LastStep } from "./last-step";
+import { SecondSignInForm } from "./second-sign-in-form";
+import { NoEmailForm } from "./no-email-form";
+
+export type AuthT =
+  | "sign_up"
+  | "log_in"
+  | "password_recovery"
+  | "not_partner"
+  | "last_step"
+  | "second_sign_in"
+  | "no_email";
 
 export const AuthorizationWindow = () => {
-  const [state, setState] = useState<"sign_up" | "log_in">("sign_up");
+  const [authState, setAuthState] = useState<AuthT>("sign_up");
+
+  const renderContent = () => {
+    switch (authState) {
+      case "sign_up":
+        return <SignUpForm setAuthState={setAuthState} authState={authState} />;
+      case "log_in":
+        return <SignInForm setAuthState={setAuthState} authState={authState} />;
+      case "password_recovery":
+        return <PasswordRecovery setAuthState={setAuthState} />;
+      case "not_partner":
+        return <NotPartner setAuthState={setAuthState} />;
+      case "last_step":
+        return <LastStep setAuthState={setAuthState} />;
+      case "second_sign_in":
+        return <SecondSignInForm setAuthState={setAuthState} />;
+      case "no_email":
+        return <NoEmailForm setAuthState={setAuthState} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="relative w-full z-10 bg-white text-black rounded-md p-8 lg:px-[76px] lg:py-[52px] flex flex-col gap-6 max-w-[336px] sm:max-w-[600px] md:max-w-[766px]">
-      <div className="flex lg:gap-5 gap-3 justify-center">
-        <button
-          className={clsx("lg:text-[42px] text-[24px] ", {
-            "opacity-100": state == "sign_up",
-            "opacity-20": state == "log_in",
-          })}
-          onClick={() => setState("sign_up")}
-        >
-          Регистрация
-        </button>
-        <button
-          className={clsx("lg:text-[42px] text-[24px] ", {
-            "opacity-100": state == "log_in",
-            "opacity-20": state == "sign_up",
-          })}
-          onClick={() => setState("log_in")}
-        >
-          /Вход
-        </button>
-      </div>
-      {state === "sign_up" ? <SignUpForm /> : <SignInForm />}
+      {renderContent()}
     </div>
   );
 };

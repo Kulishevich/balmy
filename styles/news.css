@@ -4,40 +4,39 @@
   grid-template-rows: auto;
   grid-column-gap: 30px;
   grid-row-gap: 30px;
-
 }
 
 /* Big cards */
-.news__item-1 { 
-  grid-area: 1 / 1 / 3 / 3; 
+.news__item-1 {
+  grid-area: 1 / 1 / 3 / 3;
 }
-.news__item-8 { 
-  grid-area: 3 / 3 / 5 / 5; 
+.news__item-8 {
+  grid-area: 3 / 3 / 5 / 5;
 }
 
 /* Other cards */
-.news__item-2 { 
-  grid-area: 1 / 3 / 2 / 4; 
+.news__item-2 {
+  grid-area: 1 / 3 / 2 / 4;
 }
-.news__item-3 { 
-  grid-area: 1 / 4 / 2 / 5; 
+.news__item-3 {
+  grid-area: 1 / 4 / 2 / 5;
 }
-.news__item-4 { 
-  grid-area: 2 / 3 / 3 / 5; 
+.news__item-4 {
+  grid-area: 2 / 3 / 3 / 5;
 }
-.news__item-5 { 
-  grid-area: 3 / 1 / 4 / 2; 
+.news__item-5 {
+  grid-area: 3 / 1 / 4 / 2;
 }
-.news__item-6 { 
-  grid-area: 3 / 2 / 4 / 3; 
+.news__item-6 {
+  grid-area: 3 / 2 / 4 / 3;
 }
-.news__item-7 { 
-  grid-area: 4 / 1 / 5 / 3; 
+.news__item-7 {
+  grid-area: 4 / 1 / 5 / 3;
 }
 
 /* Common styles */
 .news-item {
-  @apply relative border border-light-gray bg-[#FDFDFD] rounded-[5px] flex flex-col transition hover:shadow-xl;
+  @apply relative bg-[#FDFDFD] rounded-[5px] flex flex-col transition hover:shadow-xl;
 }
 
 .news-item__image-wrapper {
@@ -153,4 +152,3 @@
     @apply top-5 left-5 text-[15px]; /* Default position and size */
   }
 }
-

@@ -43,11 +43,11 @@ export const NewsCard = () => {
           есть стилисты и другие люди, которые работают...
         </p>
         <div className="flex justify-between items-center w-full">
-          <button className="flex items-center gap-[6px]">
+          <button className="flex items-center gap-[6px] font-semibold text-[19px]">
             Подробнее
             <TallArrowRightIcon />
           </button>
-          <p className="flex items-center gap-2 font-semibold text-[17px]">
+          <p className="flex items-center gap-2 font-normal text-[17px]">
             <HeartIcon />
             23 оценки
           </p>

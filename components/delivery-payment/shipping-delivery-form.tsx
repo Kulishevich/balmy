@@ -63,7 +63,7 @@ function ShippingDeliveryForm({ className, meInfo, token }: Props) {
       customer_name: orderDataCopy.fullName,
       phone: normalPhone,
       email: orderDataCopy.email,
-      address: orderDataCopy.address,
+      delivery_address: orderDataCopy.address,
       comment: order.comment,
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
