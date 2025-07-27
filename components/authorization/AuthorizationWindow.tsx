@@ -19,6 +19,8 @@ export type AuthT =
 
 export const AuthorizationWindow = () => {
   const [authState, setAuthState] = useState<AuthT>("sign_up");
+  const [phone, setPhone] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
 
   const renderContent = () => {
     switch (authState) {
@@ -27,13 +29,19 @@ export const AuthorizationWindow = () => {
       case "log_in":
         return <SignInForm setAuthState={setAuthState} authState={authState} />;
       case "password_recovery":
-        return <PasswordRecovery setAuthState={setAuthState} />;
+        return (
+          <PasswordRecovery
+            setAuthState={setAuthState}
+            setEmail={setEmail}
+            setPhone={setPhone}
+          />
+        );
       case "not_partner":
         return <NotPartner setAuthState={setAuthState} />;
       case "last_step":
-        return <LastStep setAuthState={setAuthState} />;
+        return <LastStep setAuthState={setAuthState} email={email || ""} />;
       case "second_sign_in":
-        return <SecondSignInForm setAuthState={setAuthState} />;
+        return <SecondSignInForm phone={phone || ""} />;
       case "no_email":
         return <NoEmailForm setAuthState={setAuthState} />;
       default:

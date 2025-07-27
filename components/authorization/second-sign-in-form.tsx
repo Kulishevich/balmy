@@ -1,20 +1,25 @@
-import React, { Dispatch, SetStateAction } from "react";
 import Action from "../action";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AuthT } from "./AuthorizationWindow";
 import { secondSignInScheme } from "@/utils/schemes/second-sign-in";
+import { normalizePhone } from "@/utils/helper";
+import { LoginRequest } from "@/api/auth";
+import { showToast } from "../toast";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 type SecondSignInFormT = {
   password: string;
 };
 
 type SecondSignInFormProps = {
-  setAuthState: Dispatch<SetStateAction<AuthT>>;
+  phone: string;
 };
 
-export const SecondSignInForm = ({ setAuthState }: SecondSignInFormProps) => {
+export const SecondSignInForm = ({ phone }: SecondSignInFormProps) => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -24,10 +29,32 @@ export const SecondSignInForm = ({ setAuthState }: SecondSignInFormProps) => {
     resolver: yupResolver(secondSignInScheme),
   });
 
-  const formHandler = handleSubmit((data) => {
-    console.log(data);
-    reset();
-    setAuthState("no_email");
+  const formHandler = handleSubmit(async (data) => {
+    const normalPhone = normalizePhone(phone);
+
+    try {
+      const res = await LoginRequest({
+        password: data.password,
+        phone: normalPhone,
+      });
+      const token = `${res.data.token_type} ${res.data.token}`;
+
+      // todo: change secure - true
+      Cookies.set("token", token, { path: "/", secure: false });
+      reset();
+      showToast({
+        title: "Успешный вход!",
+        variant: "success",
+      });
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+      showToast({
+        title: "Произошла ошибка",
+        description: "Пожалуйста, повторите попытку ещё раз.",
+        variant: "error",
+      });
+    }
   });
 
   return (

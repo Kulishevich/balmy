@@ -56,7 +56,7 @@ function NewsPage() {
           </span>
         )}
       </div>
-      <TextEditor />
+      {/* <TextEditor /> */}
       <Action>Посмотреть превью</Action>
     </div>
   );

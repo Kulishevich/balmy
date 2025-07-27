@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthT } from "./AuthorizationWindow";
 import { noEmailScheme } from "@/utils/schemes/no-email";
+import { setEmailAndResetPassword } from "@/api/auth";
 
 type NoEmailFormT = {
   email: string;
@@ -24,10 +25,23 @@ export const NoEmailForm = ({ setAuthState }: NoEmailFormProps) => {
     resolver: yupResolver(noEmailScheme),
   });
 
-  const formHandler = handleSubmit((data) => {
-    console.log(data);
-    reset();
-    setAuthState("not_partner");
+  const formHandler = handleSubmit(async (data) => {
+    try {
+      const res = await setEmailAndResetPassword({
+        phone: "",
+        email: data.email,
+      });
+
+      if (res.success) {
+        setAuthState("last_step");
+      } else {
+        setAuthState("not_partner");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      reset();
+    }
   });
 
   return (

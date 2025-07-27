@@ -57,3 +57,24 @@ export interface IMe {
     phone?: string;
   };
 }
+
+export interface IPasswordRecovery {
+  phone: string;
+}
+
+export interface IPasswordRecoveryResponse {
+  success: boolean;
+  message: string;
+  email?: string;
+  require_email?: boolean;
+}
+
+export interface ISetEmailAndResetPasswordData {
+  phone: string;
+  email: string;
+}
+
+export interface ISetEmailAndResetPasswordResponse {
+  success: boolean;
+  message: string;
+}

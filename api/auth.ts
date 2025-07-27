@@ -3,6 +3,10 @@ import {
   ILoginRequest,
   ILoginResponse,
   IMe,
+  IPasswordRecovery,
+  IPasswordRecoveryResponse,
+  ISetEmailAndResetPasswordData,
+  ISetEmailAndResetPasswordResponse,
 } from "@/types/auth";
 
 export async function CreateClientRequest(orderData: ICreateClientRequest) {
@@ -104,5 +108,61 @@ export async function getMe(token: string) {
   } catch (error) {
     console.error("Ошибка при получении данных пользователя:", error);
     return null;
+  }
+}
+
+export async function forgotPassword(
+  passwordRecoveryData: IPasswordRecovery
+): Promise<IPasswordRecoveryResponse> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/clients/forgot-password`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(passwordRecoveryData),
+    });
+
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error(`Ошибка API: ${res.status} — ${message}`);
+    }
+
+    const order = await res.json();
+
+    return order;
+  } catch (err) {
+    console.error("Ошибка при входе в аккаунт:", err);
+    throw err;
+  }
+}
+
+export async function setEmailAndResetPassword(
+  setEmailAndResetPasswordData: ISetEmailAndResetPasswordData
+): Promise<ISetEmailAndResetPasswordResponse> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/clients/set-email-and-reset-password`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(setEmailAndResetPasswordData),
+    });
+
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error(`Ошибка API: ${res.status} — ${message}`);
+    }
+
+    const order = await res.json();
+
+    return order;
+  } catch (err) {
+    console.error("Ошибка при входе в аккаунт:", err);
+    throw err;
   }
 }

@@ -8,7 +8,7 @@ type NotPartnerProps = {
 
 export const NotPartner = ({ setAuthState }: NotPartnerProps) => {
   const handleClick = () => {
-    setAuthState("last_step");
+    setAuthState("sign_up");
   };
 
   return (

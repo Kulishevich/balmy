@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { passwordRecoveryScheme } from "@/utils/schemes/password-recovery";
 import { AuthT } from "./AuthorizationWindow";
+import { forgotPassword } from "@/api/auth";
 
 type PasswordRecoveryForm = {
   phone: string;
@@ -12,9 +13,15 @@ type PasswordRecoveryForm = {
 
 type PasswordRecoveryProps = {
   setAuthState: Dispatch<SetStateAction<AuthT>>;
+  setEmail: Dispatch<SetStateAction<string | null>>;
+  setPhone: Dispatch<SetStateAction<string | null>>;
 };
 
-export const PasswordRecovery = ({ setAuthState }: PasswordRecoveryProps) => {
+export const PasswordRecovery = ({
+  setAuthState,
+  setEmail,
+  setPhone,
+}: PasswordRecoveryProps) => {
   const {
     register,
     handleSubmit,
@@ -24,10 +31,24 @@ export const PasswordRecovery = ({ setAuthState }: PasswordRecoveryProps) => {
     resolver: yupResolver(passwordRecoveryScheme),
   });
 
-  const formHandler = handleSubmit((data) => {
-    console.log(data);
-    reset();
-    setAuthState("not_partner");
+  const formHandler = handleSubmit(async (data) => {
+    try {
+      const res = await forgotPassword(data);
+
+      if (res.success) {
+        setEmail(res.email || "");
+        setPhone(data.phone);
+        setAuthState("last_step");
+      } else if (!res.success && res.require_email) {
+        setAuthState("no_email");
+      } else {
+        setAuthState("not_partner");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      reset();
+    }
   });
 
   return (
