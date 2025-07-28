@@ -59,9 +59,12 @@ export const SecondSignInForm = ({ phone }: SecondSignInFormProps) => {
 
   return (
     <form onSubmit={formHandler} className="flex flex-col gap-6 items-center">
-      <p className="text-[42px] font-bold">Вход на сайт</p>
+      <p className="text-[24px] lg:text-[42px] font-bold">Вход на сайт</p>
       <div className="flex flex-col gap-[6px] w-full">
-        <label className="font-normal cursor-pointer" htmlFor="password">
+        <label
+          className="font-normal cursor-pointer text-[17px] lg:text-[21px]"
+          htmlFor="password"
+        >
           Пароль из email*
         </label>
         <input
@@ -79,7 +82,7 @@ export const SecondSignInForm = ({ phone }: SecondSignInFormProps) => {
           </span>
         )}
       </div>
-      <Action className="w-full" typeButton="submit">
+      <Action className="w-full text-[19px] lg:text-[21px]" typeButton="submit">
         Войти
       </Action>
     </form>

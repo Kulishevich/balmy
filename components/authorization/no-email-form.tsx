@@ -13,9 +13,10 @@ type NoEmailFormT = {
 
 type NoEmailFormProps = {
   setAuthState: Dispatch<SetStateAction<AuthT>>;
+  phone: string;
 };
 
-export const NoEmailForm = ({ setAuthState }: NoEmailFormProps) => {
+export const NoEmailForm = ({ setAuthState, phone }: NoEmailFormProps) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +29,7 @@ export const NoEmailForm = ({ setAuthState }: NoEmailFormProps) => {
   const formHandler = handleSubmit(async (data) => {
     try {
       const res = await setEmailAndResetPassword({
-        phone: "",
+        phone,
         email: data.email,
       });
 
@@ -46,10 +47,10 @@ export const NoEmailForm = ({ setAuthState }: NoEmailFormProps) => {
 
   return (
     <form onSubmit={formHandler} className="flex flex-col gap-6 items-center">
-      <p className="text-[42px] font-bold text-center">
+      <p className="text-[24px] lg:text-[42px] font-bold text-center">
         Вы уже партнёр Balmy Pro, но ваш email не был зарегистрирован 😔{" "}
       </p>
-      <p className="text-[14px] font-normal text-center">
+      <p className="text-[17px] font-normal text-center">
         Пожалуйста, заполните поле ниже релевантным email-адресом
       </p>
       <div className="flex flex-col gap-[6px] w-full">
@@ -71,8 +72,8 @@ export const NoEmailForm = ({ setAuthState }: NoEmailFormProps) => {
           </span>
         )}
       </div>
-      <Action className="w-full" typeButton="submit">
-        Войти
+      <Action className="w-full text-[19px] lg:text-[21px]" typeButton="submit">
+        Восстановить доступ
       </Action>
     </form>
   );

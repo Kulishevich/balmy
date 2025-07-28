@@ -125,11 +125,6 @@ export async function forgotPassword(
       body: JSON.stringify(passwordRecoveryData),
     });
 
-    if (!res.ok) {
-      const message = await res.text();
-      throw new Error(`Ошибка API: ${res.status} — ${message}`);
-    }
-
     const order = await res.json();
 
     return order;

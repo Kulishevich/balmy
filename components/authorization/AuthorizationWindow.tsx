@@ -43,7 +43,7 @@ export const AuthorizationWindow = () => {
       case "second_sign_in":
         return <SecondSignInForm phone={phone || ""} />;
       case "no_email":
-        return <NoEmailForm setAuthState={setAuthState} />;
+        return <NoEmailForm setAuthState={setAuthState} phone={phone || ""} />;
       default:
         return null;
     }

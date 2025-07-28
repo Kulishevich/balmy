@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { passwordRecoveryScheme } from "@/utils/schemes/password-recovery";
 import { AuthT } from "./AuthorizationWindow";
 import { forgotPassword } from "@/api/auth";
+import { normalizePhone } from "@/utils/helper";
 
 type PasswordRecoveryForm = {
   phone: string;
@@ -32,19 +33,25 @@ export const PasswordRecovery = ({
   });
 
   const formHandler = handleSubmit(async (data) => {
+    const phone = normalizePhone(data.phone);
+
     try {
       const res = await forgotPassword(data);
 
       if (res.success) {
         setEmail(res.email || "");
-        setPhone(data.phone);
+        setPhone(phone);
+
         setAuthState("last_step");
       } else if (!res.success && res.require_email) {
+        setPhone(phone);
+
         setAuthState("no_email");
       } else {
         setAuthState("not_partner");
       }
     } catch (err) {
+      setAuthState("not_partner");
       console.log(err);
     } finally {
       reset();
@@ -52,10 +59,18 @@ export const PasswordRecovery = ({
   });
 
   return (
-    <form onSubmit={formHandler} className="flex flex-col gap-6 items-center">
-      <p className="text-[42px] font-bold">Восстановление доступа</p>
+    <form
+      onSubmit={formHandler}
+      className="flex flex-col gap-5 items-center lg:gap-6"
+    >
+      <p className="text-[24px] lg:text-[42px] font-bold text-center">
+        Восстановление доступа
+      </p>
       <div className="flex flex-col gap-[6px] w-full">
-        <label className="font-normal cursor-pointer" htmlFor="phone">
+        <label
+          className="text-[17px] lg:text-[21px]  font-normal cursor-pointer"
+          htmlFor="phone"
+        >
           Номер телефона*
         </label>
         <input
@@ -73,7 +88,7 @@ export const PasswordRecovery = ({
           </span>
         )}
       </div>
-      <Action className="w-full" typeButton="submit">
+      <Action className="w-full text-[19px] lg:text-[21px]" typeButton="submit">
         Восстановить доступ
       </Action>
     </form>
