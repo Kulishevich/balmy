@@ -10,9 +10,11 @@ import { IMe } from "@/types/auth";
 function DeliverySection({
   meInfo,
   token,
+  useBonuses,
 }: {
   meInfo: IMe | null;
   token: string;
+  useBonuses: boolean;
 }) {
   const { deliveryType, setDeliveryType } = useOrderState();
 
@@ -69,6 +71,7 @@ function DeliverySection({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-[30px]">
         <CourierDeliveryForm
           token={token}
+          useBonuses={useBonuses}
           meInfo={meInfo}
           className={cn("transition", {
             "opacity-100": deliveryType == "Courier",
@@ -77,6 +80,7 @@ function DeliverySection({
         />
         <ShippingDeliveryForm
           token={token}
+          useBonuses={useBonuses}
           meInfo={meInfo}
           className={cn("transition", {
             "opacity-100": deliveryType == "Post",

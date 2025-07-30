@@ -8,7 +8,7 @@ import { useOrderState } from "@/store/order";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getMe } from "@/api/auth";
 import { IMe } from "@/types/auth";
 
@@ -17,6 +17,8 @@ function DeliveryPayment() {
   const [personalInfo, setPersonalInfo] = useState(false);
   const token = Cookies.get("token") || "";
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const useBonuses = searchParams.get("use_bonuses") === "true";
   const { deliveryType } = useOrderState();
   const form =
     deliveryType == "Courier"
@@ -50,7 +52,7 @@ function DeliveryPayment() {
     <>
       <Title className="mt-10 text-center">Доставка и оплата</Title>
       <Breadcrumbs className="mt-4 mx-auto" />
-      <DeliverySection meInfo={meInfo} token={token} />
+      <DeliverySection meInfo={meInfo} token={token} useBonuses={useBonuses} />
       <PaymentMethodsSection deliveryType={deliveryType} />
       <div className="container mt-[42px] lg:mt-[120px]">
         <div className="flex items-center gap-2">

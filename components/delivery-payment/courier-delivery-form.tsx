@@ -21,6 +21,7 @@ interface Props {
   className?: string;
   meInfo: IMe | null;
   token: string;
+  useBonuses: boolean;
 }
 
 export type OrderInputs = {
@@ -30,7 +31,7 @@ export type OrderInputs = {
   email?: string;
 };
 
-function CourierDeliveryForm({ className, meInfo, token }: Props) {
+function CourierDeliveryForm({ className, meInfo, token, useBonuses }: Props) {
   const { setDeliveryType, setComment, getOrder } = useOrderState();
   const {
     handleSubmit,
@@ -87,6 +88,7 @@ function CourierDeliveryForm({ className, meInfo, token }: Props) {
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
       client_moysklad_id: meInfo?.moysklad_id || "",
+      use_bonus_points: useBonuses,
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,
@@ -97,13 +99,22 @@ function CourierDeliveryForm({ className, meInfo, token }: Props) {
     try {
       const data = await sendOrder({ orderData: requestData, token });
 
+      console.log(data);
+
       if (data?.data.payment_url) {
         window.open(data?.data.payment_url, "_blank");
       }
 
+      if (data?.data.pdf_path) {
+        router.push(
+          `${process.env.NEXT_PUBLIC_STORAGE_URL}${data?.data.pdf_path}`
+        );
+      } else {
+        router.push("/");
+      }
+
       clearCart();
       showToast({ title: "Заказ оформлен успешно", variant: "success" });
-      router.push("/");
     } catch (err) {
       showToast({
         title: "Произошла ошибка",

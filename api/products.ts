@@ -2,12 +2,12 @@ import { Direction } from "@/store/filter";
 import { Product, ProductResponse } from "@/types/product";
 
 export async function getProducts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/all`, {
     next: { revalidate: 60 },
   });
   const clonedResponse = res.clone();
   const { data } = (await clonedResponse.json()) as {
-    data: ProductResponse;
+    data: Product[];
   };
 
   return data;
@@ -112,7 +112,7 @@ export async function getSimilarProducts({
 }) {
   const products = await getProducts();
 
-  const similarProducts = products.data
+  const similarProducts = products
     .filter(
       (product) =>
         product.category.slug === currentProductCategorySlug &&
@@ -121,5 +121,5 @@ export async function getSimilarProducts({
     .sort(() => Math.random() - 0.5)
     .slice(0, 4);
 
-  return { similarProducts };
+  return similarProducts;
 }

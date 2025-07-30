@@ -1,57 +1,49 @@
 "use client";
 
-import React, {
-  useEffect,
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
-import Quill from "quill";
-import "quill/dist/quill.snow.css"; // Import Quill styles
+import ReactQuill from "react-quill-new"; // 👈 Новый пакет
+import "react-quill-new/dist/quill.snow.css";
 
-// Define the ref type for the RichTextEditor component
-export type RichTextEditorHandle = {
-  getContent: () => string;
+interface RichTextEditorProps {
+  value: string;
+  onChange: (val: string) => void;
+}
+
+export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
+  return (
+    <ReactQuill
+      className="h-[400px] w-full bg-white rounded-[5px] overflow-hidden text-dark-grey"
+      theme="snow"
+      value={value}
+      onChange={onChange}
+      modules={{
+        toolbar: [
+          // [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          // ["bold", "italic", "underline", "strike"],
+          // [{ color: [] }, { background: [] }],
+          // [{ script: "sub" }, { script: "super" }],
+          // ["blockquote", "code-block"],
+          // [{ list: "ordered" }, { list: "bullet" }],
+          // [{ indent: "-1" }, { indent: "+1" }],
+          // [{ direction: "rtl" }],
+          // [{ size: ["small", false, "large", "huge"] }],
+          // [{ font: [] }],
+          // [{ align: [] }],
+          // ["link", "image", "video"],
+          // ["clean"],
+
+          ["bold", "italic", "underline", "strike"],
+          ["blockquote"],
+          [{ header: 1 }, { header: 2 }],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ indent: "-1" }, { indent: "+1" }],
+          [{ size: ["small", false, "large", "huge"] }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          [{ color: [] }, { background: [] }],
+          [{ align: [] }],
+          ["clean"],
+          ["link", "image"],
+        ],
+      }}
+    />
+  );
 };
-
-const RichTextEditor = forwardRef<RichTextEditorHandle>((_, ref) => {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const quillRef = useRef<Quill | null>(null);
-
-  useEffect(() => {
-    if (editorRef.current) {
-      quillRef.current = new Quill(editorRef.current, {
-        theme: "snow",
-        modules: {
-          toolbar: [
-            [{ header: [1, 2, 3, false] }],
-            ["bold", "italic", "underline", "strike"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["link", "image"],
-            ["clean"],
-          ],
-        },
-        placeholder: "Write something...",
-      });
-    }
-
-    return () => {
-      quillRef.current = null; // Cleanup to avoid memory leaks
-    };
-  }, []);
-
-  // Expose the getContent function to the parent component
-  useImperativeHandle(ref, () => ({
-    getContent: () => {
-      if (quillRef.current) {
-        return quillRef.current.root.innerHTML; // Return the HTML content
-      }
-      return "";
-    },
-  }));
-
-  return <div ref={editorRef} className="w-full h-[400px]" />;
-});
-
-RichTextEditor.displayName = "RichTextEditor";
-export default RichTextEditor;

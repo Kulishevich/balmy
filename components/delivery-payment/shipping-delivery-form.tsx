@@ -12,6 +12,7 @@ import { useCartStore } from "@/store/cart";
 import { showToast } from "../toast";
 import { IMe } from "@/types/auth";
 import { normalizePhone } from "@/utils/helper";
+import { OrderRequest } from "@/types/order";
 
 export type Post = "Европочта" | "Белпочта" | "СДЭК";
 
@@ -19,9 +20,10 @@ interface Props {
   className?: string;
   meInfo: IMe | null;
   token: string;
+  useBonuses: boolean;
 }
 
-function ShippingDeliveryForm({ className, meInfo, token }: Props) {
+function ShippingDeliveryForm({ className, meInfo, token, useBonuses }: Props) {
   const [post, setPost] = useState<Post>("Европочта");
   const { setDeliveryType, setComment, getOrder } = useOrderState();
   const router = useRouter();
@@ -59,7 +61,7 @@ function ShippingDeliveryForm({ className, meInfo, token }: Props) {
 
     const normalPhone = normalizePhone(orderDataCopy.phone);
 
-    const requestData = {
+    const requestData: OrderRequest = {
       customer_name: orderDataCopy.fullName,
       phone: normalPhone,
       email: orderDataCopy.email,
@@ -68,6 +70,7 @@ function ShippingDeliveryForm({ className, meInfo, token }: Props) {
       delivery_method: order.deliveryType,
       payment_method: order.paymentType,
       client_moysklad_id: meInfo?.moysklad_id || "",
+      use_bonus_points: useBonuses,
       items: order.items.map((elem) => ({
         product_id: elem.product_id,
         quantity: elem.quantity,
@@ -78,14 +81,20 @@ function ShippingDeliveryForm({ className, meInfo, token }: Props) {
     try {
       const data = await sendOrder({ orderData: requestData, token });
 
-      if (data?.data.payment_url) {
+      if (data?.data?.payment_url) {
         window.open(data?.data.payment_url, "_blank");
       }
 
+      if (data?.data.pdf_path) {
+        router.push(
+          `${process.env.NEXT_PUBLIC_STORAGE_URL}${data?.data.pdf_path}`
+        );
+      } else {
+        router.push("/");
+      }
+
       clearCart();
-      router.push("/");
       showToast({ title: "Заказ оформлен успешно", variant: "success" });
-      window.open("/files/example.pdf", "_blank");
     } catch (err) {
       showToast({
         title: "Произошла ошибка",

@@ -115,3 +115,18 @@ export interface IOrderProduct {
   images: [];
   main_image: string | null;
 }
+
+export interface MaxBonusPointsData {
+  token: string;
+  order_amount: number;
+}
+
+export interface MaxBonusPointsResponse {
+  success: true;
+  data: {
+    max_bonus_points: 0;
+    available_bonus_points: 0;
+    order_amount: 1000;
+    max_percentage: 20;
+  };
+}

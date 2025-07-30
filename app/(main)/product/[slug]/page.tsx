@@ -16,9 +16,9 @@ async function ProductPage({ params }: Props) {
     notFound();
   }
 
-  const { similarProducts } = await getSimilarProducts({
+  const similarProducts = await getSimilarProducts({
     currentProductSlug: product.slug,
-    currentProductCategorySlug: product.slug,
+    currentProductCategorySlug: product.category.slug,
   });
 
   return (

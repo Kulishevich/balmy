@@ -78,3 +78,13 @@ export interface ISetEmailAndResetPasswordResponse {
   success: boolean;
   message: string;
 }
+
+export interface IChangePasswordData {
+  new_password: string;
+  token: string;
+}
+
+export interface IBonuses {
+  balance: 0;
+  currency_symbol: "₽";
+}

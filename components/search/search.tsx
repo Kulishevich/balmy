@@ -22,7 +22,7 @@ async function Search({ className }: Props) {
 
   return (
     <div className={cn("relative 2xl:max-w-[572px] w-full", className)}>
-      <SearchWrapper searchOptions={searchOptions} products={products?.data} />
+      <SearchWrapper searchOptions={searchOptions} products={products} />
     </div>
   );
 }

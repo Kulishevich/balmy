@@ -32,9 +32,6 @@ importers:
       nextjs-toploader:
         specifier: ^3.7.15
         version: 3.7.15(next@15.0.3(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.81.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      quill:
-        specifier: ^2.0.3
-        version: 2.0.3
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -47,6 +44,9 @@ importers:
       react-hook-form:
         specifier: ^7.53.2
         version: 7.53.2(react@18.2.0)
+      react-quill-new:
+        specifier: ^3.4.6
+        version: 3.4.6(quill-delta@5.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-swipeable:
         specifier: ^7.0.2
         version: 7.0.2(react@18.2.0)
@@ -2515,6 +2515,13 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-quill-new@3.4.6:
+    resolution: {integrity: sha512-S2kEAwoKRo+xUIAEpb94fwiPe2QU3FmwIfQ+7Lkchf+izPa2nRu1mr4i4QxyVYg8TjHDryDUiOEYZuFEV45QFA==}
+    peerDependencies:
+      quill-delta: ^5.1.0
+      react: ^16 || ^17 || ^18 || ^19
+      react-dom: ^16 || ^17 || ^18 || ^19
 
   react-swipeable@7.0.2:
     resolution: {integrity: sha512-v1Qx1l+aC2fdxKa9aKJiaU/ZxmJ5o98RMoFwUqAAzVWUcxgfHFXDDruCKXhw6zIYXm6V64JiHgP9f6mlME5l8w==}
@@ -5654,6 +5661,14 @@ snapshots:
       react: 18.2.0
 
   react-is@16.13.1: {}
+
+  react-quill-new@3.4.6(quill-delta@5.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      lodash-es: 4.17.21
+      quill: 2.0.3
+      quill-delta: 5.1.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   react-swipeable@7.0.2(react@18.2.0):
     dependencies:

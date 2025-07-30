@@ -7,28 +7,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import EyeIcom from "@/public/icons/eye-icon.svg";
-import { useRef } from "react";
-import dynamic from "next/dynamic";
-
-const RichTextEditor = dynamic(
-  () => import("@/components/news/rich-text-editor"),
-  {
-    ssr: false,
-  }
-);
-
-// Define the RichTextEditorHandle type
-type RichTextEditorHandle = {
-  getContent: () => string;
-};
+import { RichTextEditor } from "@/components/news/rich-text-editor";
+import { useState } from "react";
 
 type NewPostForm = {
   title: string;
 };
 
 function NewsPage() {
-  const editorRef = useRef<RichTextEditorHandle>(null); // Ref for RichTextEditor
-
+  const [value, setValue] = useState<string>("");
+  console.log(value);
   const {
     register,
     handleSubmit,
@@ -71,7 +59,10 @@ function NewsPage() {
             </span>
           )}
         </div>
-        <RichTextEditor ref={editorRef} />
+        <RichTextEditor
+          onChange={(val: string) => setValue(val)}
+          value={value}
+        />
         <button className="bg-[#E1E1E1] rounded-[5px] px-6 py-4 flex items-center gap-[6px] text-dark-grey font-medium text-[17px]">
           <EyeIcom />
           Посмотреть превью

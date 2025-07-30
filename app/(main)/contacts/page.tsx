@@ -69,7 +69,6 @@ async function ContactsPage() {
               href={ADDRESS.href}
               target="_blank"
             >
-              {ADDRESS.value}
               {contacts.address}
             </Link>
           </div>

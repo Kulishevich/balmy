@@ -1,4 +1,6 @@
 import {
+  IBonuses,
+  IChangePasswordData,
   ICreateClientRequest,
   ILoginRequest,
   ILoginResponse,
@@ -153,11 +155,66 @@ export async function setEmailAndResetPassword(
       throw new Error(`Ошибка API: ${res.status} — ${message}`);
     }
 
-    const order = await res.json();
+    const data = await res.json();
 
-    return order;
+    return data;
   } catch (err) {
     console.error("Ошибка при входе в аккаунт:", err);
     throw err;
+  }
+}
+
+export async function changePassword({
+  new_password,
+  token,
+}: IChangePasswordData) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/client/change-password`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: token ? `${token}` : "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ new_password }),
+    });
+
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error(`Ошибка при смене пароля — ${message}`);
+    }
+
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.error("Ошибка при смене пароля:", err);
+    throw err;
+  }
+}
+
+export async function getAllBonuses(token: string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/client/bonus-points`;
+
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: token ? `${token}` : "",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      return null;
+    }
+
+    const { data } = (await res.json()) as { data: IBonuses };
+
+    return data;
+  } catch (error) {
+    console.error("Ошибка при получении данных пользователя:", error);
+    return null;
   }
 }

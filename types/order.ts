@@ -18,6 +18,7 @@ export interface OrderRequest {
   client_moysklad_id: string;
   delivery_method: string;
   payment_method: string;
+  use_bonus_points: boolean;
   items: OrderPosition[];
 }
 
@@ -37,9 +38,19 @@ export interface OrderResponse {
   data: {
     order: IOrderItem;
     payment_url: string;
+    pdf_filename: string;
+    pdf_path: string;
+
     moysklad_order: {
       id: string;
       name: string;
+    };
+
+    applied_discount: {
+      type: string;
+      amount: number;
+      personal_discount: null;
+      promo_discount: null;
     };
   };
 }

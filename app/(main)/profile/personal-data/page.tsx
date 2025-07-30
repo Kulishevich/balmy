@@ -1,9 +1,11 @@
-import { getMe } from "@/api/auth";
+import { getAllBonuses, getMe } from "@/api/auth";
 import Action from "@/components/action";
 import Breadcrumbs from "@/components/breadcrumbs";
+import { ChangePasswordForm } from "@/components/profile-data-password";
 import Title from "@/components/title";
 import MedalIcon from "@/public/icons/medal-star.svg";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function PersonalDataPage() {
@@ -16,8 +18,12 @@ async function PersonalDataPage() {
     redirect("/authorization");
   }
 
+  const bonuses = await getAllBonuses(token);
+
+  console.log(bonuses);
+
   return (
-    <>
+    <div className="container">
       <Title type="h1" className="mt-10 text-center">
         Личные данные
       </Title>
@@ -32,7 +38,7 @@ async function PersonalDataPage() {
               ФИО / Название компании
             </label>
             <input
-              className={"custom-input--white mt-[6px] "}
+              className={"custom-input--white"}
               id="name"
               placeholder="ФИО / Название компании"
               value={me?.name}
@@ -47,13 +53,16 @@ async function PersonalDataPage() {
               Номер телефона
             </label>
             <input
-              className={"custom-input--white mt-[6px] "}
+              className={"custom-input--white"}
               id="phone"
               placeholder="Номер телефона"
               value={me?.phone}
               disabled
             />
           </div>
+
+          <ChangePasswordForm token={token} />
+
           <div className="flex flex-col gap-[10px] items-start">
             <p className="font-normal cursor-pointer">Статус</p>
             <button
@@ -64,14 +73,15 @@ async function PersonalDataPage() {
               Партнёр Balmy
             </button>
           </div>
-          {/* <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[10px]">
             <label className="font-normal cursor-pointer" htmlFor="discount">
               Бонусные баллы
             </label>
             <input
-              className={"custom-input--white mt-[6px] "}
+              className={"custom-input--white"}
               id="discount"
-              placeholder="23.40 BYN"
+              disabled
+              placeholder={`${bonuses?.balance} ${bonuses?.currency_symbol}`}
             />
             <span className="text-[#9E9E9E] relative before:content-['*'] before:text-gold text-[17px] font-normal">
               Бонусные баллы начисляются после совершения покупок на сайте
@@ -80,7 +90,7 @@ async function PersonalDataPage() {
                 Договор оферты
               </Link>
             </span>
-          </div> */}
+          </div>
         </div>
         <Action
           type="link"
@@ -91,7 +101,7 @@ async function PersonalDataPage() {
           Назад
         </Action>
       </div>
-    </>
+    </div>
   );
 }
 

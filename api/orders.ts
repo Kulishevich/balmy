@@ -1,4 +1,9 @@
-import { IOrders, IOrderStatus } from "@/types/orders";
+import {
+  IOrders,
+  IOrderStatus,
+  MaxBonusPointsData,
+  MaxBonusPointsResponse,
+} from "@/types/orders";
 
 export async function getOrders(token: string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/client/orders`;
@@ -50,3 +55,33 @@ export async function getStatuses() {
     return null;
   }
 }
+
+export const getMaxBonusPoints = async ({
+  token,
+  order_amount,
+}: MaxBonusPointsData): Promise<MaxBonusPointsResponse | null> => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/client/bonus-points/calculate-max`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: token ? `${token}` : "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ order_amount }),
+    });
+
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error(`Ошибка при смене пароля — ${message}`);
+    }
+
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.error("Ошибка при смене пароля:", err);
+    throw err;
+  }
+};

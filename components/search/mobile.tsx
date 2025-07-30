@@ -22,10 +22,7 @@ async function SearchMobile({ className }: Props) {
 
   return (
     <div className={cn("container relative lg:hidden", className)}>
-      <SearchWrapperMobile
-        searchOptions={searchOptions}
-        products={products.data}
-      />
+      <SearchWrapperMobile searchOptions={searchOptions} products={products} />
     </div>
   );
 }
