@@ -131,7 +131,7 @@ function FilterPopup({ brands }: Props) {
                   onClick={handleBrandClick(slug)}
                 >
                   <input
-                    className="custom-checkbox border-white/30"
+                    className="custom-checkbox border border-white/30"
                     id={slug}
                     type="radio"
                     checked={currentBrand == slug}
@@ -167,7 +167,7 @@ function FilterPopup({ brands }: Props) {
               onClick={handleSortClick}
             >
               <input
-                className="custom-checkbox border-white/30"
+                className="custom-checkbox border border-white/30"
                 id={sortDirection}
                 type="radio"
                 name="sort"

@@ -32,8 +32,10 @@ function CartPage() {
   const cartTotal = getCartTotal();
   const cartTotalDiscount = getCartTotalDiscount();
   const beforeFreeShipping = FREE_SHIPPING_PRICE - cartTotal;
+  const addedBonuses = (cartTotal * 0.03).toFixed(2);
 
-  const addedBonuses = cartTotal * 0.03;
+  const totalPrice =
+    beforeFreeShipping <= 0 ? cartTotal : cartTotal + SHIPPING_PRICE;
 
   useEffect(() => {
     async function handleFetchCategories() {
@@ -156,7 +158,7 @@ function CartPage() {
 
                 <span className=" flex font-bold">
                   Итого:{" "}
-                  <span className="ml-auto">{cartTotal.toFixed(2)} byn</span>
+                  <span className="ml-auto">{totalPrice.toFixed(2)} byn</span>
                 </span>
               </div>
             </div>

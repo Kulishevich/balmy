@@ -8,6 +8,7 @@ import { useCartStore } from "@/store/cart";
 import { useScreenSize } from "@/hooks/use-screen-size";
 import { getDeclensionForGoods } from "@/utils/helper";
 import { useMobileMenuStore } from "@/store/mobile-menu";
+import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "@/utils/constants";
 
 interface Props {
   className?: string;
@@ -20,6 +21,10 @@ function CartInfo({ className, mobileMenu }: Props) {
   const { isTablet } = useScreenSize();
   const cartTotal = getCartTotal();
   const cartItemCount = getCartItemCount();
+  const beforeFreeShipping = FREE_SHIPPING_PRICE - cartTotal;
+
+  const totalPrice =
+    beforeFreeShipping <= 0 ? cartTotal : cartTotal + SHIPPING_PRICE;
 
   if (mobileMenu) {
     return (
@@ -62,7 +67,7 @@ function CartInfo({ className, mobileMenu }: Props) {
         <span className="font-semibold">Корзина</span>
         <span className="text-[15px] text-wrap font-normal text-white/50">
           {cartItemCount} {getDeclensionForGoods(cartItemCount)} (
-          {cartTotal.toFixed(2)} BYN)
+          {totalPrice.toFixed(2)} BYN)
         </span>
       </div>
     </Link>

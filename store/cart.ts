@@ -1,6 +1,5 @@
 import { showToast } from "@/components/toast";
 import { CartProduct } from "@/types/product";
-import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "@/utils/constants";
 import { create } from "zustand";
 
 interface CartStore {
@@ -117,10 +116,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
   getCartTotal: () => {
     const { cart } = get();
     const cartTotal = cart.reduce((total, product) => total + product.price, 0);
-
-    if (cartTotal < FREE_SHIPPING_PRICE && cart.length) {
-      return cartTotal + SHIPPING_PRICE;
-    }
 
     return cartTotal;
   },
