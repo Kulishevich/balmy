@@ -167,6 +167,38 @@ body {
 .docs li {
 }
 
+.clampedText {
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* 👈 сколько строк оставить */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.content-wrapper p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.content-wrapper h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.content-wrapper h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.content-wrapper strong {
+  font-weight: 700;
+}
+
+.content-wrapper ul {
+  list-style: disc;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 /* Медиазапросы для экрана до 992px */
 @media (max-width: 992px) {
   .docs {

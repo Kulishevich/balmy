@@ -38,6 +38,8 @@ function Breadcrumbs({ className, dynamicPath }: Props) {
         return { href: "/order-history", name: "История заказов" };
       case "news":
         return { href: "/news", name: "Лента новостей" };
+      case "add-new-post":
+        return { href: "/news/add-new-post", name: "Добавить новость" };
       default:
         break;
     }

@@ -19,7 +19,7 @@ export async function getOrders(token: string) {
     });
 
     if (!res.ok) {
-      console.log("hui");
+      console.log("Ошибка при получении заказов пользователя");
       return null;
     }
 
