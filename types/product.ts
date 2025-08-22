@@ -44,6 +44,7 @@ export interface Product {
   specifications: [];
   stock: number;
   updated_at: string;
+  buy_price: string;
 }
 
 export interface ProductImage {

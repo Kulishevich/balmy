@@ -47,6 +47,7 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
     slug,
     quantity,
     country,
+    // buy_price,
   } = product;
 
   const isDiscount = !!Number(discount);
@@ -161,22 +162,43 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
               src={EcoFriendlyImage}
               alt="эко"
             />
-            {!isDiscount && (
-              <span className="mt-[30px] sm:mt-[40px] text-[32px] font-quicksand sm:text-[40px] font-semibold text-center sm:text-left">
-                {price} byn
+
+            <div className="flex flex-col gap-[6px] mt-[30px] sm:mt-[40px] items-center xl:items-start">
+              <p className="text-[17px] text-center sm:text-left">
+                Оптовая цена:
+              </p>
+
+              {!isDiscount && (
+                <p className="text-[32px] font-quicksand sm:text-[40px] font-semibold text-center xl:text-left">
+                  {price} byn
+                </p>
+              )}
+              {!!isDiscount && (
+                <div className="flex flex-col xl:flex-row gap-2 xl:gap-[14px] items-center xl:items-end">
+                  <p className="sm:text-[40px] text-[32px] font-semibold text-center sm:text-left">
+                    {discountPrices.toFixed(2)} byn
+                  </p>
+
+                  <div className="flex items-center gap-2">
+                    <p className="opacity-50 line-through text-[21px] font-semibold">
+                      {price} byn
+                    </p>
+                    <p className="bg-red px-2 py-1 rounded-[4px]">
+                      -{Number(discount)}%
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* <div className="flex flex-col gap-[6px] mt-[30px] sm:mt-[40px] opacity-50 items-center xl:items-start">
+              <p className="text-[17px]">Розничная цена:</p>
+
+              <span className="text-[32px] sm:text-[40px] font-semibold text-center sm:text-left">
+                {buy_price} byn
               </span>
-            )}
-            {!!isDiscount && (
-              <>
-                <span className="mt-[30px] sm:mt-[40px] font-quicksand sm:text-[40px] text-[32px] font-semibold text-center sm:text-left inline-flex flex-col sm:flex-row gap-x-6">
-                  <span>{discountPrices.toFixed(2)} byn</span>
-                  <span className="opacity-50 line-through">{price} byn</span>
-                </span>
-                <span className="mt-3 opacity-50">
-                  Cо скидкой {Number(discount)}%
-                </span>
-              </>
-            )}
+            </div> */}
+
             {!!quantity && (
               <div className="max-w-[660px] mt-[30px] grid grid-cols-2 2xl:flex gap-3">
                 {!cartProduct && (
@@ -220,7 +242,7 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
                   Описание:
                 </p>
                 <div
-                  className="mt-5 max-w-full text-center sm:text-left break-words overflow-hidden [word-break:break-word] [&>*]:[overflow-wrap:anywhere] [&>*]:[word-break:break-word]"
+                  className="mt-5 max-w-full text-center bg-white p-6 rounded-[5px]  sm:text-left break-words overflow-hidden [word-break:break-word] [&>*]:[overflow-wrap:anywhere] [&>*]:[word-break:break-word]"
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
               </>
