@@ -23,26 +23,11 @@ function Pagination({ totalPages, currentPage = "1" }: Props) {
   function handlePageChange(page: number) {
     return () => {
       const params = new URLSearchParams(searchParams);
-      if (pathname.includes("/page")) {
-        if (page === 1) {
-          const newUrl = pathname.replace(`/page/${currentPageNumber}`, "");
 
-          router.push(`${newUrl}?${params.toString()}`);
-        } else {
-          const newUrl = pathname.replace(
-            `/page/${currentPageNumber}`,
-            `/page/${page}`
-          );
+      params.set("page", page.toString());
 
-          router.push(`${newUrl}?${params.toString()}`);
-        }
-      } else {
-        if (page === 1) {
-          router.push(`${pathname}?${params.toString()}`);
-        } else {
-          router.push(`${pathname}/page/${page}?${params.toString()}`);
-        }
-      }
+      const url = `${pathname}?${params.toString()}`;
+      router.push(url, { scroll: true });
     };
   }
 

@@ -4,8 +4,8 @@ import Image from "next/image";
 import TallArrowRightIcon from "@/public/icons/tall-arrow-right.svg";
 import Link from "next/link";
 import HeartIcon from "@/public/icons/heart.svg";
-import { NewsI } from "@/types/news";
 import { likePost } from "@/api/posts";
+import { INews } from "@/types/news";
 
 export const NewsCard = ({
   content,
@@ -17,7 +17,7 @@ export const NewsCard = ({
   liked_by_me,
   likes_count,
   token,
-}: NewsI & { token: string }) => {
+}: INews & { token: string }) => {
   const [likesCount, setLikesCount] = useState(Number(likes_count));
   const [likedByMeToggle, setLikedByMeToogle] = useState(liked_by_me);
 
@@ -56,19 +56,11 @@ export const NewsCard = ({
           alt={"news"}
           fill
         />
-        <div className="absolute top-0 right-0 flex gap-3 items-center p-[14px] sm:p-5 bg-white rounded-b-[5px] rounded-r-none border border-black">
-          <Image
-            src={"/images/news-profile.png"}
-            width={48}
-            height={48}
-            alt="profile-photo"
-          />
-          <div className="flex flex-col gap-1">
-            <p className="font-semibold text-[17px]">{author.name}</p>
-            <p className="font-normal text-[14px] opacity-70">
-              {new Date(published_at).toLocaleDateString("RU-ru")}
-            </p>
-          </div>
+        <div className="absolute top-0 right-0 flex flex-col gap-1 p-[14px] sm:px-5 sm:py-4 bg-white rounded-b-[5px] rounded-r-none border border-black">
+          <p className="font-semibold text-[17px]">{author.name}</p>
+          <p className="font-normal text-[14px] opacity-70">
+            {new Date(published_at).toLocaleDateString("RU-ru")}
+          </p>
         </div>
       </Link>
       <div className="flex flex-col p-4 sm:px-[36px] sm:py-[30px] items-start">

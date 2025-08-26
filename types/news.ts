@@ -1,4 +1,4 @@
-export interface NewsI {
+export interface INews {
   approved_at: string;
   author_client_id: string;
   content: string;
@@ -19,4 +19,14 @@ export interface NewsI {
   };
   liked_by_me: boolean;
   likes_count: string;
+}
+
+export interface IAllNewsResponse {
+  current_page: number;
+  data: INews[];
+  from: number;
+  last_page: number;
+  per_page: number;
+  to: number;
+  total: number;
 }

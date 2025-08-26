@@ -1,8 +1,49 @@
-import { NewsI } from "@/types/news";
+import { IAllNewsResponse, INews } from "@/types/news";
 
-export async function getAllPosts(token: string): Promise<NewsI[] | null> {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/client-news`;
+interface IGetAllPostsProps {
+  token: string;
+  page?: string;
+  per_page?: string;
+  search?: string;
+  tag?: string;
+  sort_by?: string;
+  sort_direction?: string;
+}
 
+export async function getAllPosts({
+  token,
+  page = "1",
+  per_page = "2",
+  search,
+  tag,
+  sort_by,
+  sort_direction,
+}: IGetAllPostsProps): Promise<IAllNewsResponse | null> {
+  const params = new URLSearchParams();
+
+  if (page) {
+    params.append("page", page);
+  }
+  if (per_page) {
+    params.append("per_page", per_page);
+  }
+  if (search) {
+    params.append("search", search);
+  }
+  if (tag) {
+    params.append("tag", tag);
+  }
+  if (sort_by) {
+    params.append("sort_by", sort_by);
+  }
+  if (sort_direction) {
+    params.append("sort_direction", sort_direction);
+  }
+
+  const url = `${
+    process.env.NEXT_PUBLIC_API_URL
+  }/client-news?${params.toString()}`;
+  
   try {
     const res = await fetch(url, {
       // next: { revalidate: 60 },
@@ -18,7 +59,7 @@ export async function getAllPosts(token: string): Promise<NewsI[] | null> {
       return null;
     }
 
-    const { data } = (await res.json()) as { data: NewsI[] };
+    const data = (await res.json()) as IAllNewsResponse;
     return data;
   } catch (error) {
     console.error("Ошибка при получении новостей пользователя:", error);
@@ -26,7 +67,7 @@ export async function getAllPosts(token: string): Promise<NewsI[] | null> {
   }
 }
 
-export async function getClientPosts(token: string): Promise<NewsI[] | null> {
+export async function getClientPosts(token: string): Promise<INews[] | null> {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/client/client-news`;
 
   try {
@@ -44,7 +85,7 @@ export async function getClientPosts(token: string): Promise<NewsI[] | null> {
       return null;
     }
 
-    const { data } = (await res.json()) as { data: NewsI[] };
+    const { data } = (await res.json()) as { data: INews[] };
     return data;
   } catch (error) {
     console.error("Ошибка при получении новостей пользователя:", error);
@@ -69,7 +110,7 @@ export async function getPostById(id: string) {
       return null;
     }
 
-    const data = (await res.json()) as NewsI;
+    const data = (await res.json()) as INews;
     return data;
   } catch (error) {
     console.error("Ошибка при получении новости по id:", error);
