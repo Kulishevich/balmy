@@ -11,7 +11,6 @@ interface Props {
   params: Promise<{
     "category-slug": string;
     "subcategory-slug": string;
-    page: string;
   }>;
   searchParams: Promise<{
     page?: string;
@@ -22,12 +21,9 @@ interface Props {
 }
 
 async function Page({ params, searchParams }: Props) {
-  const {
-    "category-slug": categorySlug,
-    "subcategory-slug": subcategorySlug,
-    page,
-  } = await params;
-  const responseSearchParams = await searchParams;
+  const { "category-slug": categorySlug, "subcategory-slug": subcategorySlug } =
+    await params;
+  const { brand_slug, direction, page, sort } = await searchParams;
 
   const isBrands = categorySlug === "brands";
 
@@ -40,9 +36,9 @@ async function Page({ params, searchParams }: Props) {
   const { last_page, data: products } = await getProductsByCategoryId({
     category_slug: !isBrands ? subcategorySlug : "",
     page: page,
-    sort_by: responseSearchParams.sort,
-    sort_direction: responseSearchParams.direction,
-    brand_slug: isBrands ? subcategorySlug : responseSearchParams.brand_slug,
+    sort_by: sort,
+    sort_direction: direction,
+    brand_slug: isBrands ? subcategorySlug : brand_slug,
   });
 
   if ((!subcategory && !isBrands) || (!category && !isBrands)) notFound();
@@ -61,7 +57,7 @@ async function Page({ params, searchParams }: Props) {
 
   return (
     <CategoryLayout
-      page={page}
+      page={page || "1"}
       category={!isBrands ? category : brandsCategory}
       subcategory={!isBrands ? subcategory : activeBrand}
       products={products}

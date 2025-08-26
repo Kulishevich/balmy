@@ -8,7 +8,7 @@ import { getBrands } from "@/api/brands";
 import { getContacts } from "@/api/contacts";
 
 interface Props {
-  params: Promise<{ "category-slug": string; page: string }>;
+  params: Promise<{ "category-slug": string }>;
   searchParams: Promise<{
     page?: string;
     sort?: string;
@@ -18,8 +18,8 @@ interface Props {
 }
 
 async function CatalogPage({ params, searchParams }: Props) {
-  const { "category-slug": categorySlug, page } = await params;
-  const responseSearchParams = await searchParams;
+  const { "category-slug": categorySlug } = await params;
+  const { brand_slug, direction, page, sort } = await searchParams;
 
   const isBrands = categorySlug === "brands";
   const isDiscounts = categorySlug === "discounts";
@@ -32,9 +32,9 @@ async function CatalogPage({ params, searchParams }: Props) {
   const { last_page, data: products } = await getProductsByCategoryId({
     category_slug: !isDiscounts || !isBrands ? categorySlug : "",
     page: page,
-    sort_by: responseSearchParams.sort,
-    sort_direction: responseSearchParams.direction,
-    brand_slug: responseSearchParams.brand_slug,
+    sort_by: sort,
+    sort_direction: direction,
+    brand_slug: brand_slug,
     on_sale: isDiscounts && true,
   });
 
@@ -55,7 +55,7 @@ async function CatalogPage({ params, searchParams }: Props) {
 
   return (
     <CategoryLayout
-      page={page}
+      page={page || "1"}
       category={
         isBrands ? brandsCategory : isDiscounts ? discountsCategory : category
       }

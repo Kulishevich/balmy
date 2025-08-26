@@ -43,7 +43,37 @@ export async function getAllPosts({
   const url = `${
     process.env.NEXT_PUBLIC_API_URL
   }/client-news?${params.toString()}`;
-  
+
+  try {
+    const res = await fetch(url, {
+      // next: { revalidate: 60 },
+      method: "GET",
+      headers: {
+        Authorization: token ? `${token}` : "",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      console.log("Ошибка при получении новостей пользователя");
+      return null;
+    }
+
+    const data = (await res.json()) as IAllNewsResponse;
+    return data;
+  } catch (error) {
+    console.error("Ошибка при получении новостей пользователя:", error);
+    return null;
+  }
+}
+
+export async function getAllPostsWithoutPagination({
+  token,
+}: {
+  token: string;
+}): Promise<IAllNewsResponse | null> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/client-news`;
+
   try {
     const res = await fetch(url, {
       // next: { revalidate: 60 },

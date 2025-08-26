@@ -12,7 +12,6 @@ interface Props {
     "category-slug": string;
     "subcategory-slug": string;
     "subsubcategory-slug": string;
-    page: string;
   }>;
   searchParams: Promise<{
     page?: string;
@@ -27,9 +26,8 @@ async function Page({ params, searchParams }: Props) {
     "category-slug": categorySlug,
     "subcategory-slug": subcategorySlug,
     "subsubcategory-slug": subsubcategorySlug,
-    page,
   } = await params;
-  const responseSearchParams = await searchParams;
+  const { brand_slug, direction, page, sort } = await searchParams;
 
   const category = await getCategory(categorySlug);
   const subcategory = await getCategory(subcategorySlug);
@@ -41,16 +39,16 @@ async function Page({ params, searchParams }: Props) {
   const { last_page, data: products } = await getProductsByCategoryId({
     category_slug: subsubcategorySlug,
     page: page,
-    sort_by: responseSearchParams.sort,
-    sort_direction: responseSearchParams.direction,
-    brand_slug: responseSearchParams.brand_slug,
+    sort_by: sort,
+    sort_direction: direction,
+    brand_slug: brand_slug,
   });
 
   if (!subcategory || !category || !subsubcategory) notFound();
 
   return (
     <CategoryLayout
-      page={page}
+      page={page || "1"}
       category={category}
       subcategory={subcategory}
       subsubcategory={subsubcategory}

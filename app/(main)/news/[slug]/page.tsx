@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/components/breadcrumbs";
 import Title from "@/components/title";
-import { getAllPosts, getPostById } from "@/api/posts";
+import { getAllPostsWithoutPagination, getPostById } from "@/api/posts";
 import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { OtherNewsCard } from "@/components/news/other-news-card";
@@ -20,14 +20,14 @@ async function NewsPage({ params }: Props) {
   }
 
   const newsData = await getPostById(newsId);
-  const news = await getAllPosts(token);
+  const news = await getAllPostsWithoutPagination({ token });
   const me = await getMe(token);
 
   if (!newsData) {
     notFound();
   }
 
-  const otherNews = news
+  const otherNews = news?.data
     ?.filter(
       (elem) =>
         elem.author_client_id === String(me?.id) && elem.id !== newsData?.id
