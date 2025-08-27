@@ -47,7 +47,7 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
     slug,
     quantity,
     country,
-    // buy_price,
+    buy_price,
   } = product;
 
   const isDiscount = !!Number(discount);
@@ -163,7 +163,7 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
               alt="эко"
             />
 
-            <div className="flex flex-col gap-[6px] mt-[30px] sm:mt-[40px] items-center xl:items-start">
+            <div className="flex flex-col gap-[6px] mt-8 sm:mt-10 items-center xl:items-start">
               <p className="text-[17px] text-center sm:text-left">
                 Оптовая цена:
               </p>
@@ -191,13 +191,13 @@ function ProductLayout({ product, similarProducts, socialLinks }: Props) {
               )}
             </div>
 
-            {/* <div className="flex flex-col gap-[6px] mt-[30px] sm:mt-[40px] opacity-50 items-center xl:items-start">
+            <div className="flex flex-col gap-[6px] mt-5 sm:mt-6 opacity-50 items-center xl:items-start">
               <p className="text-[17px]">Розничная цена:</p>
 
               <span className="text-[32px] sm:text-[40px] font-semibold text-center sm:text-left">
                 {buy_price} byn
               </span>
-            </div> */}
+            </div>
 
             {!!quantity && (
               <div className="max-w-[660px] mt-[30px] grid grid-cols-2 2xl:flex gap-3">

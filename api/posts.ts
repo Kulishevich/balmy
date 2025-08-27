@@ -71,8 +71,8 @@ export async function getAllPostsWithoutPagination({
   token,
 }: {
   token: string;
-}): Promise<IAllNewsResponse | null> {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/client-news`;
+}): Promise<INews[] | null> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/client-news/all`;
 
   try {
     const res = await fetch(url, {
@@ -89,7 +89,7 @@ export async function getAllPostsWithoutPagination({
       return null;
     }
 
-    const data = (await res.json()) as IAllNewsResponse;
+    const data = (await res.json()) as INews[];
     return data;
   } catch (error) {
     console.error("Ошибка при получении новостей пользователя:", error);

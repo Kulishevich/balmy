@@ -7,11 +7,7 @@ import Action from "@/components/action";
 import { cookies } from "next/headers";
 import { getAllPosts } from "@/api/posts";
 import { redirect } from "next/navigation";
-import {
-  getActiveRaffle,
-  // getActiveRaffleLider,
-  getActiveRafflePrize,
-} from "@/api/raffles";
+import { getActiveRaffle, getActiveRafflePrize } from "@/api/raffles";
 import Link from "next/link";
 import Pagination from "@/components/pagination";
 
@@ -34,9 +30,6 @@ async function NewsPage({ searchParams }: Props) {
 
   const activeRaffle = await getActiveRaffle(token);
   const activePrize = await getActiveRafflePrize(token);
-  // const activeLider = await getActiveRaffleLider(token);
-  // console.log(activeRaffle);
-  // console.log("lider:", activeLider);
 
   const getDaysLeft = (date: string) => {
     const diff = new Date(date).getTime() - Date.now();
@@ -93,13 +86,13 @@ async function NewsPage({ searchParams }: Props) {
                       Всего постов:
                     </p>
                     <p className="w-[50%] font-bold text-[17px] flex gap-1 items-center justify-end lg:justify-normal">
-                      12
+                      {activeRaffle?.leader.author_articles_count}
                     </p>
                   </div>
                   <div className="flex gap-7 border-b border-[#E1E1E1] pb-4">
                     <p className="w-[50%] font-normal text-[17px] ">Статус:</p>
                     <p className="w-[50%] font-bold text-[17px] flex gap-1 items-center justify-end lg:justify-normal">
-                      Партнер Balmy
+                      {activeRaffle?.leader.status}
                     </p>
                   </div>
                 </div>

@@ -12,22 +12,7 @@ export interface IActiveRaffle {
     winner_likes_count: string | null;
     winner_reach_time: string | null;
   };
-  leader: {
-    news: {
-      id: number;
-      author_client_id: number;
-      title: string;
-      subtitle: string;
-      content: string;
-      published_at: string;
-      author: {
-        id: number;
-        name: string;
-      };
-    };
-    likes_count: 42;
-    reach_time: "2025-08-26T13:29:59.536268Z";
-  } | null;
+  leader: ILeader | null;
 }
 
 export interface IActiveRafflePrize {
@@ -38,5 +23,24 @@ export interface IActiveRafflePrize {
 
 export interface IActiveRaffleLider {
   success: boolean;
-  data: [];
+  data: ILeader[];
+}
+
+interface ILeader {
+  author_articles_count: string;
+  status: string;
+  news: {
+    id: number;
+    author_client_id: number;
+    title: string;
+    subtitle: string;
+    content: string;
+    published_at: string;
+    author: {
+      id: number;
+      name: string;
+    };
+  };
+  likes_count: 42;
+  reach_time: "2025-08-26T13:29:59.536268Z";
 }

@@ -27,7 +27,7 @@ async function NewsPage({ params }: Props) {
     notFound();
   }
 
-  const otherNews = news?.data
+  const otherNews = news
     ?.filter(
       (elem) =>
         elem.author_client_id === String(me?.id) && elem.id !== newsData?.id

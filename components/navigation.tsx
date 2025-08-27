@@ -2,7 +2,8 @@
 import LocationIcon from "@/public/icons/location.svg";
 import BurgerIcon from "@/public/icons/burger.svg";
 import ProfileIcon from "@/public/icons/profile.svg";
-// import NewsIcon from "@/public/icons/news.svg";
+import NewsIcon from "@/public/icons/news.svg";
+import NewsMobileIcon from "@/public/icons/news-mobile.svg";
 import ProfileMobileIcon from "@/public/icons/profile-mobile.svg";
 import PhoneOutlineIcon from "@/public/icons/phone-outline.svg";
 import SearchMobileIcon from "@/public/icons/search-mobile.svg";
@@ -49,7 +50,7 @@ function Navigation({
             <BurgerIcon />
             <span className="sr-only">Открыть меню</span>
           </button>
-          <Link className="ml-9 w-[67px] h-[57px] relative" href="/">
+          <Link className="ml-5 sm:ml-9 w-[67px] h-[57px] relative" href="/">
             <Image
               src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${logo}`}
               fill
@@ -57,7 +58,7 @@ function Navigation({
               className="object-cover"
             />
           </Link>
-          <div className="ml-auto flex gap-6">
+          <div className="ml-auto flex gap-2 sm:gap-6">
             {phones.map((phone, index) => (
               <Link href={`tel:${phone}`} key={index}>
                 <PhoneOutlineIcon />
@@ -72,6 +73,9 @@ function Navigation({
               />
               <span className="sr-only">Открыть поиск</span>
             </button>
+            <Link href={"/news"}>
+              <NewsMobileIcon />
+            </Link>
             <CartInfo />
             <Link href={"/profile"}>
               <ProfileMobileIcon />
@@ -119,13 +123,13 @@ function Navigation({
         )}
 
         <div className="flex gap-[13px]">
-          {/* <Link
+          <Link
             href={"/news"}
             className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
           >
             <NewsIcon />
             Лента новостей
-          </Link> */}
+          </Link>
           <Link
             href={"/profile"}
             className="bg-white text-black px-[14px] py-[6px] rounded-[4px] flex items-center gap-[9px]"
